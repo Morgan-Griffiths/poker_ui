@@ -48,18 +48,22 @@ select,
 textarea {
   font-family: inherit;
   font-size: inherit;
-  padding: 0.4em;
+  padding: 20px;
   margin: 0 0 0.5em 0;
   box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 2px;
+  border: none;
+  border-radius: 20px;
+  height: 40px;
+  width: 350px;
+  background-color: rgba(0,0,0,0.8);
+  color: white;
 }
 
 input:focus,
 select:focus,
 textarea:focus,
 button:focus {
-    outline: none;
+  outline: none;
 }
 
 input:disabled {
@@ -67,24 +71,25 @@ input:disabled {
 }
 
 input[type="range"] {
-	height: 20px;
-    width: 30%;
-    background-color: rgba(0,0,0,.4);
-    padding: 0;
-    border: none;
-    border-radius: 10px;
-    -webkit-appearance: none;
-    box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.7);
+  height: 20px;
+  width: 500px;
+  margin: 0 10px;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  -webkit-appearance: none;
+  box-shadow: inset 0px 3px 3px rgb(0, 0, 0);
 }
 
 input[type="range" i]::-webkit-slider-thumb {
-	width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: white;
-    cursor: pointer;
-    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.8);
-    -webkit-appearance: none;	
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+  box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.8);
+  -webkit-appearance: none;
 }
 
 #table {
@@ -99,6 +104,23 @@ input[type="range" i]::-webkit-slider-thumb {
   width: 100%;
   margin: auto;
   text-align: center;
+}
+
+.btn-wrapper {
+  height: 50px;
+  width: 300px;
+  margin: 15px auto;
+}
+
+#game-menu {
+  list-style: none;
+  padding: 0;
+  width: 300px;
+  margin: auto;
+}
+
+#game-menu .btn {
+  padding: 20px 0;
 }
 
 #player .card-container {
@@ -154,21 +176,70 @@ input[type="range" i]::-webkit-slider-thumb {
   width: 320px;
 }
 
-#chips img {
-  max-width: 150px;
+#bet-slider {
+  width: 100%;
+}
+
+#bet-slider.inactive {
+  -webkit-transform: translateY(100px);
+  transform: translateY(100px);
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+
+#bet-slider.active {
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+
+#bet-slider.inactive span {
+  visibility: hidden;
+}
+
+.left.actions.inactive {
+  -webkit-transform: translateX(340px);
+  transform: translateX(340px);
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+
+.left.actions.active {
+  -webkit-transform: translateX(10px);
+  transform: translateX(10px);
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+
+.right.actions.inactive {
+  -webkit-transform: translateX(-340px);
+  transform: translateX(-340px);
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+
+.right.actions.active {
+  -webkit-transform: translateX(-10px);
+  transform: translateX(-10px);
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
 }
 
 #player-info {
-  width: 500px;
-  border-radius: 4px;
-  background-color: rgba(0, 0, 0, 0.6);
+  height: 80px;
+  width: 600px;
+  background-color: rgb(0, 0, 0);
   padding: 0 7px;
-  box-shadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.8);
+  border-radius: 6px;
+  box-shadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  justify-content: center;
 }
 
-#raise-slider {
-	width: 100%;
-	margin-bottom: 20px;
+.input-wrapper {
+  width: 100%;
+  padding: 30px;
 }
 
 .d-flex {
@@ -176,7 +247,11 @@ input[type="range" i]::-webkit-slider-thumb {
 }
 
 .flex-wrap {
-	flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.column {
+  flex-direction: column;
 }
 
 .justify-center {
@@ -187,9 +262,13 @@ input[type="range" i]::-webkit-slider-thumb {
   align-items: center;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .btn {
   color: #fff;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.8);
   cursor: pointer;
   display: flex;
   font-size: 16px;
@@ -203,14 +282,14 @@ input[type="range" i]::-webkit-slider-thumb {
 
 @-webkit-keyframes hover-effect {
   50% {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.8);
   }
 }
 @keyframes hover-effect {
-	50% {
-	  background-color: rgba(0, 0, 0, 0.6);
-	}
+  50% {
+    background-color: rgba(0, 0, 0, 0.8);
   }
+}
 .hover-effect {
   -webkit-transform: perspective(1px) translateZ(0);
   transform: perspective(1px) translateZ(0);

@@ -1,22 +1,22 @@
 <script>
-  import { shuffle } from './cards.js';
-  import { fold, check, bet } from './actions.js';
+  import { shuffle } from "./cards.js";
   let game = null;
   let playerName = null;
   let playerNumCards = null;
   let playerHandWidth = 160;
-  let dealerHandWidth = 100;
-  let bank = 1000;
-  let dealerHand = [];
+  let pokerBotHandWidth = 100;
+  let pokerBotBank = 1000;
+  let playerBank = 1000;
+  let pokerBotHand = [];
   let playerHand = [];
   let community = [];
   let pot = 0;
   let potClass = "";
   let showdown = false;
   let firstAction = true;
-  let dealerBet = 32;
+  let pokerBotBet = 32;
   let betAmount = 0;
-  let maxBet = bank;
+  let maxBet = playerBank;
   let playerTurn = false;
   let playerActions = "inactive";
   let action = "";
@@ -28,13 +28,13 @@
 
   function setGame(name) {
     game = name;
-    if (game === 'texas') {
+    if (game === "texas") {
       playerNumCards = 2;
-      setHandWidth()
+      setHandWidth();
     }
-    if (game === 'omaha5') {
+    if (game === "omaha5") {
       playerNumCards = 5;
-      setHandWidth()
+      setHandWidth();
     }
     if (firstAction) {
       action = "Bet";
@@ -43,20 +43,24 @@
     }
     let deck = shuffle();
     deal(deck);
-    setTimeout(() => {potClass = 'active'}, 100);
+    setTimeout(() => {
+      potClass = "active";
+    }, 100);
   }
 
   function setHandWidth(numCards) {
     playerHandWidth = playerNumCards * 100 + 60;
-    dealerHandWidth = playerNumCards * 60 + 40;
+    pokerBotHandWidth = playerNumCards * 60 + 40;
   }
 
   function deal(deck) {
-    for(let i = 0; i < playerNumCards; i++) {
+    for (let i = 0; i < playerNumCards; i++) {
       playerHand.push(deck[i]);
-      dealerHand.push(deck[i+1]);
+      pokerBotHand.push(deck[i + 1]);
     }
-    setTimeout(function(){toggleTurn()}, 200);
+    setTimeout(function() {
+      toggleTurn();
+    }, 200);
   }
 
   function toggleTurn() {
@@ -69,7 +73,7 @@
   }
 
   function checkAllIn() {
-    if (betAmount === bank) {
+    if (betAmount === playerBank) {
       action = "Go All In";
     } else {
       if (firstAction) {
@@ -79,6 +83,8 @@
       }
     }
   }
+
+  function fold() {}
 </script>
 
 <div id="table">
@@ -105,9 +111,9 @@
       </ul>
     </div>
   {:else}
-    <div class="container">
-      <div id="dealer" class="hand" style="width: {dealerHandWidth}px">
-        {#each dealerHand as card}
+    <div class="container no-margin-bottom">
+      <div id="poker-bot" class="hand" style="width: {pokerBotHandWidth}px">
+        {#each pokerBotHand as card}
           {#if !showdown}
             <div class="card-container">
               <img src="images/cards/card_back.png" alt="Card Back" />
@@ -119,6 +125,13 @@
             </div>
           {/if}
         {/each}
+      </div>
+    </div>
+    <div class="container no-margin-bottom no-margin-top">
+      <div id="poker-bot-info" class="d-flex column">
+        <p>Morgan's Poker Bot</p>
+        <hr />
+        <p>${pokerBotBank}</p>
       </div>
     </div>
     <div class="container">
@@ -163,27 +176,27 @@
         </div>
       </div>
       <div class="left {playerActions} actions d-flex align-center">
-        <div class="btn hover-effect">
+        <div class="btn hover-effect" on:click={fold}>
           <span>Fold</span>
         </div>
         <div class="btn hover-effect">
           <span>Check</span>
         </div>
       </div>
-      <div id="player-info" class="d-flex column" on:click={toggleTurn}>
+      <div id="player-info" class="d-flex column">
         <p>{playerName}</p>
         <hr />
-        <p>${bank}</p>
+        <p>${playerBank}</p>
       </div>
       <div class="right {playerActions} actions d-flex align-center">
         {#if !firstAction}
           <div class="btn hover-effect">
-            <span>Call {dealerBet}</span>
+            <span>Call {pokerBotBet}</span>
           </div>
-          <div class="btn hover-effect" on:click={bet}>
+          <div class="btn hover-effect">
             <span>{action} {betAmount}</span>
           </div>
-          {:else}
+        {:else}
           <div class="btn hover-effect">
             <span>{action} {betAmount}</span>
           </div>

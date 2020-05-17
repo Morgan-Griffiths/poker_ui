@@ -127,7 +127,7 @@ input[type="range" i]::-webkit-slider-thumb {
   width: 100px;
 }
 
-#dealer .card-container img {
+#poker-bot .card-container img {
   max-width: 100px;
 }
 
@@ -144,12 +144,11 @@ input[type="range" i]::-webkit-slider-thumb {
   margin: auto;
 }
 
-#dealer {
+#poker-bot {
   min-height: 160px;
-  justify-content: center;
 }
 
-#dealer .card-container {
+#poker-bot .card-container {
   width: 60px;
 }
 
@@ -247,6 +246,18 @@ input[type="range" i]::-webkit-slider-thumb {
   transform: translateX(-10px);
   -webkit-transition-duration: 0.5s;
   transition-duration: 0.5s;
+}
+
+#poker-bot-info {
+  height: 80px;
+  width: 300px;
+  background-color: rgb(0, 0, 0);
+  padding: 0 7px;
+  border-radius: 6px;
+  box-shadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.3);
+  justify-content: center;
+  margin: 0 auto 20px auto;
+  transform: perspective(200px) rotateX(10deg);
 }
 
 #player-info {

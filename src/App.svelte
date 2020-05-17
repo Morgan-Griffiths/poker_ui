@@ -1,25 +1,39 @@
 <script>
   import { shuffle } from "./cards.js";
+  import ActionDialog from "./ActionDialog.svelte";
   let game = null;
   let playerName = null;
   let playerNumCards = null;
   let playerHandWidth = 160;
   let pokerBotHandWidth = 100;
-  let pokerBotBank = 1000;
-  let playerBank = 1000;
-  let pokerBotHand = [];
-  let playerHand = [];
+  let pokerBot = {
+    hand: [],
+    bank: 1000,
+    dealer: true
+  };
+  let player = {
+    hand: [],
+    bank: 1000,
+    dealer: false
+  };
   let community = [];
   let pot = 0;
   let potClass = "";
   let showdown = false;
+  let allIn = false;
   let firstAction = true;
   let pokerBotBet = 32;
   let betAmount = 0;
-  let maxBet = playerBank;
+  let maxBet = player.bank;
   let playerTurn = false;
   let playerActions = "inactive";
-  let action = "";
+  let messageObj = {
+    currPlayer: null,
+    othPlayer: null,
+    pot: null,
+    amount: null,
+    action: null
+  }
 
   function setName() {
     let value = document.getElementById("player-name").value;
@@ -36,16 +50,27 @@
       playerNumCards = 5;
       setHandWidth();
     }
-    if (firstAction) {
-      action = "Bet";
-    } else {
-      action = "Raise";
-    }
+    init();
+  }
+
+  function init() {
+    calculateBlind();
     let deck = shuffle();
     deal(deck);
     setTimeout(() => {
       potClass = "active";
     }, 100);
+  }
+
+  function calculateBlind() {
+    if (player.dealer) {
+      pokerBot.bank -= 25;
+    } else {
+      player.bank -= 25;
+    }
+    pot += 25;
+    maxBet = player.bank;
+    return;
   }
 
   function setHandWidth(numCards) {
@@ -54,13 +79,14 @@
   }
 
   function deal(deck) {
+    let card = 0;
     for (let i = 0; i < playerNumCards; i++) {
-      playerHand.push(deck[i]);
-      pokerBotHand.push(deck[i + 1]);
+      player.hand.push(deck[card]);
+      card++;
+      pokerBot.hand.push(deck[card]);
+      card++;
     }
-    setTimeout(function() {
-      toggleTurn();
-    }, 200);
+    setTimeout(toggleTurn, 200);
   }
 
   function toggleTurn() {
@@ -72,19 +98,50 @@
     }
   }
 
+  function toggleDealers() {
+    pokerBot.dealer = !pokerBot.dealer;
+    player.dealer = !player.dealer;
+  }
+
   function checkAllIn() {
-    if (betAmount === playerBank) {
-      action = "Go All In";
+    if (betAmount === player.bank) {
+      allIn = true;
     } else {
-      if (firstAction) {
-        action = "Bet";
-      } else {
-        action = "Raise";
-      }
+      allIn = false;
     }
   }
 
-  function fold() {}
+  function reset() {
+    pokerBot.hand = [];
+    player.hand = [];
+    community = [];
+    pot = 0;
+    toggleDealers();
+    init();
+  }
+
+  function fold() {    
+    messageObj.currPlayer = playerName;
+    messageObj.othPlayer = 'Poker Bot';
+    messageObj.pot = pot;
+    messageObj.action = "fold";
+    pokerBot.bank += pot;
+    reset();
+  }
+
+  function endTurn(action) {
+    if (action === "check") {
+      toggleTurn();
+    }
+    getPokerBotAction();
+  }
+
+  async function getPokerBotAction() {
+    let pokerBotAction = "check";
+    setTimeout(function() {
+      toggleTurn();
+    }, 1000);
+  }
 </script>
 
 <div id="table">
@@ -113,7 +170,7 @@
   {:else}
     <div class="container no-margin-bottom">
       <div id="poker-bot" class="hand" style="width: {pokerBotHandWidth}px">
-        {#each pokerBotHand as card}
+        {#each pokerBot.hand as card}
           {#if !showdown}
             <div class="card-container">
               <img src="images/cards/card_back.png" alt="Card Back" />
@@ -129,9 +186,14 @@
     </div>
     <div class="container no-margin-bottom no-margin-top">
       <div id="poker-bot-info" class="d-flex column">
-        <p>Morgan's Poker Bot</p>
+        <div class="d-flex justify-center" style="margin-bottom: 8px">
+          Morgan's Poker Bot
+          {#if pokerBot.dealer}
+            <div class="dealer-chip">D</div>
+          {/if}
+        </div>
         <hr />
-        <p>${pokerBotBank}</p>
+        <p>${pokerBot.bank}</p>
       </div>
     </div>
     <div class="container">
@@ -144,6 +206,7 @@
         <span>${pot}</span>
       </div>
       <div id="community" class="hand">
+        <ActionDialog messageObj={messageObj} />
         {#each community as card}
           <div class="card-container">
             <img src="images/cards/{card}.png" alt={card} />
@@ -153,7 +216,7 @@
     </div>
     <div class="container no-margin-bottom">
       <div id="player" class="hand" style="width: {playerHandWidth}px">
-        {#each playerHand as card}
+        {#each player.hand as card}
           <div class="card-container">
             <img src="images/cards/{card}.png" alt={card} />
           </div>
@@ -170,6 +233,7 @@
             type="range"
             min="0"
             max={maxBet}
+            step="25"
             bind:value={betAmount}
             on:input={checkAllIn} />
           <span>${maxBet}</span>
@@ -179,26 +243,35 @@
         <div class="btn hover-effect" on:click={fold}>
           <span>Fold</span>
         </div>
-        <div class="btn hover-effect">
+        <div class="btn hover-effect" on:click={() => endTurn('check')}>
           <span>Check</span>
         </div>
       </div>
       <div id="player-info" class="d-flex column">
-        <p>{playerName}</p>
+        <div class="d-flex justify-center" style="margin-bottom: 8px">
+          {playerName}
+          {#if player.dealer}
+            <div class="dealer-chip">D</div>
+          {/if}
+        </div>
         <hr />
-        <p>${playerBank}</p>
+        <p>${player.bank}</p>
       </div>
       <div class="right {playerActions} actions d-flex align-center">
         {#if !firstAction}
-          <div class="btn hover-effect">
+          <div class="btn hover-effect" on:click={() => endTurn('call')}>
             <span>Call {pokerBotBet}</span>
           </div>
-          <div class="btn hover-effect">
-            <span>{action} {betAmount}</span>
+          <div class="btn hover-effect" on:click={() => endTurn('raise')}>
+            <span>
+              {#if allIn}Go All In!{:else}Raise {betAmount}{/if}
+            </span>
           </div>
         {:else}
-          <div class="btn hover-effect">
-            <span>{action} {betAmount}</span>
+          <div class="btn hover-effect" on:click={() => endTurn('bet')}>
+            <span>
+              {#if allIn}Go All In!{:else}Bet {betAmount}{/if}
+            </span>
           </div>
         {/if}
       </div>

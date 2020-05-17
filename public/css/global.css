@@ -55,7 +55,7 @@ textarea {
   border-radius: 20px;
   height: 40px;
   width: 350px;
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(0, 0, 0, 0.8);
   color: white;
 }
 
@@ -124,7 +124,7 @@ input[type="range" i]::-webkit-slider-thumb {
 }
 
 #player .card-container {
-  width: 125px;
+  width: 100px;
 }
 
 #dealer .card-container img {
@@ -136,7 +136,7 @@ input[type="range" i]::-webkit-slider-thumb {
 }
 
 #player .card-container img {
-  max-width: 225px;
+  max-width: 160px;
 }
 
 .hand {
@@ -145,7 +145,7 @@ input[type="range" i]::-webkit-slider-thumb {
 }
 
 #dealer {
-  width: 550px;
+  min-height: 160px;
   justify-content: center;
 }
 
@@ -154,6 +154,7 @@ input[type="range" i]::-webkit-slider-thumb {
 }
 
 #community {
+  min-height: 250px;
   width: 900px;
   justify-content: center;
   margin: 10px auto;
@@ -165,10 +166,32 @@ input[type="range" i]::-webkit-slider-thumb {
 
 #pot {
   font-size: 20px;
+  height: 30px;
+  width: 30px;
+  margin: 0 auto 30px auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0px 3px 3px rgba(0, 0, 0, 0.7);
+}
+
+#pot span {
+  visibility: hidden;
+}
+
+#pot.active {
+  width: 200px;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+
+#pot.active span {
+  visibility: visible;
 }
 
 #player {
-  width: 750px;
+  min-height: 250px;
   position: relative;
 }
 
@@ -264,6 +287,22 @@ input[type="range" i]::-webkit-slider-thumb {
 
 .text-center {
   text-align: center;
+}
+
+.no-margin-top {
+  margin-top: 0;
+}
+
+.no-margin-right {
+  margin-right: 0;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0;
+}
+
+.no-margin-left {
+  margin-left: 0;
 }
 
 .btn {

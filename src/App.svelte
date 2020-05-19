@@ -19,13 +19,13 @@
   let community = [];
   let pot = 0;
   let potClass = "";
-  let showdown = false;
+  let showdown = true;
   let allIn = false;
   let firstAction = true;
   let pokerBotBet = 32;
   let betAmount = 0;
   let maxBet = player.bank;
-  let playerTurn = false;
+  let playerTurn = true;
   let playerActions = "inactive";
   let messageObj = {
     currPlayer: null,
@@ -33,7 +33,7 @@
     pot: null,
     amount: null,
     action: null
-  }
+  };
 
   function setName() {
     let value = document.getElementById("player-name").value;
@@ -59,6 +59,7 @@
     deal(deck);
     setTimeout(() => {
       potClass = "active";
+      playerActions = "active";
     }, 100);
   }
 
@@ -86,21 +87,15 @@
       pokerBot.hand.push(deck[card]);
       card++;
     }
-    setTimeout(toggleTurn, 200);
   }
 
   function toggleTurn() {
     playerTurn = !playerTurn;
-    if (playerTurn) {
-      playerActions = "active";
-    } else {
+    if (!playerTurn) {
       playerActions = "inactive";
+    } else {
+      playerActions = "active";
     }
-  }
-
-  function toggleDealers() {
-    pokerBot.dealer = !pokerBot.dealer;
-    player.dealer = !player.dealer;
   }
 
   function checkAllIn() {
@@ -116,16 +111,26 @@
     player.hand = [];
     community = [];
     pot = 0;
-    toggleDealers();
-    init();
+    pokerBot.dealer = !pokerBot.dealer;
+    player.dealer = !player.dealer;
+    toggleTurn();
+    calculateBlind();
+    let deck = shuffle();
+    deal(deck);
   }
 
-  function fold() {    
-    messageObj.currPlayer = playerName;
-    messageObj.othPlayer = 'Poker Bot';
+  function fold(bot) {
+    if (bot) {
+      messageObj.currPlayer = "Poker Bot";
+      messageObj.othPlayer = playerName;
+      player.bank += pot;
+    } else {
+      messageObj.currPlayer = playerName;
+      messageObj.othPlayer = "Poker Bot";
+      pokerBot.bank += pot;
+    }
     messageObj.pot = pot;
     messageObj.action = "fold";
-    pokerBot.bank += pot;
     reset();
   }
 
@@ -133,14 +138,26 @@
     if (action === "check") {
       toggleTurn();
     }
-    getPokerBotAction();
+    setTimeout(getPokerBotAction, 2000);
   }
 
   async function getPokerBotAction() {
-    let pokerBotAction = "check";
-    setTimeout(function() {
-      toggleTurn();
-    }, 1000);
+    let max;
+    let actions = [];
+    if (firstAction) {
+      max = 3;
+      actions = ["fold", "check", "bet"];
+    } else {
+      max = 4;
+      actions = ["fold", "check", "call", "raise"];
+    }
+    let randomIndex = Math.floor(Math.random() * Math.floor(max));
+    let action = actions[randomIndex];
+    if (action === "fold") {
+      fold(true)
+    } else {
+      endTurn(action)
+    }
   }
 </script>
 
@@ -185,7 +202,10 @@
       </div>
     </div>
     <div class="container no-margin-bottom no-margin-top">
-      <div id="poker-bot-info" class="d-flex column">
+      <div
+        id="poker-bot-info"
+        class="d-flex column"
+        on:click={getPokerBotAction}>
         <div class="d-flex justify-center" style="margin-bottom: 8px">
           Morgan's Poker Bot
           {#if pokerBot.dealer}
@@ -206,7 +226,7 @@
         <span>${pot}</span>
       </div>
       <div id="community" class="hand">
-        <ActionDialog messageObj={messageObj} />
+        <ActionDialog {messageObj} />
         {#each community as card}
           <div class="card-container">
             <img src="images/cards/{card}.png" alt={card} />
@@ -240,7 +260,7 @@
         </div>
       </div>
       <div class="left {playerActions} actions d-flex align-center">
-        <div class="btn hover-effect" on:click={fold}>
+        <div class="btn hover-effect" on:click={() => fold(false)}>
           <span>Fold</span>
         </div>
         <div class="btn hover-effect" on:click={() => endTurn('check')}>

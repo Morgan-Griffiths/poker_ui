@@ -657,7 +657,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (170:2) {:else}
+    // (187:2) {:else}
     function create_else_block(ctx) {
     	let div1;
     	let div0;
@@ -851,71 +851,71 @@ var app = (function () {
     			attr_dev(div0, "id", "poker-bot");
     			attr_dev(div0, "class", "hand");
     			set_style(div0, "width", /*pokerBotHandWidth*/ ctx[3] + "px");
-    			add_location(div0, file$1, 171, 6, 3604);
+    			add_location(div0, file$1, 188, 6, 4081);
     			attr_dev(div1, "class", "container no-margin-bottom");
-    			add_location(div1, file$1, 170, 4, 3557);
+    			add_location(div1, file$1, 187, 4, 4034);
     			attr_dev(div2, "class", "d-flex justify-center");
     			set_style(div2, "margin-bottom", "8px");
-    			add_location(div2, file$1, 188, 8, 4211);
-    			add_location(hr0, file$1, 194, 8, 4419);
-    			add_location(p0, file$1, 195, 8, 4434);
+    			add_location(div2, file$1, 208, 8, 4741);
+    			add_location(hr0, file$1, 214, 8, 4949);
+    			add_location(p0, file$1, 215, 8, 4964);
     			attr_dev(div3, "id", "poker-bot-info");
     			attr_dev(div3, "class", "d-flex column");
-    			add_location(div3, file$1, 187, 6, 4155);
+    			add_location(div3, file$1, 204, 6, 4632);
     			attr_dev(div4, "class", "container no-margin-bottom no-margin-top");
-    			add_location(div4, file$1, 186, 4, 4094);
+    			add_location(div4, file$1, 203, 4, 4571);
     			if (img.src !== (img_src_value = "images/poker-chip.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Poker Chip");
     			attr_dev(img, "height", "105%");
     			set_style(img, "margin-right", "10px");
-    			add_location(img, file$1, 200, 8, 4556);
-    			add_location(span0, file$1, 205, 8, 4697);
+    			add_location(img, file$1, 220, 8, 5086);
+    			add_location(span0, file$1, 225, 8, 5227);
     			attr_dev(div5, "id", "pot");
     			attr_dev(div5, "class", /*potClass*/ ctx[8]);
-    			add_location(div5, file$1, 199, 6, 4516);
+    			add_location(div5, file$1, 219, 6, 5046);
     			attr_dev(div6, "id", "community");
     			attr_dev(div6, "class", "hand");
-    			add_location(div6, file$1, 207, 6, 4736);
+    			add_location(div6, file$1, 227, 6, 5266);
     			attr_dev(div7, "class", "container");
-    			add_location(div7, file$1, 198, 4, 4486);
+    			add_location(div7, file$1, 218, 4, 5016);
     			attr_dev(div8, "id", "player");
     			attr_dev(div8, "class", "hand");
     			set_style(div8, "width", /*playerHandWidth*/ ctx[2] + "px");
-    			add_location(div8, file$1, 217, 6, 5061);
+    			add_location(div8, file$1, 237, 6, 5580);
     			attr_dev(div9, "class", "container no-margin-bottom");
-    			add_location(div9, file$1, 216, 4, 5014);
-    			add_location(span1, file$1, 230, 10, 5562);
+    			add_location(div9, file$1, 236, 4, 5533);
+    			add_location(span1, file$1, 250, 10, 6081);
     			attr_dev(input, "type", "range");
     			attr_dev(input, "min", "0");
     			attr_dev(input, "max", /*maxBet*/ ctx[11]);
     			attr_dev(input, "step", "25");
-    			add_location(input, file$1, 231, 10, 5588);
-    			add_location(span2, file$1, 238, 10, 5769);
+    			add_location(input, file$1, 251, 10, 6107);
+    			add_location(span2, file$1, 258, 10, 6288);
     			attr_dev(div10, "class", "input-wrapper d-flex justify-center");
-    			add_location(div10, file$1, 229, 8, 5502);
+    			add_location(div10, file$1, 249, 8, 6021);
     			attr_dev(div11, "id", "bet-slider");
     			attr_dev(div11, "class", div11_class_value = "" + (/*playerActions*/ ctx[12] + " d-flex justify-center flex-wrap"));
-    			add_location(div11, file$1, 226, 6, 5400);
-    			add_location(span3, file$1, 243, 10, 5954);
+    			add_location(div11, file$1, 246, 6, 5919);
+    			add_location(span3, file$1, 263, 10, 6486);
     			attr_dev(div12, "class", "btn hover-effect");
-    			add_location(div12, file$1, 242, 8, 5897);
-    			add_location(span4, file$1, 246, 10, 6070);
+    			add_location(div12, file$1, 262, 8, 6416);
+    			add_location(span4, file$1, 266, 10, 6602);
     			attr_dev(div13, "class", "btn hover-effect");
-    			add_location(div13, file$1, 245, 8, 5995);
+    			add_location(div13, file$1, 265, 8, 6527);
     			attr_dev(div14, "class", div14_class_value = "left " + /*playerActions*/ ctx[12] + " actions d-flex align-center");
-    			add_location(div14, file$1, 241, 6, 5826);
+    			add_location(div14, file$1, 261, 6, 6345);
     			attr_dev(div15, "class", "d-flex justify-center");
     			set_style(div15, "margin-bottom", "8px");
-    			add_location(div15, file$1, 250, 8, 6176);
-    			add_location(hr1, file$1, 256, 8, 6376);
-    			add_location(p1, file$1, 257, 8, 6391);
+    			add_location(div15, file$1, 270, 8, 6708);
+    			add_location(hr1, file$1, 276, 8, 6908);
+    			add_location(p1, file$1, 277, 8, 6923);
     			attr_dev(div16, "id", "player-info");
     			attr_dev(div16, "class", "d-flex column");
-    			add_location(div16, file$1, 249, 6, 6123);
+    			add_location(div16, file$1, 269, 6, 6655);
     			attr_dev(div17, "class", div17_class_value = "right " + /*playerActions*/ ctx[12] + " actions d-flex align-center");
-    			add_location(div17, file$1, 259, 6, 6432);
+    			add_location(div17, file$1, 279, 6, 6964);
     			attr_dev(div18, "class", "container d-flex justify-center flex-wrap no-margin-top");
-    			add_location(div18, file$1, 225, 4, 5324);
+    			add_location(div18, file$1, 245, 4, 5843);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div1, anchor);
@@ -1000,11 +1000,12 @@ var app = (function () {
     			if (remount) run_all(dispose);
 
     			dispose = [
-    				listen_dev(input, "change", /*input_change_input_handler*/ ctx[34]),
-    				listen_dev(input, "input", /*input_change_input_handler*/ ctx[34]),
+    				listen_dev(div3, "click", /*getPokerBotAction*/ ctx[22], false, false, false),
+    				listen_dev(input, "change", /*input_change_input_handler*/ ctx[33]),
+    				listen_dev(input, "input", /*input_change_input_handler*/ ctx[33]),
     				listen_dev(input, "input", /*checkAllIn*/ ctx[19], false, false, false),
-    				listen_dev(div12, "click", /*fold*/ ctx[20], false, false, false),
-    				listen_dev(div13, "click", /*click_handler_2*/ ctx[35], false, false, false)
+    				listen_dev(div12, "click", /*click_handler_2*/ ctx[34], false, false, false),
+    				listen_dev(div13, "click", /*click_handler_3*/ ctx[35], false, false, false)
     			];
     		},
     		p: function update(ctx, dirty) {
@@ -1182,14 +1183,14 @@ var app = (function () {
     		block,
     		id: create_else_block.name,
     		type: "else",
-    		source: "(170:2) {:else}",
+    		source: "(187:2) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (158:32) 
+    // (175:32) 
     function create_if_block_1(ctx) {
     	let div2;
     	let h1;
@@ -1216,17 +1217,17 @@ var app = (function () {
     			li1 = element("li");
     			div1 = element("div");
     			div1.textContent = "Omaha 5 Card";
-    			add_location(h1, file$1, 159, 6, 3230);
+    			add_location(h1, file$1, 176, 6, 3707);
     			attr_dev(div0, "class", "btn hover-effect");
-    			add_location(div0, file$1, 162, 10, 3334);
-    			add_location(li0, file$1, 161, 8, 3285);
+    			add_location(div0, file$1, 179, 10, 3811);
+    			add_location(li0, file$1, 178, 8, 3762);
     			attr_dev(div1, "class", "btn hover-effect");
-    			add_location(div1, file$1, 165, 10, 3457);
-    			add_location(li1, file$1, 164, 8, 3407);
+    			add_location(div1, file$1, 182, 10, 3934);
+    			add_location(li1, file$1, 181, 8, 3884);
     			attr_dev(ul, "id", "game-menu");
-    			add_location(ul, file$1, 160, 6, 3257);
+    			add_location(ul, file$1, 177, 6, 3734);
     			attr_dev(div2, "class", "container text-center");
-    			add_location(div2, file$1, 158, 4, 3188);
+    			add_location(div2, file$1, 175, 4, 3665);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div2, anchor);
@@ -1241,8 +1242,8 @@ var app = (function () {
     			if (remount) run_all(dispose);
 
     			dispose = [
-    				listen_dev(li0, "click", /*click_handler*/ ctx[32], false, false, false),
-    				listen_dev(li1, "click", /*click_handler_1*/ ctx[33], false, false, false)
+    				listen_dev(li0, "click", /*click_handler*/ ctx[31], false, false, false),
+    				listen_dev(li1, "click", /*click_handler_1*/ ctx[32], false, false, false)
     			];
     		},
     		p: noop,
@@ -1258,14 +1259,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(158:32) ",
+    		source: "(175:32) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (148:2) {#if !game && !playerName}
+    // (165:2) {#if !game && !playerName}
     function create_if_block$1(ctx) {
     	let div3;
     	let h1;
@@ -1289,18 +1290,18 @@ var app = (function () {
     			div2 = element("div");
     			div1 = element("div");
     			div1.textContent = "Play";
-    			add_location(h1, file$1, 149, 6, 2914);
+    			add_location(h1, file$1, 166, 6, 3391);
     			attr_dev(input, "type", "text");
     			attr_dev(input, "id", "player-name");
-    			add_location(input, file$1, 151, 8, 2975);
+    			add_location(input, file$1, 168, 8, 3452);
     			attr_dev(div0, "id", "name-field");
-    			add_location(div0, file$1, 150, 6, 2945);
+    			add_location(div0, file$1, 167, 6, 3422);
     			attr_dev(div1, "class", "btn hover-effect");
-    			add_location(div1, file$1, 154, 8, 3067);
+    			add_location(div1, file$1, 171, 8, 3544);
     			attr_dev(div2, "class", "btn-wrapper");
-    			add_location(div2, file$1, 153, 6, 3033);
+    			add_location(div2, file$1, 170, 6, 3510);
     			attr_dev(div3, "class", "container text-center");
-    			add_location(div3, file$1, 148, 4, 2872);
+    			add_location(div3, file$1, 165, 4, 3349);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div3, anchor);
@@ -1327,14 +1328,14 @@ var app = (function () {
     		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(148:2) {#if !game && !playerName}",
+    		source: "(165:2) {#if !game && !playerName}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (174:10) {#if !showdown}
+    // (191:10) {#if !showdown}
     function create_if_block_8(ctx) {
     	let div;
     	let img;
@@ -1346,9 +1347,9 @@ var app = (function () {
     			img = element("img");
     			if (img.src !== (img_src_value = "images/cards/card_back.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Card Back");
-    			add_location(img, file$1, 175, 14, 3794);
+    			add_location(img, file$1, 192, 14, 4271);
     			attr_dev(div, "class", "card-container");
-    			add_location(div, file$1, 174, 12, 3751);
+    			add_location(div, file$1, 191, 12, 4228);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1363,14 +1364,14 @@ var app = (function () {
     		block,
     		id: create_if_block_8.name,
     		type: "if",
-    		source: "(174:10) {#if !showdown}",
+    		source: "(191:10) {#if !showdown}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (179:10) {#if showdown}
+    // (196:10) {#if showdown}
     function create_if_block_7(ctx) {
     	let div;
     	let img;
@@ -1385,9 +1386,9 @@ var app = (function () {
     			t = space();
     			if (img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[39] + ".png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", img_alt_value = /*card*/ ctx[39]);
-    			add_location(img, file$1, 180, 14, 3966);
+    			add_location(img, file$1, 197, 14, 4443);
     			attr_dev(div, "class", "card-container");
-    			add_location(div, file$1, 179, 12, 3923);
+    			add_location(div, file$1, 196, 12, 4400);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1412,14 +1413,14 @@ var app = (function () {
     		block,
     		id: create_if_block_7.name,
     		type: "if",
-    		source: "(179:10) {#if showdown}",
+    		source: "(196:10) {#if showdown}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (173:8) {#each pokerBot.hand as card}
+    // (190:8) {#each pokerBot.hand as card}
     function create_each_block_2(ctx) {
     	let t;
     	let if_block1_anchor;
@@ -1454,14 +1455,14 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(173:8) {#each pokerBot.hand as card}",
+    		source: "(190:8) {#each pokerBot.hand as card}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (191:10) {#if pokerBot.dealer}
+    // (211:10) {#if pokerBot.dealer}
     function create_if_block_6(ctx) {
     	let div;
 
@@ -1470,7 +1471,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = "D";
     			attr_dev(div, "class", "dealer-chip");
-    			add_location(div, file$1, 191, 12, 4347);
+    			add_location(div, file$1, 211, 12, 4877);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1484,14 +1485,14 @@ var app = (function () {
     		block,
     		id: create_if_block_6.name,
     		type: "if",
-    		source: "(191:10) {#if pokerBot.dealer}",
+    		source: "(211:10) {#if pokerBot.dealer}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (210:8) {#each community as card}
+    // (230:8) {#each community as card}
     function create_each_block_1(ctx) {
     	let div;
     	let img;
@@ -1506,9 +1507,9 @@ var app = (function () {
     			t = space();
     			if (img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[39] + ".png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", img_alt_value = /*card*/ ctx[39]);
-    			add_location(img, file$1, 211, 12, 4904);
+    			add_location(img, file$1, 231, 12, 5423);
     			attr_dev(div, "class", "card-container");
-    			add_location(div, file$1, 210, 10, 4863);
+    			add_location(div, file$1, 230, 10, 5382);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1533,14 +1534,14 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(210:8) {#each community as card}",
+    		source: "(230:8) {#each community as card}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (219:8) {#each player.hand as card}
+    // (239:8) {#each player.hand as card}
     function create_each_block(ctx) {
     	let div;
     	let img;
@@ -1555,9 +1556,9 @@ var app = (function () {
     			t = space();
     			if (img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[39] + ".png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", img_alt_value = /*card*/ ctx[39]);
-    			add_location(img, file$1, 220, 12, 5214);
+    			add_location(img, file$1, 240, 12, 5733);
     			attr_dev(div, "class", "card-container");
-    			add_location(div, file$1, 219, 10, 5173);
+    			add_location(div, file$1, 239, 10, 5692);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1582,14 +1583,14 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(219:8) {#each player.hand as card}",
+    		source: "(239:8) {#each player.hand as card}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (253:10) {#if player.dealer}
+    // (273:10) {#if player.dealer}
     function create_if_block_5(ctx) {
     	let div;
 
@@ -1598,7 +1599,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = "D";
     			attr_dev(div, "class", "dealer-chip");
-    			add_location(div, file$1, 253, 12, 6304);
+    			add_location(div, file$1, 273, 12, 6836);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1612,14 +1613,14 @@ var app = (function () {
     		block,
     		id: create_if_block_5.name,
     		type: "if",
-    		source: "(253:10) {#if player.dealer}",
+    		source: "(273:10) {#if player.dealer}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (270:8) {:else}
+    // (290:8) {:else}
     function create_else_block_2(ctx) {
     	let div;
     	let span;
@@ -1638,16 +1639,16 @@ var app = (function () {
     			div = element("div");
     			span = element("span");
     			if_block.c();
-    			add_location(span, file$1, 271, 12, 6955);
+    			add_location(span, file$1, 291, 12, 7487);
     			attr_dev(div, "class", "btn hover-effect");
-    			add_location(div, file$1, 270, 10, 6880);
+    			add_location(div, file$1, 290, 10, 7412);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div, anchor);
     			append_dev(div, span);
     			if_block.m(span, null);
     			if (remount) dispose();
-    			dispose = listen_dev(div, "click", /*click_handler_5*/ ctx[38], false, false, false);
+    			dispose = listen_dev(div, "click", /*click_handler_6*/ ctx[38], false, false, false);
     		},
     		p: function update(ctx, dirty) {
     			if (current_block_type === (current_block_type = select_block_type_3(ctx)) && if_block) {
@@ -1673,14 +1674,14 @@ var app = (function () {
     		block,
     		id: create_else_block_2.name,
     		type: "else",
-    		source: "(270:8) {:else}",
+    		source: "(290:8) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (261:8) {#if !firstAction}
+    // (281:8) {#if !firstAction}
     function create_if_block_2(ctx) {
     	let div0;
     	let span0;
@@ -1706,12 +1707,12 @@ var app = (function () {
     			div1 = element("div");
     			span1 = element("span");
     			if_block.c();
-    			add_location(span0, file$1, 262, 12, 6609);
+    			add_location(span0, file$1, 282, 12, 7141);
     			attr_dev(div0, "class", "btn hover-effect");
-    			add_location(div0, file$1, 261, 10, 6533);
-    			add_location(span1, file$1, 265, 12, 6745);
+    			add_location(div0, file$1, 281, 10, 7065);
+    			add_location(span1, file$1, 285, 12, 7277);
     			attr_dev(div1, "class", "btn hover-effect");
-    			add_location(div1, file$1, 264, 10, 6668);
+    			add_location(div1, file$1, 284, 10, 7200);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div0, anchor);
@@ -1723,8 +1724,8 @@ var app = (function () {
     			if (remount) run_all(dispose);
 
     			dispose = [
-    				listen_dev(div0, "click", /*click_handler_3*/ ctx[36], false, false, false),
-    				listen_dev(div1, "click", /*click_handler_4*/ ctx[37], false, false, false)
+    				listen_dev(div0, "click", /*click_handler_4*/ ctx[36], false, false, false),
+    				listen_dev(div1, "click", /*click_handler_5*/ ctx[37], false, false, false)
     			];
     		},
     		p: function update(ctx, dirty) {
@@ -1753,14 +1754,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(261:8) {#if !firstAction}",
+    		source: "(281:8) {#if !firstAction}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (273:35) {:else}
+    // (293:35) {:else}
     function create_else_block_3(ctx) {
     	let t0;
     	let t1;
@@ -1787,14 +1788,14 @@ var app = (function () {
     		block,
     		id: create_else_block_3.name,
     		type: "else",
-    		source: "(273:35) {:else}",
+    		source: "(293:35) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (273:14) {#if allIn}
+    // (293:14) {#if allIn}
     function create_if_block_4(ctx) {
     	let t;
 
@@ -1815,14 +1816,14 @@ var app = (function () {
     		block,
     		id: create_if_block_4.name,
     		type: "if",
-    		source: "(273:14) {#if allIn}",
+    		source: "(293:14) {#if allIn}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (267:35) {:else}
+    // (287:35) {:else}
     function create_else_block_1(ctx) {
     	let t0;
     	let t1;
@@ -1849,14 +1850,14 @@ var app = (function () {
     		block,
     		id: create_else_block_1.name,
     		type: "else",
-    		source: "(267:35) {:else}",
+    		source: "(287:35) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (267:14) {#if allIn}
+    // (287:14) {#if allIn}
     function create_if_block_3(ctx) {
     	let t;
 
@@ -1877,7 +1878,7 @@ var app = (function () {
     		block,
     		id: create_if_block_3.name,
     		type: "if",
-    		source: "(267:14) {#if allIn}",
+    		source: "(287:14) {#if allIn}",
     		ctx
     	});
 
@@ -1906,7 +1907,7 @@ var app = (function () {
     			div = element("div");
     			if_block.c();
     			attr_dev(div, "id", "table");
-    			add_location(div, file$1, 146, 0, 2822);
+    			add_location(div, file$1, 163, 0, 3299);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1978,13 +1979,13 @@ var app = (function () {
     	let community = [];
     	let pot = 0;
     	let potClass = "";
-    	let showdown = false;
+    	let showdown = true;
     	let allIn = false;
     	let firstAction = true;
     	let pokerBotBet = 32;
     	let betAmount = 0;
     	let maxBet = player.bank;
-    	let playerTurn = false;
+    	let playerTurn = true;
     	let playerActions = "inactive";
 
     	let messageObj = {
@@ -2024,6 +2025,7 @@ var app = (function () {
     		setTimeout(
     			() => {
     				$$invalidate(8, potClass = "active");
+    				$$invalidate(12, playerActions = "active");
     			},
     			100
     		);
@@ -2055,23 +2057,16 @@ var app = (function () {
     			pokerBot.hand.push(deck[card]);
     			card++;
     		}
-
-    		setTimeout(toggleTurn, 200);
     	}
 
     	function toggleTurn() {
     		playerTurn = !playerTurn;
 
-    		if (playerTurn) {
-    			$$invalidate(12, playerActions = "active");
-    		} else {
+    		if (!playerTurn) {
     			$$invalidate(12, playerActions = "inactive");
+    		} else {
+    			$$invalidate(12, playerActions = "active");
     		}
-    	}
-
-    	function toggleDealers() {
-    		$$invalidate(4, pokerBot.dealer = !pokerBot.dealer, pokerBot);
-    		$$invalidate(5, player.dealer = !player.dealer, player);
     	}
 
     	function checkAllIn() {
@@ -2087,16 +2082,27 @@ var app = (function () {
     		$$invalidate(5, player.hand = [], player);
     		$$invalidate(6, community = []);
     		$$invalidate(7, pot = 0);
-    		toggleDealers();
-    		init();
+    		$$invalidate(4, pokerBot.dealer = !pokerBot.dealer, pokerBot);
+    		$$invalidate(5, player.dealer = !player.dealer, player);
+    		toggleTurn();
+    		calculateBlind();
+    		let deck = shuffle();
+    		deal(deck);
     	}
 
-    	function fold() {
-    		$$invalidate(13, messageObj.currPlayer = playerName, messageObj);
-    		$$invalidate(13, messageObj.othPlayer = "Poker Bot", messageObj);
+    	function fold(bot) {
+    		if (bot) {
+    			$$invalidate(13, messageObj.currPlayer = "Poker Bot", messageObj);
+    			$$invalidate(13, messageObj.othPlayer = playerName, messageObj);
+    			$$invalidate(5, player.bank += pot, player);
+    		} else {
+    			$$invalidate(13, messageObj.currPlayer = playerName, messageObj);
+    			$$invalidate(13, messageObj.othPlayer = "Poker Bot", messageObj);
+    			$$invalidate(4, pokerBot.bank += pot, pokerBot);
+    		}
+
     		$$invalidate(13, messageObj.pot = pot, messageObj);
     		$$invalidate(13, messageObj.action = "fold", messageObj);
-    		$$invalidate(4, pokerBot.bank += pot, pokerBot);
     		reset();
     	}
 
@@ -2105,17 +2111,29 @@ var app = (function () {
     			toggleTurn();
     		}
 
-    		getPokerBotAction();
+    		setTimeout(getPokerBotAction, 2000);
     	}
 
     	async function getPokerBotAction() {
+    		let max;
+    		let actions = [];
 
-    		setTimeout(
-    			function () {
-    				toggleTurn();
-    			},
-    			1000
-    		);
+    		if (firstAction) {
+    			max = 3;
+    			actions = ["fold", "check", "bet"];
+    		} else {
+    			max = 4;
+    			actions = ["fold", "check", "call", "raise"];
+    		}
+
+    		let randomIndex = Math.floor(Math.random() * Math.floor(max));
+    		let action = actions[randomIndex];
+
+    		if (action === "fold") {
+    			fold(true);
+    		} else {
+    			endTurn(action);
+    		}
     	}
 
     	const writable_props = [];
@@ -2134,10 +2152,11 @@ var app = (function () {
     		$$invalidate(10, betAmount);
     	}
 
-    	const click_handler_2 = () => endTurn("check");
-    	const click_handler_3 = () => endTurn("call");
-    	const click_handler_4 = () => endTurn("raise");
-    	const click_handler_5 = () => endTurn("bet");
+    	const click_handler_2 = () => fold(false);
+    	const click_handler_3 = () => endTurn("check");
+    	const click_handler_4 = () => endTurn("call");
+    	const click_handler_5 = () => endTurn("raise");
+    	const click_handler_6 = () => endTurn("bet");
 
     	$$self.$capture_state = () => ({
     		shuffle,
@@ -2168,7 +2187,6 @@ var app = (function () {
     		setHandWidth,
     		deal,
     		toggleTurn,
-    		toggleDealers,
     		checkAllIn,
     		reset,
     		fold,
@@ -2225,6 +2243,7 @@ var app = (function () {
     		checkAllIn,
     		fold,
     		endTurn,
+    		getPokerBotAction,
     		playerNumCards,
     		playerTurn,
     		init,
@@ -2232,16 +2251,15 @@ var app = (function () {
     		setHandWidth,
     		deal,
     		toggleTurn,
-    		toggleDealers,
     		reset,
-    		getPokerBotAction,
     		click_handler,
     		click_handler_1,
     		input_change_input_handler,
     		click_handler_2,
     		click_handler_3,
     		click_handler_4,
-    		click_handler_5
+    		click_handler_5,
+    		click_handler_6
     	];
     }
 

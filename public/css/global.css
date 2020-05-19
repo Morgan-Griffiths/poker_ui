@@ -94,7 +94,6 @@ input[type="range" i]::-webkit-slider-thumb {
 
 #table {
   height: 100%;
-  width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

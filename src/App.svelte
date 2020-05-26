@@ -1,33 +1,37 @@
 <script>
   import { shuffle } from "./cards.js";
   import ActionDialog from "./ActionDialog.svelte";
-  let game = null;
-  let playerName = null;
-  let playerNumCards = null;
-  let playerHandWidth = 160;
-  let pokerBotHandWidth = 100;
-  let pokerBot = {
+  export let game = null;
+  export let playerName = null;
+  let playerNumCards;
+  export let pokerBotHandWidth;
+  $: pokerBotHandWidth = playerNumCards * 60 + 40;
+  export let playerHandWidth;
+  $: playerHandWidth = playerNumCards * 100 + 60;
+  let firstAction;
+  export let pot = 0;
+  let potClass;
+  let playerTurn;
+  export let playerActions;
+  $: playerActions = playerTurn ? 'active' : 'inactive';
+  export let pokerBot = {
     hand: [],
     bank: 1000,
     dealer: true
   };
-  let player = {
+  export let player = {
     hand: [],
     bank: 1000,
     dealer: false
   };
-  let community = [];
-  let pot = 0;
-  let potClass = "";
-  let showdown = true;
-  let allIn = false;
-  let firstAction = true;
-  let pokerBotBet = 32;
-  let betAmount = 0;
-  let maxBet = player.bank;
-  let playerTurn = true;
-  let playerActions = "inactive";
-  let messageObj = {
+  export let community = [];
+  export let betAmount = 0;
+  export let maxBet;
+  $: maxBet = player.bank;
+  export let allIn;
+  $: allIn = betAmount === player.bank ? true : false;
+  let showdown;
+  export let messageObj = {
     currPlayer: null,
     othPlayer: null,
     pot: null,
@@ -44,11 +48,9 @@
     game = name;
     if (game === "texas") {
       playerNumCards = 2;
-      setHandWidth();
     }
     if (game === "omaha5") {
       playerNumCards = 5;
-      setHandWidth();
     }
     init();
   }
@@ -58,8 +60,9 @@
     let deck = shuffle();
     deal(deck);
     setTimeout(() => {
+      playerTurn = true;
       potClass = "active";
-      playerActions = "active";
+      firstAction = true;
     }, 100);
   }
 
@@ -72,11 +75,6 @@
     pot += 25;
     maxBet = player.bank;
     return;
-  }
-
-  function setHandWidth(numCards) {
-    playerHandWidth = playerNumCards * 100 + 60;
-    pokerBotHandWidth = playerNumCards * 60 + 40;
   }
 
   function deal(deck) {
@@ -98,14 +96,6 @@
     }
   }
 
-  function checkAllIn() {
-    if (betAmount === player.bank) {
-      allIn = true;
-    } else {
-      allIn = false;
-    }
-  }
-
   function reset() {
     pokerBot.hand = [];
     player.hand = [];
@@ -113,7 +103,13 @@
     pot = 0;
     pokerBot.dealer = !pokerBot.dealer;
     player.dealer = !player.dealer;
-    toggleTurn();
+    if (pokerBot.dealer) {
+      playerTurn = true;
+      playerActions = "active";
+    } else {
+      playerTurn = false;
+      playerActions = "inactive";
+    }
     calculateBlind();
     let deck = shuffle();
     deal(deck);
@@ -153,11 +149,12 @@
     }
     let randomIndex = Math.floor(Math.random() * Math.floor(max));
     let action = actions[randomIndex];
-    if (action === "fold") {
-      fold(true)
-    } else {
-      endTurn(action)
-    }
+    console.log(action)
+    // if (action === "fold") {
+    //   fold(true)
+    // } else {
+    //   endTurn(action)
+    // }
   }
 </script>
 
@@ -254,8 +251,7 @@
             min="0"
             max={maxBet}
             step="25"
-            bind:value={betAmount}
-            on:input={checkAllIn} />
+            bind:value={betAmount} />
           <span>${maxBet}</span>
         </div>
       </div>
@@ -280,7 +276,7 @@
       <div class="right {playerActions} actions d-flex align-center">
         {#if !firstAction}
           <div class="btn hover-effect" on:click={() => endTurn('call')}>
-            <span>Call {pokerBotBet}</span>
+            <span>Call</span>
           </div>
           <div class="btn hover-effect" on:click={() => endTurn('raise')}>
             <span>

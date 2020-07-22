@@ -13,8 +13,8 @@
     messages = setMessages(messageObj);
     setTimeout(function() {
         messageObj = {
-            playerName: null,
-            pokerBot: false,
+            currPlayer: null,
+            othPlayer: false,
             pot: null,
             amount: null,
             action: null

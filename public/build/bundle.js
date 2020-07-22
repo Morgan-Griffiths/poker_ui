@@ -487,7 +487,7 @@ var app = (function () {
     			t = text(t_value);
     			attr_dev(div, "id", "action-dialog");
     			attr_dev(div, "class", "container svelte-1oud35h");
-    			add_location(div, file, 53, 2, 1220);
+    			add_location(div, file, 53, 2, 1221);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div, anchor);
@@ -591,8 +591,8 @@ var app = (function () {
     		setTimeout(
     			function () {
     				$$invalidate(0, messageObj = {
-    					playerName: null,
-    					pokerBot: false,
+    					currPlayer: null,
+    					othPlayer: false,
     					pot: null,
     					amount: null,
     					action: null
@@ -664,41 +664,41 @@ var app = (function () {
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[27] = list[i];
+    	child_ctx[29] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[27] = list[i];
+    	child_ctx[29] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[32] = list[i];
+    	child_ctx[34] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_3(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[32] = list[i];
+    	child_ctx[34] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_5(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[32] = list[i];
+    	child_ctx[34] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_4(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[37] = list[i];
+    	child_ctx[39] = list[i];
     	return child_ctx;
     }
 
-    // (153:2) {:else}
+    // (182:2) {:else}
     function create_else_block(ctx) {
     	let div1;
     	let div0;
@@ -712,7 +712,7 @@ var app = (function () {
     	let t3;
     	let p0;
     	let t4;
-    	let t5_value = /*villain*/ ctx[6].bank + "";
+    	let t5_value = /*villain*/ ctx[9].bank + "";
     	let t5;
     	let t6;
     	let div7;
@@ -754,7 +754,7 @@ var app = (function () {
     	let t24;
     	let p1;
     	let t25;
-    	let t26_value = /*hero*/ ctx[7].bank + "";
+    	let t26_value = /*hero*/ ctx[10].bank + "";
     	let t26;
     	let t27;
     	let div15;
@@ -763,16 +763,16 @@ var app = (function () {
     	let dispose;
 
     	function select_block_type_1(ctx, dirty) {
-    		if (/*villain*/ ctx[6].hand.length === 0) return create_if_block_8;
+    		if (/*villain*/ ctx[9].hand.length === 0) return create_if_block_8;
     		return create_else_block_1;
     	}
 
     	let current_block_type = select_block_type_1(ctx);
     	let if_block0 = current_block_type(ctx);
-    	let if_block1 = /*villain*/ ctx[6].dealer && create_if_block_7(ctx);
+    	let if_block1 = /*villain*/ ctx[9].dealer && create_if_block_7(ctx);
 
     	const actiondialog = new ActionDialog({
-    			props: { messageObj: /*messageObj*/ ctx[10] },
+    			props: { messageObj: /*messageObj*/ ctx[14] },
     			$$inline: true
     		});
 
@@ -784,7 +784,7 @@ var app = (function () {
     		each_blocks_1[i] = create_each_block_3(get_each_context_3(ctx, each_value_3, i));
     	}
 
-    	let each_value_2 = /*hero*/ ctx[7].hand;
+    	let each_value_2 = /*hero*/ ctx[10].hand;
     	validate_each_argument(each_value_2);
     	let each_blocks = [];
 
@@ -792,9 +792,9 @@ var app = (function () {
     		each_blocks[i] = create_each_block_2(get_each_context_2(ctx, each_value_2, i));
     	}
 
-    	let if_block2 = /*availActions*/ ctx[13] && create_if_block_5(ctx);
-    	let if_block3 = /*hero*/ ctx[7].dealer && create_if_block_4(ctx);
-    	let if_block4 = /*availActions*/ ctx[13] && create_if_block_2(ctx);
+    	let if_block2 = /*availActions*/ ctx[2] && create_if_block_5(ctx);
+    	let if_block3 = /*hero*/ ctx[10].dealer && create_if_block_4(ctx);
+    	let if_block4 = /*availActions*/ ctx[2] && create_if_block_2(ctx);
 
     	const block = {
     		c: function create() {
@@ -820,7 +820,7 @@ var app = (function () {
     			t7 = space();
     			span0 = element("span");
     			t8 = text("$");
-    			t9 = text(/*pot*/ ctx[4]);
+    			t9 = text(/*pot*/ ctx[7]);
     			t10 = space();
     			div6 = element("div");
     			create_component(actiondialog.$$.fragment);
@@ -849,7 +849,7 @@ var app = (function () {
     			t16 = space();
     			span2 = element("span");
     			t17 = text("$");
-    			t18 = text(/*maxBet*/ ctx[9]);
+    			t18 = text(/*maxBet*/ ctx[13]);
     			t19 = space();
     			div12 = element("div");
     			if (if_block2) if_block2.c();
@@ -870,66 +870,66 @@ var app = (function () {
     			if (if_block4) if_block4.c();
     			attr_dev(div0, "id", "villian");
     			attr_dev(div0, "class", "hand");
-    			set_style(div0, "width", /*pokerBotHandWidth*/ ctx[2] + "px");
-    			add_location(div0, file$1, 154, 6, 4226);
+    			set_style(div0, "width", /*pokerBotHandWidth*/ ctx[5] + "px");
+    			add_location(div0, file$1, 183, 6, 5502);
     			attr_dev(div1, "class", "container no-margin-bottom");
-    			add_location(div1, file$1, 153, 4, 4179);
+    			add_location(div1, file$1, 182, 4, 5455);
     			attr_dev(div2, "class", "d-flex justify-center");
     			set_style(div2, "margin-bottom", "8px");
-    			add_location(div2, file$1, 172, 8, 4882);
-    			add_location(hr0, file$1, 178, 8, 5089);
-    			add_location(p0, file$1, 179, 8, 5104);
+    			add_location(div2, file$1, 201, 8, 6158);
+    			add_location(hr0, file$1, 207, 8, 6365);
+    			add_location(p0, file$1, 208, 8, 6380);
     			attr_dev(div3, "id", "villian-info");
     			attr_dev(div3, "class", "d-flex column");
-    			add_location(div3, file$1, 171, 6, 4828);
+    			add_location(div3, file$1, 200, 6, 6104);
     			attr_dev(div4, "class", "container no-margin-bottom no-margin-top");
-    			add_location(div4, file$1, 170, 4, 4767);
+    			add_location(div4, file$1, 199, 4, 6043);
     			if (img.src !== (img_src_value = "images/poker-chip.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Poker Chip");
     			attr_dev(img, "height", "105%");
     			set_style(img, "margin-right", "10px");
-    			add_location(img, file$1, 184, 8, 5225);
-    			add_location(span0, file$1, 189, 8, 5366);
+    			add_location(img, file$1, 213, 8, 6501);
+    			add_location(span0, file$1, 218, 8, 6642);
     			attr_dev(div5, "id", "pot");
-    			attr_dev(div5, "class", /*potClass*/ ctx[14]);
-    			add_location(div5, file$1, 183, 6, 5185);
+    			attr_dev(div5, "class", /*potClass*/ ctx[16]);
+    			add_location(div5, file$1, 212, 6, 6461);
     			attr_dev(div6, "id", "community");
     			attr_dev(div6, "class", "hand");
-    			add_location(div6, file$1, 191, 6, 5405);
+    			add_location(div6, file$1, 220, 6, 6681);
     			attr_dev(div7, "class", "container");
-    			add_location(div7, file$1, 182, 4, 5155);
+    			add_location(div7, file$1, 211, 4, 6431);
     			attr_dev(div8, "id", "hero");
     			attr_dev(div8, "class", "hand");
-    			set_style(div8, "width", /*heroHandWidth*/ ctx[3] + "px");
-    			add_location(div8, file$1, 201, 6, 5719);
+    			set_style(div8, "width", /*heroHandWidth*/ ctx[6] + "px");
+    			add_location(div8, file$1, 230, 6, 6995);
     			attr_dev(div9, "class", "container no-margin-bottom");
-    			add_location(div9, file$1, 200, 4, 5672);
-    			add_location(span1, file$1, 214, 10, 6216);
+    			add_location(div9, file$1, 229, 4, 6948);
+    			add_location(span1, file$1, 243, 10, 7492);
     			attr_dev(input, "type", "range");
     			attr_dev(input, "min", "0");
-    			attr_dev(input, "max", /*maxBet*/ ctx[9]);
+    			attr_dev(input, "max", /*maxBet*/ ctx[13]);
     			attr_dev(input, "step", "1");
-    			add_location(input, file$1, 215, 10, 6242);
-    			add_location(span2, file$1, 222, 10, 6420);
+    			add_location(input, file$1, 244, 10, 7518);
+    			add_location(span2, file$1, 251, 10, 7696);
     			attr_dev(div10, "class", "input-wrapper d-flex justify-center");
-    			add_location(div10, file$1, 213, 8, 6156);
+    			add_location(div10, file$1, 242, 8, 7432);
     			attr_dev(div11, "id", "bet-slider");
-    			attr_dev(div11, "class", div11_class_value = "" + (/*heroActiveClass*/ ctx[5] + " d-flex justify-center flex-wrap"));
-    			add_location(div11, file$1, 210, 6, 6052);
-    			attr_dev(div12, "class", div12_class_value = "left " + /*heroActiveClass*/ ctx[5] + " actions d-flex align-center");
-    			add_location(div12, file$1, 225, 6, 6477);
+    			attr_dev(div11, "class", div11_class_value = "" + (/*heroActiveClass*/ ctx[8] + " d-flex justify-center flex-wrap"));
+    			add_location(div11, file$1, 239, 6, 7328);
+    			attr_dev(div12, "class", div12_class_value = "left " + /*heroActiveClass*/ ctx[8] + " actions d-flex align-center");
+    			add_location(div12, file$1, 254, 6, 7753);
     			attr_dev(div13, "class", "d-flex justify-center");
     			set_style(div13, "margin-bottom", "8px");
-    			add_location(div13, file$1, 240, 8, 6996);
-    			add_location(hr1, file$1, 246, 8, 7194);
-    			add_location(p1, file$1, 247, 8, 7209);
+    			add_location(div13, file$1, 269, 8, 8267);
+    			add_location(hr1, file$1, 275, 8, 8465);
+    			add_location(p1, file$1, 276, 8, 8480);
     			attr_dev(div14, "id", "hero-info");
     			attr_dev(div14, "class", "d-flex column");
-    			add_location(div14, file$1, 239, 6, 6945);
-    			attr_dev(div15, "class", div15_class_value = "right " + /*heroActiveClass*/ ctx[5] + " actions d-flex align-center");
-    			add_location(div15, file$1, 249, 6, 7248);
+    			add_location(div14, file$1, 268, 6, 8216);
+    			attr_dev(div15, "class", div15_class_value = "right " + /*heroActiveClass*/ ctx[8] + " actions d-flex align-center");
+    			add_location(div15, file$1, 278, 6, 8519);
     			attr_dev(div16, "class", "container d-flex justify-center flex-wrap no-margin-top");
-    			add_location(div16, file$1, 209, 4, 5976);
+    			add_location(div16, file$1, 238, 4, 7252);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div1, anchor);
@@ -979,7 +979,7 @@ var app = (function () {
     			append_dev(div10, span1);
     			append_dev(div10, t15);
     			append_dev(div10, input);
-    			set_input_value(input, /*betSize*/ ctx[8]);
+    			set_input_value(input, /*betSize*/ ctx[12]);
     			append_dev(div10, t16);
     			append_dev(div10, span2);
     			append_dev(span2, t17);
@@ -1006,9 +1006,9 @@ var app = (function () {
     			if (remount) run_all(dispose);
 
     			dispose = [
-    				listen_dev(input, "change", /*input_change_input_handler*/ ctx[24]),
-    				listen_dev(input, "input", /*input_change_input_handler*/ ctx[24]),
-    				listen_dev(input, "input", /*checkAllIn*/ ctx[19], false, false, false)
+    				listen_dev(input, "change", /*input_change_input_handler*/ ctx[26]),
+    				listen_dev(input, "input", /*input_change_input_handler*/ ctx[26]),
+    				listen_dev(input, "input", /*checkAllIn*/ ctx[20], false, false, false)
     			];
     		},
     		p: function update(ctx, dirty) {
@@ -1024,11 +1024,11 @@ var app = (function () {
     				}
     			}
 
-    			if (!current || dirty[0] & /*pokerBotHandWidth*/ 4) {
-    				set_style(div0, "width", /*pokerBotHandWidth*/ ctx[2] + "px");
+    			if (!current || dirty[0] & /*pokerBotHandWidth*/ 32) {
+    				set_style(div0, "width", /*pokerBotHandWidth*/ ctx[5] + "px");
     			}
 
-    			if (/*villain*/ ctx[6].dealer) {
+    			if (/*villain*/ ctx[9].dealer) {
     				if (if_block1) ; else {
     					if_block1 = create_if_block_7(ctx);
     					if_block1.c();
@@ -1039,15 +1039,15 @@ var app = (function () {
     				if_block1 = null;
     			}
 
-    			if ((!current || dirty[0] & /*villain*/ 64) && t5_value !== (t5_value = /*villain*/ ctx[6].bank + "")) set_data_dev(t5, t5_value);
-    			if (!current || dirty[0] & /*pot*/ 16) set_data_dev(t9, /*pot*/ ctx[4]);
+    			if ((!current || dirty[0] & /*villain*/ 512) && t5_value !== (t5_value = /*villain*/ ctx[9].bank + "")) set_data_dev(t5, t5_value);
+    			if (!current || dirty[0] & /*pot*/ 128) set_data_dev(t9, /*pot*/ ctx[7]);
 
-    			if (!current || dirty[0] & /*potClass*/ 16384) {
-    				attr_dev(div5, "class", /*potClass*/ ctx[14]);
+    			if (!current || dirty[0] & /*potClass*/ 65536) {
+    				attr_dev(div5, "class", /*potClass*/ ctx[16]);
     			}
 
     			const actiondialog_changes = {};
-    			if (dirty[0] & /*messageObj*/ 1024) actiondialog_changes.messageObj = /*messageObj*/ ctx[10];
+    			if (dirty[0] & /*messageObj*/ 16384) actiondialog_changes.messageObj = /*messageObj*/ ctx[14];
     			actiondialog.$set(actiondialog_changes);
 
     			if (dirty[0] & /*community*/ 2048) {
@@ -1074,8 +1074,8 @@ var app = (function () {
     				each_blocks_1.length = each_value_3.length;
     			}
 
-    			if (dirty[0] & /*hero*/ 128) {
-    				each_value_2 = /*hero*/ ctx[7].hand;
+    			if (dirty[0] & /*hero*/ 1024) {
+    				each_value_2 = /*hero*/ ctx[10].hand;
     				validate_each_argument(each_value_2);
     				let i;
 
@@ -1098,25 +1098,25 @@ var app = (function () {
     				each_blocks.length = each_value_2.length;
     			}
 
-    			if (!current || dirty[0] & /*heroHandWidth*/ 8) {
-    				set_style(div8, "width", /*heroHandWidth*/ ctx[3] + "px");
+    			if (!current || dirty[0] & /*heroHandWidth*/ 64) {
+    				set_style(div8, "width", /*heroHandWidth*/ ctx[6] + "px");
     			}
 
-    			if (!current || dirty[0] & /*maxBet*/ 512) {
-    				attr_dev(input, "max", /*maxBet*/ ctx[9]);
+    			if (!current || dirty[0] & /*maxBet*/ 8192) {
+    				attr_dev(input, "max", /*maxBet*/ ctx[13]);
     			}
 
-    			if (dirty[0] & /*betSize*/ 256) {
-    				set_input_value(input, /*betSize*/ ctx[8]);
+    			if (dirty[0] & /*betSize*/ 4096) {
+    				set_input_value(input, /*betSize*/ ctx[12]);
     			}
 
-    			if (!current || dirty[0] & /*maxBet*/ 512) set_data_dev(t18, /*maxBet*/ ctx[9]);
+    			if (!current || dirty[0] & /*maxBet*/ 8192) set_data_dev(t18, /*maxBet*/ ctx[13]);
 
-    			if (!current || dirty[0] & /*heroActiveClass*/ 32 && div11_class_value !== (div11_class_value = "" + (/*heroActiveClass*/ ctx[5] + " d-flex justify-center flex-wrap"))) {
+    			if (!current || dirty[0] & /*heroActiveClass*/ 256 && div11_class_value !== (div11_class_value = "" + (/*heroActiveClass*/ ctx[8] + " d-flex justify-center flex-wrap"))) {
     				attr_dev(div11, "class", div11_class_value);
     			}
 
-    			if (/*availActions*/ ctx[13]) {
+    			if (/*availActions*/ ctx[2]) {
     				if (if_block2) {
     					if_block2.p(ctx, dirty);
     				} else {
@@ -1129,13 +1129,13 @@ var app = (function () {
     				if_block2 = null;
     			}
 
-    			if (!current || dirty[0] & /*heroActiveClass*/ 32 && div12_class_value !== (div12_class_value = "left " + /*heroActiveClass*/ ctx[5] + " actions d-flex align-center")) {
+    			if (!current || dirty[0] & /*heroActiveClass*/ 256 && div12_class_value !== (div12_class_value = "left " + /*heroActiveClass*/ ctx[8] + " actions d-flex align-center")) {
     				attr_dev(div12, "class", div12_class_value);
     			}
 
     			if (!current || dirty[0] & /*playerName*/ 2) set_data_dev(t21, /*playerName*/ ctx[1]);
 
-    			if (/*hero*/ ctx[7].dealer) {
+    			if (/*hero*/ ctx[10].dealer) {
     				if (if_block3) ; else {
     					if_block3 = create_if_block_4(ctx);
     					if_block3.c();
@@ -1146,9 +1146,9 @@ var app = (function () {
     				if_block3 = null;
     			}
 
-    			if ((!current || dirty[0] & /*hero*/ 128) && t26_value !== (t26_value = /*hero*/ ctx[7].bank + "")) set_data_dev(t26, t26_value);
+    			if ((!current || dirty[0] & /*hero*/ 1024) && t26_value !== (t26_value = /*hero*/ ctx[10].bank + "")) set_data_dev(t26, t26_value);
 
-    			if (/*availActions*/ ctx[13]) {
+    			if (/*availActions*/ ctx[2]) {
     				if (if_block4) {
     					if_block4.p(ctx, dirty);
     				} else {
@@ -1161,7 +1161,7 @@ var app = (function () {
     				if_block4 = null;
     			}
 
-    			if (!current || dirty[0] & /*heroActiveClass*/ 32 && div15_class_value !== (div15_class_value = "right " + /*heroActiveClass*/ ctx[5] + " actions d-flex align-center")) {
+    			if (!current || dirty[0] & /*heroActiveClass*/ 256 && div15_class_value !== (div15_class_value = "right " + /*heroActiveClass*/ ctx[8] + " actions d-flex align-center")) {
     				attr_dev(div15, "class", div15_class_value);
     			}
     		},
@@ -1200,14 +1200,14 @@ var app = (function () {
     		block,
     		id: create_else_block.name,
     		type: "else",
-    		source: "(153:2) {:else}",
+    		source: "(182:2) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (144:32) 
+    // (173:32) 
     function create_if_block_1(ctx) {
     	let div1;
     	let h1;
@@ -1227,14 +1227,14 @@ var app = (function () {
     			li = element("li");
     			div0 = element("div");
     			div0.textContent = "Omaha";
-    			add_location(h1, file$1, 145, 6, 3982);
+    			add_location(h1, file$1, 174, 6, 5258);
     			attr_dev(div0, "class", "btn hover-effect");
-    			add_location(div0, file$1, 148, 10, 4086);
-    			add_location(li, file$1, 147, 8, 4037);
+    			add_location(div0, file$1, 177, 10, 5362);
+    			add_location(li, file$1, 176, 8, 5313);
     			attr_dev(ul, "id", "game-menu");
-    			add_location(ul, file$1, 146, 6, 4009);
+    			add_location(ul, file$1, 175, 6, 5285);
     			attr_dev(div1, "class", "container text-center");
-    			add_location(div1, file$1, 144, 4, 3940);
+    			add_location(div1, file$1, 173, 4, 5216);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div1, anchor);
@@ -1244,7 +1244,7 @@ var app = (function () {
     			append_dev(ul, li);
     			append_dev(li, div0);
     			if (remount) dispose();
-    			dispose = listen_dev(li, "click", /*click_handler*/ ctx[23], false, false, false);
+    			dispose = listen_dev(li, "click", /*click_handler*/ ctx[25], false, false, false);
     		},
     		p: noop,
     		i: noop,
@@ -1259,14 +1259,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(144:32) ",
+    		source: "(173:32) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (134:2) {#if !game && !playerName}
+    // (163:2) {#if !game && !playerName}
     function create_if_block$1(ctx) {
     	let div3;
     	let h1;
@@ -1290,18 +1290,18 @@ var app = (function () {
     			div2 = element("div");
     			div1 = element("div");
     			div1.textContent = "Play";
-    			add_location(h1, file$1, 135, 6, 3668);
+    			add_location(h1, file$1, 164, 6, 4944);
     			attr_dev(input, "type", "text");
     			attr_dev(input, "id", "hero-name");
-    			add_location(input, file$1, 137, 8, 3729);
+    			add_location(input, file$1, 166, 8, 5005);
     			attr_dev(div0, "id", "name-field");
-    			add_location(div0, file$1, 136, 6, 3699);
+    			add_location(div0, file$1, 165, 6, 4975);
     			attr_dev(div1, "class", "btn hover-effect");
-    			add_location(div1, file$1, 140, 8, 3819);
+    			add_location(div1, file$1, 169, 8, 5095);
     			attr_dev(div2, "class", "btn-wrapper");
-    			add_location(div2, file$1, 139, 6, 3785);
+    			add_location(div2, file$1, 168, 6, 5061);
     			attr_dev(div3, "class", "container text-center");
-    			add_location(div3, file$1, 134, 4, 3626);
+    			add_location(div3, file$1, 163, 4, 4902);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div3, anchor);
@@ -1313,7 +1313,7 @@ var app = (function () {
     			append_dev(div3, div2);
     			append_dev(div2, div1);
     			if (remount) dispose();
-    			dispose = listen_dev(div1, "click", /*setName*/ ctx[15], false, false, false);
+    			dispose = listen_dev(div1, "click", /*setName*/ ctx[17], false, false, false);
     		},
     		p: noop,
     		i: noop,
@@ -1328,17 +1328,17 @@ var app = (function () {
     		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(134:2) {#if !game && !playerName}",
+    		source: "(163:2) {#if !game && !playerName}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (162:8) {:else}
+    // (191:8) {:else}
     function create_else_block_1(ctx) {
     	let each_1_anchor;
-    	let each_value_5 = /*villain*/ ctx[6].hand;
+    	let each_value_5 = /*villain*/ ctx[9].hand;
     	validate_each_argument(each_value_5);
     	let each_blocks = [];
 
@@ -1362,8 +1362,8 @@ var app = (function () {
     			insert_dev(target, each_1_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*villain*/ 64) {
-    				each_value_5 = /*villain*/ ctx[6].hand;
+    			if (dirty[0] & /*villain*/ 512) {
+    				each_value_5 = /*villain*/ ctx[9].hand;
     				validate_each_argument(each_value_5);
     				let i;
 
@@ -1396,17 +1396,17 @@ var app = (function () {
     		block,
     		id: create_else_block_1.name,
     		type: "else",
-    		source: "(162:8) {:else}",
+    		source: "(191:8) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (156:8) {#if villain.hand.length === 0}
+    // (185:8) {#if villain.hand.length === 0}
     function create_if_block_8(ctx) {
     	let each_1_anchor;
-    	let each_value_4 = Array(/*playerNumCards*/ ctx[12]);
+    	let each_value_4 = Array(/*playerNumCards*/ ctx[15]);
     	validate_each_argument(each_value_4);
     	let each_blocks = [];
 
@@ -1430,9 +1430,9 @@ var app = (function () {
     			insert_dev(target, each_1_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*playerNumCards*/ 4096) {
+    			if (dirty[0] & /*playerNumCards*/ 32768) {
     				const old_length = each_value_4.length;
-    				each_value_4 = Array(/*playerNumCards*/ ctx[12]);
+    				each_value_4 = Array(/*playerNumCards*/ ctx[15]);
     				validate_each_argument(each_value_4);
     				let i;
 
@@ -1463,14 +1463,14 @@ var app = (function () {
     		block,
     		id: create_if_block_8.name,
     		type: "if",
-    		source: "(156:8) {#if villain.hand.length === 0}",
+    		source: "(185:8) {#if villain.hand.length === 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (163:10) {#each villain.hand as card}
+    // (192:10) {#each villain.hand as card}
     function create_each_block_5(ctx) {
     	let div;
     	let img;
@@ -1483,11 +1483,11 @@ var app = (function () {
     			div = element("div");
     			img = element("img");
     			t = space();
-    			if (img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[32] + ".png")) attr_dev(img, "src", img_src_value);
-    			attr_dev(img, "alt", img_alt_value = /*card*/ ctx[32]);
-    			add_location(img, file$1, 164, 14, 4639);
+    			if (img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[34] + ".png")) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "alt", img_alt_value = /*card*/ ctx[34]);
+    			add_location(img, file$1, 193, 14, 5915);
     			attr_dev(div, "class", "card-container");
-    			add_location(div, file$1, 163, 12, 4596);
+    			add_location(div, file$1, 192, 12, 5872);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1495,11 +1495,11 @@ var app = (function () {
     			append_dev(div, t);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*villain*/ 64 && img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[32] + ".png")) {
+    			if (dirty[0] & /*villain*/ 512 && img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[34] + ".png")) {
     				attr_dev(img, "src", img_src_value);
     			}
 
-    			if (dirty[0] & /*villain*/ 64 && img_alt_value !== (img_alt_value = /*card*/ ctx[32])) {
+    			if (dirty[0] & /*villain*/ 512 && img_alt_value !== (img_alt_value = /*card*/ ctx[34])) {
     				attr_dev(img, "alt", img_alt_value);
     			}
     		},
@@ -1512,14 +1512,14 @@ var app = (function () {
     		block,
     		id: create_each_block_5.name,
     		type: "each",
-    		source: "(163:10) {#each villain.hand as card}",
+    		source: "(192:10) {#each villain.hand as card}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (157:10) {#each Array(playerNumCards) as _}
+    // (186:10) {#each Array(playerNumCards) as _}
     function create_each_block_4(ctx) {
     	let div;
     	let img;
@@ -1533,9 +1533,9 @@ var app = (function () {
     			t = space();
     			if (img.src !== (img_src_value = "images/cards/card_back.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Card Back");
-    			add_location(img, file$1, 158, 14, 4435);
+    			add_location(img, file$1, 187, 14, 5711);
     			attr_dev(div, "class", "card-container");
-    			add_location(div, file$1, 157, 12, 4392);
+    			add_location(div, file$1, 186, 12, 5668);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1551,14 +1551,14 @@ var app = (function () {
     		block,
     		id: create_each_block_4.name,
     		type: "each",
-    		source: "(157:10) {#each Array(playerNumCards) as _}",
+    		source: "(186:10) {#each Array(playerNumCards) as _}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (175:10) {#if villain.dealer}
+    // (204:10) {#if villain.dealer}
     function create_if_block_7(ctx) {
     	let div;
 
@@ -1567,7 +1567,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = "D";
     			attr_dev(div, "class", "dealer-chip");
-    			add_location(div, file$1, 175, 12, 5017);
+    			add_location(div, file$1, 204, 12, 6293);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1581,14 +1581,14 @@ var app = (function () {
     		block,
     		id: create_if_block_7.name,
     		type: "if",
-    		source: "(175:10) {#if villain.dealer}",
+    		source: "(204:10) {#if villain.dealer}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (194:8) {#each community as card}
+    // (223:8) {#each community as card}
     function create_each_block_3(ctx) {
     	let div;
     	let img;
@@ -1601,11 +1601,11 @@ var app = (function () {
     			div = element("div");
     			img = element("img");
     			t = space();
-    			if (img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[32] + ".png")) attr_dev(img, "src", img_src_value);
-    			attr_dev(img, "alt", img_alt_value = /*card*/ ctx[32]);
-    			add_location(img, file$1, 195, 12, 5562);
+    			if (img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[34] + ".png")) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "alt", img_alt_value = /*card*/ ctx[34]);
+    			add_location(img, file$1, 224, 12, 6838);
     			attr_dev(div, "class", "card-container");
-    			add_location(div, file$1, 194, 10, 5521);
+    			add_location(div, file$1, 223, 10, 6797);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1613,11 +1613,11 @@ var app = (function () {
     			append_dev(div, t);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*community*/ 2048 && img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[32] + ".png")) {
+    			if (dirty[0] & /*community*/ 2048 && img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[34] + ".png")) {
     				attr_dev(img, "src", img_src_value);
     			}
 
-    			if (dirty[0] & /*community*/ 2048 && img_alt_value !== (img_alt_value = /*card*/ ctx[32])) {
+    			if (dirty[0] & /*community*/ 2048 && img_alt_value !== (img_alt_value = /*card*/ ctx[34])) {
     				attr_dev(img, "alt", img_alt_value);
     			}
     		},
@@ -1630,14 +1630,14 @@ var app = (function () {
     		block,
     		id: create_each_block_3.name,
     		type: "each",
-    		source: "(194:8) {#each community as card}",
+    		source: "(223:8) {#each community as card}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (203:8) {#each hero.hand as card}
+    // (232:8) {#each hero.hand as card}
     function create_each_block_2(ctx) {
     	let div;
     	let img;
@@ -1650,11 +1650,11 @@ var app = (function () {
     			div = element("div");
     			img = element("img");
     			t = space();
-    			if (img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[32] + ".png")) attr_dev(img, "src", img_src_value);
-    			attr_dev(img, "alt", img_alt_value = /*card*/ ctx[32]);
-    			add_location(img, file$1, 204, 12, 5866);
+    			if (img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[34] + ".png")) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "alt", img_alt_value = /*card*/ ctx[34]);
+    			add_location(img, file$1, 233, 12, 7142);
     			attr_dev(div, "class", "card-container");
-    			add_location(div, file$1, 203, 10, 5825);
+    			add_location(div, file$1, 232, 10, 7101);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1662,11 +1662,11 @@ var app = (function () {
     			append_dev(div, t);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*hero*/ 128 && img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[32] + ".png")) {
+    			if (dirty[0] & /*hero*/ 1024 && img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[34] + ".png")) {
     				attr_dev(img, "src", img_src_value);
     			}
 
-    			if (dirty[0] & /*hero*/ 128 && img_alt_value !== (img_alt_value = /*card*/ ctx[32])) {
+    			if (dirty[0] & /*hero*/ 1024 && img_alt_value !== (img_alt_value = /*card*/ ctx[34])) {
     				attr_dev(img, "alt", img_alt_value);
     			}
     		},
@@ -1679,17 +1679,17 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(203:8) {#each hero.hand as card}",
+    		source: "(232:8) {#each hero.hand as card}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (227:8) {#if availActions}
+    // (256:8) {#if availActions}
     function create_if_block_5(ctx) {
     	let each_1_anchor;
-    	let each_value_1 = /*divideActions*/ ctx[17]("left");
+    	let each_value_1 = /*leftAvailActions*/ ctx[3];
     	validate_each_argument(each_value_1);
     	let each_blocks = [];
 
@@ -1713,8 +1713,8 @@ var app = (function () {
     			insert_dev(target, each_1_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*endTurn, divideActions, betSize*/ 393472) {
-    				each_value_1 = /*divideActions*/ ctx[17]("left");
+    			if (dirty[0] & /*endTurn, leftAvailActions, betSize*/ 528392) {
+    				each_value_1 = /*leftAvailActions*/ ctx[3];
     				validate_each_argument(each_value_1);
     				let i;
 
@@ -1747,26 +1747,26 @@ var app = (function () {
     		block,
     		id: create_if_block_5.name,
     		type: "if",
-    		source: "(227:8) {#if availActions}",
+    		source: "(256:8) {#if availActions}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (234:16) {#if action === 'Bet' || action === 'Raise'}
+    // (263:16) {#if action === 'Bet' || action === 'Raise'}
     function create_if_block_6(ctx) {
     	let t;
 
     	const block = {
     		c: function create() {
-    			t = text(/*betSize*/ ctx[8]);
+    			t = text(/*betSize*/ ctx[12]);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, t, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*betSize*/ 256) set_data_dev(t, /*betSize*/ ctx[8]);
+    			if (dirty[0] & /*betSize*/ 4096) set_data_dev(t, /*betSize*/ ctx[12]);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(t);
@@ -1777,26 +1777,26 @@ var app = (function () {
     		block,
     		id: create_if_block_6.name,
     		type: "if",
-    		source: "(234:16) {#if action === 'Bet' || action === 'Raise'}",
+    		source: "(263:16) {#if action === 'Bet' || action === 'Raise'}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (228:10) {#each divideActions('left') as action}
+    // (257:10) {#each leftAvailActions as action}
     function create_each_block_1(ctx) {
     	let div;
     	let span;
-    	let t0_value = /*action*/ ctx[27] + "";
+    	let t0_value = /*action*/ ctx[29] + "";
     	let t0;
     	let t1;
     	let t2;
     	let dispose;
-    	let if_block = (/*action*/ ctx[27] === "Bet" || /*action*/ ctx[27] === "Raise") && create_if_block_6(ctx);
+    	let if_block = (/*action*/ ctx[29] === "Bet" || /*action*/ ctx[29] === "Raise") && create_if_block_6(ctx);
 
     	function click_handler_1(...args) {
-    		return /*click_handler_1*/ ctx[25](/*action*/ ctx[27], ...args);
+    		return /*click_handler_1*/ ctx[27](/*action*/ ctx[29], ...args);
     	}
 
     	const block = {
@@ -1807,9 +1807,9 @@ var app = (function () {
     			t1 = space();
     			if (if_block) if_block.c();
     			t2 = space();
-    			add_location(span, file$1, 231, 14, 6746);
+    			add_location(span, file$1, 260, 14, 8017);
     			attr_dev(div, "class", "btn hover-effect");
-    			add_location(div, file$1, 228, 12, 6631);
+    			add_location(div, file$1, 257, 12, 7902);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div, anchor);
@@ -1823,7 +1823,20 @@ var app = (function () {
     		},
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
-    			if (/*action*/ ctx[27] === "Bet" || /*action*/ ctx[27] === "Raise") if_block.p(ctx, dirty);
+    			if (dirty[0] & /*leftAvailActions*/ 8 && t0_value !== (t0_value = /*action*/ ctx[29] + "")) set_data_dev(t0, t0_value);
+
+    			if (/*action*/ ctx[29] === "Bet" || /*action*/ ctx[29] === "Raise") {
+    				if (if_block) {
+    					if_block.p(ctx, dirty);
+    				} else {
+    					if_block = create_if_block_6(ctx);
+    					if_block.c();
+    					if_block.m(span, null);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
+    			}
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
@@ -1836,14 +1849,14 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(228:10) {#each divideActions('left') as action}",
+    		source: "(257:10) {#each leftAvailActions as action}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (243:10) {#if hero.dealer}
+    // (272:10) {#if hero.dealer}
     function create_if_block_4(ctx) {
     	let div;
 
@@ -1852,7 +1865,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = "D";
     			attr_dev(div, "class", "dealer-chip");
-    			add_location(div, file$1, 243, 12, 7122);
+    			add_location(div, file$1, 272, 12, 8393);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1866,17 +1879,17 @@ var app = (function () {
     		block,
     		id: create_if_block_4.name,
     		type: "if",
-    		source: "(243:10) {#if hero.dealer}",
+    		source: "(272:10) {#if hero.dealer}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (251:8) {#if availActions}
+    // (280:8) {#if availActions}
     function create_if_block_2(ctx) {
     	let each_1_anchor;
-    	let each_value = /*divideActions*/ ctx[17]("right");
+    	let each_value = /*rightAvailActions*/ ctx[4];
     	validate_each_argument(each_value);
     	let each_blocks = [];
 
@@ -1900,8 +1913,8 @@ var app = (function () {
     			insert_dev(target, each_1_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*endTurn, divideActions, betSize*/ 393472) {
-    				each_value = /*divideActions*/ ctx[17]("right");
+    			if (dirty[0] & /*endTurn, rightAvailActions, betSize*/ 528400) {
+    				each_value = /*rightAvailActions*/ ctx[4];
     				validate_each_argument(each_value);
     				let i;
 
@@ -1934,26 +1947,26 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(251:8) {#if availActions}",
+    		source: "(280:8) {#if availActions}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (258:16) {#if action === 'Bet' || action === 'Raise'}
+    // (287:16) {#if action === 'Bet' || action === 'Raise'}
     function create_if_block_3(ctx) {
     	let t;
 
     	const block = {
     		c: function create() {
-    			t = text(/*betSize*/ ctx[8]);
+    			t = text(/*betSize*/ ctx[12]);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, t, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*betSize*/ 256) set_data_dev(t, /*betSize*/ ctx[8]);
+    			if (dirty[0] & /*betSize*/ 4096) set_data_dev(t, /*betSize*/ ctx[12]);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(t);
@@ -1964,26 +1977,26 @@ var app = (function () {
     		block,
     		id: create_if_block_3.name,
     		type: "if",
-    		source: "(258:16) {#if action === 'Bet' || action === 'Raise'}",
+    		source: "(287:16) {#if action === 'Bet' || action === 'Raise'}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (252:10) {#each divideActions('right') as action}
+    // (281:10) {#each rightAvailActions as action}
     function create_each_block(ctx) {
     	let div;
     	let span;
-    	let t0_value = /*action*/ ctx[27] + "";
+    	let t0_value = /*action*/ ctx[29] + "";
     	let t0;
     	let t1;
     	let t2;
     	let dispose;
-    	let if_block = (/*action*/ ctx[27] === "Bet" || /*action*/ ctx[27] === "Raise") && create_if_block_3(ctx);
+    	let if_block = (/*action*/ ctx[29] === "Bet" || /*action*/ ctx[29] === "Raise") && create_if_block_3(ctx);
 
     	function click_handler_2(...args) {
-    		return /*click_handler_2*/ ctx[26](/*action*/ ctx[27], ...args);
+    		return /*click_handler_2*/ ctx[28](/*action*/ ctx[29], ...args);
     	}
 
     	const block = {
@@ -1994,9 +2007,9 @@ var app = (function () {
     			t1 = space();
     			if (if_block) if_block.c();
     			t2 = space();
-    			add_location(span, file$1, 255, 14, 7519);
+    			add_location(span, file$1, 284, 14, 8785);
     			attr_dev(div, "class", "btn hover-effect");
-    			add_location(div, file$1, 252, 12, 7404);
+    			add_location(div, file$1, 281, 12, 8670);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div, anchor);
@@ -2010,7 +2023,20 @@ var app = (function () {
     		},
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
-    			if (/*action*/ ctx[27] === "Bet" || /*action*/ ctx[27] === "Raise") if_block.p(ctx, dirty);
+    			if (dirty[0] & /*rightAvailActions*/ 16 && t0_value !== (t0_value = /*action*/ ctx[29] + "")) set_data_dev(t0, t0_value);
+
+    			if (/*action*/ ctx[29] === "Bet" || /*action*/ ctx[29] === "Raise") {
+    				if (if_block) {
+    					if_block.p(ctx, dirty);
+    				} else {
+    					if_block = create_if_block_3(ctx);
+    					if_block.c();
+    					if_block.m(span, null);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
+    			}
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
@@ -2023,7 +2049,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(252:10) {#each divideActions('right') as action}",
+    		source: "(281:10) {#each rightAvailActions as action}",
     		ctx
     	});
 
@@ -2052,7 +2078,7 @@ var app = (function () {
     			div = element("div");
     			if_block.c();
     			attr_dev(div, "id", "table");
-    			add_location(div, file$1, 132, 0, 3576);
+    			add_location(div, file$1, 161, 0, 4852);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -2113,11 +2139,17 @@ var app = (function () {
     	return block;
     }
 
+    function setMessage(payload, botAction) {
+    	
+    } // if (botAction) {
+    //   let {last_action, last_betsize, pot} = payload;
+
     function instance$1($$self, $$props, $$invalidate) {
     	let { game = null } = $$props;
     	let { playerName = null } = $$props;
     	let playerNumCards;
-    	let availActions;
+    	let { availActions = [] } = $$props;
+    	let { leftAvailActions } = $$props, { rightAvailActions } = $$props;
     	let { pokerBotHandWidth } = $$props;
     	let { heroHandWidth } = $$props;
     	let { pot = 0 } = $$props;
@@ -2140,6 +2172,8 @@ var app = (function () {
     		action: null
     	} } = $$props;
 
+    	let gameState;
+
     	async function setName() {
     		let value = document.getElementById("hero-name").value;
     		$$invalidate(1, playerName = value);
@@ -2154,54 +2188,30 @@ var app = (function () {
     		$$invalidate(0, game = name);
     		const res = await fetch("http://localhost:4000/api/reset");
     		let text = await res.text();
-    		let data = JSON.parse(text);
-    		const { state } = data;
-    		$$invalidate(12, playerNumCards = state.hero_cards.length / 2);
-    		$$invalidate(13, availActions = getAvailActions(state.action_mask));
-    		$$invalidate(7, hero.hand = await getCards(state.hero_cards), hero);
-    		$$invalidate(7, hero.bank = state.hero_stack, hero);
-    		$$invalidate(7, hero.dealer = state.hero_position == 0 ? true : false, hero);
-    		$$invalidate(6, villain.bank = state.villain_stack, villain);
-    		$$invalidate(6, villain.dealer = state.villain_position == 0 ? true : false, villain);
-    		$$invalidate(4, pot = state.pot);
-    		$$invalidate(14, potClass = "active");
-    		$$invalidate(5, heroActiveClass = "active");
-    	}
-
-    	function divideActions(side) {
-    		if (availActions.length > 2) {
-    			if (side === "left") {
-    				return availActions.slice(0, 2);
-    			}
-
-    			return availActions.slice(2);
-    		} else {
-    			if (side === "left") {
-    				return availActions.slice(0, 1);
-    			}
-
-    			return availActions.slice(1);
-    		}
+    		gameState = JSON.parse(text);
+    		const { state } = gameState;
+    		$$invalidate(15, playerNumCards = state.hero_cards.length / 2);
+    		$$invalidate(2, availActions = getAvailActions(state.action_mask));
+    		$$invalidate(10, hero.hand = await getCards(state.hero_cards), hero);
+    		$$invalidate(11, community = await getCards(state.board_cards));
+    		$$invalidate(10, hero.bank = state.hero_stack, hero);
+    		$$invalidate(10, hero.dealer = state.hero_position == 0 ? true : false, hero);
+    		$$invalidate(9, villain.bank = state.villain_stack, villain);
+    		$$invalidate(9, villain.dealer = state.villain_position == 0 ? true : false, villain);
+    		$$invalidate(7, pot = state.pot);
+    		$$invalidate(16, potClass = "active");
+    		$$invalidate(8, heroActiveClass = "active");
     	}
 
     	async function endTurn(action, betSize) {
     		action = action.slice(0, 1).toLowerCase() + action.slice(1);
-    		$$invalidate(5, heroActiveClass = "inactive");
-    		$$invalidate(10, messageObj.currPlayer = playerName, messageObj);
-    		$$invalidate(10, messageObj.othPlayer = "PokerBot", messageObj);
-    		$$invalidate(10, messageObj.action = action, messageObj);
+    		$$invalidate(8, heroActiveClass = "inactive");
 
-    		if (betSize > 0) {
-    			$$invalidate(10, messageObj.amount = betSize, messageObj);
-    		} else {
-    			if (action === "fold") {
-    				$$invalidate(10, messageObj.amount = pot, messageObj);
-    			}
-
-    			$$invalidate(10, messageObj.amount = null, messageObj);
+    		if (action === "call") {
+    			betSize = gameState.state.last_betsize;
     		}
 
-    		$$invalidate(10, messageObj.action = action, messageObj);
+    		console.log(JSON.stringify({ action, betsize: betSize }));
 
     		const res = await fetch("http://localhost:4000/api/step", {
     			method: "POST",
@@ -2210,38 +2220,69 @@ var app = (function () {
 
     		let text = await res.text();
     		let data = JSON.parse(text);
-    		const { state } = data;
+    		console.log("data", data);
+    		setMessage(data.state);
+    		$$invalidate(2, availActions = getAvailActions(data.state.action_mask));
+    		console.log(availActions);
+    		$$invalidate(7, pot = data.state.pot);
+    		$$invalidate(9, villain.bank = data.state.villain_stack, villain);
+    		$$invalidate(8, heroActiveClass = "active");
+    		console.log(pot);
+    		console.log(data.state.done);
 
-    		setTimeout(
-    			function () {
-    				console.log(state);
+    		if (data.state.done) {
+    			villain.dealer
+    			? $$invalidate(9, villain.hand = await getCards(data.outcome.player1_hand), villain)
+    			: $$invalidate(9, villain.hand = await getCards(data.outcome.player2_hand), villain);
 
-    				// messageObj.currPlayer = 'PokerBot';
-    				// messageObj.othPlayer = playerName;
-    				// messageObj.action = `${state.action}s`;
-    				// betSize > 0 ? messageObj.amount = betSize : messageObj.amount = null;
-    				// messageObj.action = state.action;
-    				$$invalidate(13, availActions = getAvailActions(state.action_mask));
+    			$$invalidate(8, heroActiveClass = "inactive");
+    			setTimeout(setGame("omaha"), 10000);
+    		}
 
-    				$$invalidate(4, pot = state.pot);
-    				$$invalidate(6, villain.bank = state.villain_stack, villain);
-    				$$invalidate(5, heroActiveClass = "active");
-    			},
-    			3000
-    		);
-    	}
+    		console.log(villain.hand);
+    	} // setTimeout(async function() {
+    	//   console.log('data', data);
 
+    	//   let betSize = last_betsize;
+    	//   messageObj.currPlayer = "PokerBot";
+    	//   messageObj.othPlayer = playerName;
+    	//   messageObj.action = actions[last_action];
+    	//   if (betSize > 0) {
+    	//     messageObj.amount = betSize;
+    	//   } else {
+    	//     if (action === "fold") {
+    	//       messageObj.pot = pot;
+    	//     }
+    	//     messageObj.amount = null;
+    	//   }
+    	// } else {
+    	//   let { action, betSize } = payload;
+    	//   messageObj.currPlayer = playerName;
+    	//   messageObj.othPlayer = "PokerBot";
+    	//   messageObj.action = action;
+    	//   if (betSize > 0) {
+    	//     messageObj.amount = betSize;
+    	//   } else {
+    	//     if (action === "fold") {
+    	//       messageObj.pot = pot;
+    	//     }
+    	//     messageObj.amount = null;
+    	//   }
+    	// }
     	function checkAllIn() {
     		if (betSize === hero.bank) {
-    			$$invalidate(20, allIn = true);
+    			$$invalidate(21, allIn = true);
     		} else {
-    			$$invalidate(20, allIn = false);
+    			$$invalidate(21, allIn = false);
     		}
     	}
 
     	const writable_props = [
     		"game",
     		"playerName",
+    		"availActions",
+    		"leftAvailActions",
+    		"rightAvailActions",
     		"pokerBotHandWidth",
     		"heroHandWidth",
     		"pot",
@@ -2265,7 +2306,7 @@ var app = (function () {
 
     	function input_change_input_handler() {
     		betSize = to_number(this.value);
-    		$$invalidate(8, betSize);
+    		$$invalidate(12, betSize);
     	}
 
     	const click_handler_1 = action => endTurn(action, betSize);
@@ -2274,27 +2315,33 @@ var app = (function () {
     	$$self.$set = $$props => {
     		if ("game" in $$props) $$invalidate(0, game = $$props.game);
     		if ("playerName" in $$props) $$invalidate(1, playerName = $$props.playerName);
-    		if ("pokerBotHandWidth" in $$props) $$invalidate(2, pokerBotHandWidth = $$props.pokerBotHandWidth);
-    		if ("heroHandWidth" in $$props) $$invalidate(3, heroHandWidth = $$props.heroHandWidth);
-    		if ("pot" in $$props) $$invalidate(4, pot = $$props.pot);
-    		if ("heroActiveClass" in $$props) $$invalidate(5, heroActiveClass = $$props.heroActiveClass);
-    		if ("villain" in $$props) $$invalidate(6, villain = $$props.villain);
-    		if ("hero" in $$props) $$invalidate(7, hero = $$props.hero);
+    		if ("availActions" in $$props) $$invalidate(2, availActions = $$props.availActions);
+    		if ("leftAvailActions" in $$props) $$invalidate(3, leftAvailActions = $$props.leftAvailActions);
+    		if ("rightAvailActions" in $$props) $$invalidate(4, rightAvailActions = $$props.rightAvailActions);
+    		if ("pokerBotHandWidth" in $$props) $$invalidate(5, pokerBotHandWidth = $$props.pokerBotHandWidth);
+    		if ("heroHandWidth" in $$props) $$invalidate(6, heroHandWidth = $$props.heroHandWidth);
+    		if ("pot" in $$props) $$invalidate(7, pot = $$props.pot);
+    		if ("heroActiveClass" in $$props) $$invalidate(8, heroActiveClass = $$props.heroActiveClass);
+    		if ("villain" in $$props) $$invalidate(9, villain = $$props.villain);
+    		if ("hero" in $$props) $$invalidate(10, hero = $$props.hero);
     		if ("community" in $$props) $$invalidate(11, community = $$props.community);
-    		if ("betSize" in $$props) $$invalidate(8, betSize = $$props.betSize);
-    		if ("maxBet" in $$props) $$invalidate(9, maxBet = $$props.maxBet);
-    		if ("allIn" in $$props) $$invalidate(20, allIn = $$props.allIn);
-    		if ("messageObj" in $$props) $$invalidate(10, messageObj = $$props.messageObj);
+    		if ("betSize" in $$props) $$invalidate(12, betSize = $$props.betSize);
+    		if ("maxBet" in $$props) $$invalidate(13, maxBet = $$props.maxBet);
+    		if ("allIn" in $$props) $$invalidate(21, allIn = $$props.allIn);
+    		if ("messageObj" in $$props) $$invalidate(14, messageObj = $$props.messageObj);
     	};
 
     	$$self.$capture_state = () => ({
     		getCards,
+    		actions,
     		getAvailActions,
     		ActionDialog,
     		game,
     		playerName,
     		playerNumCards,
     		availActions,
+    		leftAvailActions,
+    		rightAvailActions,
     		pokerBotHandWidth,
     		heroHandWidth,
     		pot,
@@ -2309,32 +2356,36 @@ var app = (function () {
     		allIn,
     		showdown,
     		messageObj,
+    		gameState,
     		setName,
     		setGame,
-    		divideActions,
     		endTurn,
+    		setMessage,
     		checkAllIn
     	});
 
     	$$self.$inject_state = $$props => {
     		if ("game" in $$props) $$invalidate(0, game = $$props.game);
     		if ("playerName" in $$props) $$invalidate(1, playerName = $$props.playerName);
-    		if ("playerNumCards" in $$props) $$invalidate(12, playerNumCards = $$props.playerNumCards);
-    		if ("availActions" in $$props) $$invalidate(13, availActions = $$props.availActions);
-    		if ("pokerBotHandWidth" in $$props) $$invalidate(2, pokerBotHandWidth = $$props.pokerBotHandWidth);
-    		if ("heroHandWidth" in $$props) $$invalidate(3, heroHandWidth = $$props.heroHandWidth);
-    		if ("pot" in $$props) $$invalidate(4, pot = $$props.pot);
-    		if ("potClass" in $$props) $$invalidate(14, potClass = $$props.potClass);
+    		if ("playerNumCards" in $$props) $$invalidate(15, playerNumCards = $$props.playerNumCards);
+    		if ("availActions" in $$props) $$invalidate(2, availActions = $$props.availActions);
+    		if ("leftAvailActions" in $$props) $$invalidate(3, leftAvailActions = $$props.leftAvailActions);
+    		if ("rightAvailActions" in $$props) $$invalidate(4, rightAvailActions = $$props.rightAvailActions);
+    		if ("pokerBotHandWidth" in $$props) $$invalidate(5, pokerBotHandWidth = $$props.pokerBotHandWidth);
+    		if ("heroHandWidth" in $$props) $$invalidate(6, heroHandWidth = $$props.heroHandWidth);
+    		if ("pot" in $$props) $$invalidate(7, pot = $$props.pot);
+    		if ("potClass" in $$props) $$invalidate(16, potClass = $$props.potClass);
     		if ("heroTurn" in $$props) heroTurn = $$props.heroTurn;
-    		if ("heroActiveClass" in $$props) $$invalidate(5, heroActiveClass = $$props.heroActiveClass);
-    		if ("villain" in $$props) $$invalidate(6, villain = $$props.villain);
-    		if ("hero" in $$props) $$invalidate(7, hero = $$props.hero);
+    		if ("heroActiveClass" in $$props) $$invalidate(8, heroActiveClass = $$props.heroActiveClass);
+    		if ("villain" in $$props) $$invalidate(9, villain = $$props.villain);
+    		if ("hero" in $$props) $$invalidate(10, hero = $$props.hero);
     		if ("community" in $$props) $$invalidate(11, community = $$props.community);
-    		if ("betSize" in $$props) $$invalidate(8, betSize = $$props.betSize);
-    		if ("maxBet" in $$props) $$invalidate(9, maxBet = $$props.maxBet);
-    		if ("allIn" in $$props) $$invalidate(20, allIn = $$props.allIn);
+    		if ("betSize" in $$props) $$invalidate(12, betSize = $$props.betSize);
+    		if ("maxBet" in $$props) $$invalidate(13, maxBet = $$props.maxBet);
+    		if ("allIn" in $$props) $$invalidate(21, allIn = $$props.allIn);
     		if ("showdown" in $$props) showdown = $$props.showdown;
-    		if ("messageObj" in $$props) $$invalidate(10, messageObj = $$props.messageObj);
+    		if ("messageObj" in $$props) $$invalidate(14, messageObj = $$props.messageObj);
+    		if ("gameState" in $$props) gameState = $$props.gameState;
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -2342,45 +2393,59 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty[0] & /*playerNumCards*/ 4096) {
-    			 $$invalidate(2, pokerBotHandWidth = playerNumCards * 60 + 40);
+    		if ($$self.$$.dirty[0] & /*availActions*/ 4) {
+    			 $$invalidate(3, leftAvailActions = availActions.length > 2
+    			? availActions.slice(0, 2)
+    			: availActions.slice(0, 1));
     		}
 
-    		if ($$self.$$.dirty[0] & /*playerNumCards*/ 4096) {
-    			 $$invalidate(3, heroHandWidth = playerNumCards * 100 + 60);
+    		if ($$self.$$.dirty[0] & /*availActions*/ 4) {
+    			 $$invalidate(4, rightAvailActions = availActions.length > 2
+    			? availActions.slice(2)
+    			: availActions.slice(1));
     		}
 
-    		if ($$self.$$.dirty[0] & /*hero*/ 128) {
-    			 $$invalidate(9, maxBet = hero.bank);
+    		if ($$self.$$.dirty[0] & /*playerNumCards*/ 32768) {
+    			 $$invalidate(5, pokerBotHandWidth = playerNumCards * 60 + 40);
     		}
 
-    		if ($$self.$$.dirty[0] & /*betSize, hero*/ 384) {
-    			 $$invalidate(20, allIn = betSize === hero.bank ? true : false);
+    		if ($$self.$$.dirty[0] & /*playerNumCards*/ 32768) {
+    			 $$invalidate(6, heroHandWidth = playerNumCards * 100 + 60);
+    		}
+
+    		if ($$self.$$.dirty[0] & /*hero*/ 1024) {
+    			 $$invalidate(13, maxBet = hero.bank);
+    		}
+
+    		if ($$self.$$.dirty[0] & /*betSize, hero*/ 5120) {
+    			 $$invalidate(21, allIn = betSize === hero.bank ? true : false);
     		}
     	};
 
     	return [
     		game,
     		playerName,
+    		availActions,
+    		leftAvailActions,
+    		rightAvailActions,
     		pokerBotHandWidth,
     		heroHandWidth,
     		pot,
     		heroActiveClass,
     		villain,
     		hero,
+    		community,
     		betSize,
     		maxBet,
     		messageObj,
-    		community,
     		playerNumCards,
-    		availActions,
     		potClass,
     		setName,
     		setGame,
-    		divideActions,
     		endTurn,
     		checkAllIn,
     		allIn,
+    		gameState,
     		heroTurn,
     		showdown,
     		click_handler,
@@ -2403,17 +2468,20 @@ var app = (function () {
     			{
     				game: 0,
     				playerName: 1,
-    				pokerBotHandWidth: 2,
-    				heroHandWidth: 3,
-    				pot: 4,
-    				heroActiveClass: 5,
-    				villain: 6,
-    				hero: 7,
+    				availActions: 2,
+    				leftAvailActions: 3,
+    				rightAvailActions: 4,
+    				pokerBotHandWidth: 5,
+    				heroHandWidth: 6,
+    				pot: 7,
+    				heroActiveClass: 8,
+    				villain: 9,
+    				hero: 10,
     				community: 11,
-    				betSize: 8,
-    				maxBet: 9,
-    				allIn: 20,
-    				messageObj: 10
+    				betSize: 12,
+    				maxBet: 13,
+    				allIn: 21,
+    				messageObj: 14
     			},
     			[-1, -1]
     		);
@@ -2428,19 +2496,27 @@ var app = (function () {
     		const { ctx } = this.$$;
     		const props = options.props || {};
 
-    		if (/*pokerBotHandWidth*/ ctx[2] === undefined && !("pokerBotHandWidth" in props)) {
+    		if (/*leftAvailActions*/ ctx[3] === undefined && !("leftAvailActions" in props)) {
+    			console_1.warn("<App> was created without expected prop 'leftAvailActions'");
+    		}
+
+    		if (/*rightAvailActions*/ ctx[4] === undefined && !("rightAvailActions" in props)) {
+    			console_1.warn("<App> was created without expected prop 'rightAvailActions'");
+    		}
+
+    		if (/*pokerBotHandWidth*/ ctx[5] === undefined && !("pokerBotHandWidth" in props)) {
     			console_1.warn("<App> was created without expected prop 'pokerBotHandWidth'");
     		}
 
-    		if (/*heroHandWidth*/ ctx[3] === undefined && !("heroHandWidth" in props)) {
+    		if (/*heroHandWidth*/ ctx[6] === undefined && !("heroHandWidth" in props)) {
     			console_1.warn("<App> was created without expected prop 'heroHandWidth'");
     		}
 
-    		if (/*maxBet*/ ctx[9] === undefined && !("maxBet" in props)) {
+    		if (/*maxBet*/ ctx[13] === undefined && !("maxBet" in props)) {
     			console_1.warn("<App> was created without expected prop 'maxBet'");
     		}
 
-    		if (/*allIn*/ ctx[20] === undefined && !("allIn" in props)) {
+    		if (/*allIn*/ ctx[21] === undefined && !("allIn" in props)) {
     			console_1.warn("<App> was created without expected prop 'allIn'");
     		}
     	}
@@ -2458,6 +2534,30 @@ var app = (function () {
     	}
 
     	set playerName(value) {
+    		throw new Error("<App>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get availActions() {
+    		throw new Error("<App>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set availActions(value) {
+    		throw new Error("<App>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get leftAvailActions() {
+    		throw new Error("<App>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set leftAvailActions(value) {
+    		throw new Error("<App>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get rightAvailActions() {
+    		throw new Error("<App>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set rightAvailActions(value) {
     		throw new Error("<App>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 

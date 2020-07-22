@@ -1,4 +1,4 @@
-const actions = [
+export const actions = [
     'Check',
     'Fold',
     'Call',

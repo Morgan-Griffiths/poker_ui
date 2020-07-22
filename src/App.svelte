@@ -1,11 +1,14 @@
 <script>
   import { getCards } from "./cards.js";
-  import { getAvailActions } from "./actions.js";
+  import { actions, getAvailActions } from "./actions.js";
   import ActionDialog from "./ActionDialog.svelte";
   export let game = null;
   export let playerName = null;
   let playerNumCards;
-  let availActions;
+  export let availActions = [];
+  export let leftAvailActions, rightAvailActions;
+  $: leftAvailActions = availActions.length > 2 ? availActions.slice(0, 2) : availActions.slice(0, 1);
+  $: rightAvailActions = availActions.length > 2 ? availActions.slice(2) : availActions.slice(1);
   export let pokerBotHandWidth;
   $: pokerBotHandWidth = playerNumCards * 60 + 40;
   export let heroHandWidth;
@@ -38,6 +41,7 @@
     amount: null,
     action: null
   };
+  let gameState;
 
   async function setName() {
     let value = document.getElementById("hero-name").value;
@@ -54,11 +58,12 @@
     game = name;
     const res = await fetch("http://localhost:4000/api/reset");
     let text = await res.text();
-    let data = JSON.parse(text);
-    const { state } = data;
+    gameState = JSON.parse(text);
+    const { state } = gameState;
     playerNumCards = state.hero_cards.length / 2;
     availActions = getAvailActions(state.action_mask);
     hero.hand = await getCards(state.hero_cards);
+    community = await getCards(state.board_cards);
     hero.bank = state.hero_stack;
     hero.dealer = state.hero_position == 0 ? true : false;
     villain.bank = state.villain_stack;
@@ -68,35 +73,17 @@
     heroActiveClass = "active";
   }
 
-  function divideActions(side) {
-    if (availActions.length > 2) {
-      if (side === "left") {
-        return availActions.slice(0, 2);
-      }
-      return availActions.slice(2);
-    } else {
-      if (side === "left") {
-        return availActions.slice(0, 1);
-      }
-      return availActions.slice(1);
-    }
-  }
-
   async function endTurn(action, betSize) {
     action = action.slice(0, 1).toLowerCase() + action.slice(1);
     heroActiveClass = "inactive";
-    messageObj.currPlayer = playerName;
-    messageObj.othPlayer = 'PokerBot';
-    messageObj.action = action;
-    if (betSize > 0) {
-      messageObj.amount = betSize;
-    } else {
-      if (action === 'fold') {
-        messageObj.amount = pot;
-      }
-      messageObj.amount = null;
+    if (action === "call") {
+      betSize = gameState.state.last_betsize;
     }
-    messageObj.action = action;
+    console.log(JSON.stringify({
+        action,
+        betsize: betSize
+      }))
+    setMessage({action, betSize}, false);
     const res = await fetch("http://localhost:4000/api/step", {
       method: "POST",
       body: JSON.stringify({
@@ -106,19 +93,61 @@
     });
     let text = await res.text();
     let data = JSON.parse(text);
-    const { state } = data;
-    setTimeout(function(){
-      console.log(state)
-      // messageObj.currPlayer = 'PokerBot';
-      // messageObj.othPlayer = playerName;
-      // messageObj.action = `${state.action}s`;
-      // betSize > 0 ? messageObj.amount = betSize : messageObj.amount = null;
-      // messageObj.action = state.action;
-      availActions = getAvailActions(state.action_mask);
-      pot = state.pot;
-      villain.bank = state.villain_stack;
-      heroActiveClass = "active";
-    }, 3000);
+    console.log('data', data);
+    setMessage(data.state, true);
+    availActions = getAvailActions(data.state.action_mask);
+    console.log(availActions)
+    pot = data.state.pot;
+    villain.bank = data.state.villain_stack;
+    heroActiveClass = "active";
+    console.log(pot)
+    console.log(data.state.done)
+    if (data.state.done) {
+       villain.dealer ? villain.hand = await getCards(data.outcome.player1_hand) : villain.hand = await getCards(data.outcome.player2_hand);
+       heroActiveClass = "inactive";
+       setTimeout(setGame('omaha'), 10000);
+    }
+    console.log(villain.hand)
+    // setTimeout(async function() {
+    //   console.log('data', data);
+    //   setMessage(data.state, true);
+    //   availActions = getAvailActions(state.action_mask);
+    //   console.log(availActions)
+    //   pot = data.state.pot;
+    //   villain.bank = data.state.villain_stack;
+    //   heroActiveClass = "active";
+    // }, 3000);
+  }
+
+  function setMessage(payload, botAction) {
+    // if (botAction) {
+    //   let {last_action, last_betsize, pot} = payload;
+    //   let betSize = last_betsize;
+    //   messageObj.currPlayer = "PokerBot";
+    //   messageObj.othPlayer = playerName;
+    //   messageObj.action = actions[last_action];
+    //   if (betSize > 0) {
+    //     messageObj.amount = betSize;
+    //   } else {
+    //     if (action === "fold") {
+    //       messageObj.pot = pot;
+    //     }
+    //     messageObj.amount = null;
+    //   }
+    // } else {
+    //   let { action, betSize } = payload;
+    //   messageObj.currPlayer = playerName;
+    //   messageObj.othPlayer = "PokerBot";
+    //   messageObj.action = action;
+    //   if (betSize > 0) {
+    //     messageObj.amount = betSize;
+    //   } else {
+    //     if (action === "fold") {
+    //       messageObj.pot = pot;
+    //     }
+    //     messageObj.amount = null;
+    //   }
+    // }
   }
 
   function checkAllIn() {
@@ -225,7 +254,7 @@
       </div>
       <div class="left {heroActiveClass} actions d-flex align-center">
         {#if availActions}
-          {#each divideActions('left') as action}
+          {#each leftAvailActions as action}
             <div
               class="btn hover-effect"
               on:click={() => endTurn(action, betSize)}>
@@ -249,7 +278,7 @@
       </div>
       <div class="right {heroActiveClass} actions d-flex align-center">
         {#if availActions}
-          {#each divideActions('right') as action}
+          {#each rightAvailActions as action}
             <div
               class="btn hover-effect"
               on:click={() => endTurn(action, betSize)}>

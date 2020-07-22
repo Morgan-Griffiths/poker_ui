@@ -53,18 +53,16 @@ const cards = [
   "AS",
 ];
 
-export function shuffle() {
-  var currentIndex = cards.length,
-    temporaryValue,
-    randomIndex;
-
-  while (0 !== currentIndex) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-    temporaryValue = cards[currentIndex];
-    cards[currentIndex] = cards[randomIndex];
-    cards[randomIndex] = temporaryValue;
-  }
-
-  return cards;
+export function getCards(array) {
+  return array.reduce((carry, value, index) => {
+    let rank;
+    let suit;
+    if ((index + 1) % 2 !== 0) {
+      rank = value;
+      suit = array[index + 1];
+      let cardIndex = (rank - 2) * 4 + suit;
+      carry.push(cards[cardIndex]);
+    }
+    return carry;
+  }, []);
 }

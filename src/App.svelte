@@ -1,35 +1,35 @@
 <script>
-  import { shuffle } from "./cards.js";
+  import { getCards } from "./cards.js";
+  import { getAvailActions } from "./actions.js";
   import ActionDialog from "./ActionDialog.svelte";
   export let game = null;
   export let playerName = null;
   let playerNumCards;
+  let availActions;
   export let pokerBotHandWidth;
   $: pokerBotHandWidth = playerNumCards * 60 + 40;
-  export let playerHandWidth;
-  $: playerHandWidth = playerNumCards * 100 + 60;
-  let firstAction;
+  export let heroHandWidth;
+  $: heroHandWidth = playerNumCards * 100 + 60;
   export let pot = 0;
   let potClass;
-  let playerTurn;
-  export let playerActions;
-  $: playerActions = playerTurn ? 'active' : 'inactive';
-  export let pokerBot = {
+  let heroTurn;
+  export let heroActiveClass = "inactive";
+  export let villain = {
     hand: [],
     bank: 1000,
     dealer: true
   };
-  export let player = {
+  export let hero = {
     hand: [],
     bank: 1000,
     dealer: false
   };
   export let community = [];
-  export let betAmount = 0;
+  export let betSize = 0;
   export let maxBet;
-  $: maxBet = player.bank;
+  $: maxBet = hero.bank;
   export let allIn;
-  $: allIn = betAmount === player.bank ? true : false;
+  $: allIn = betSize === hero.bank ? true : false;
   let showdown;
   export let messageObj = {
     currPlayer: null,
@@ -39,122 +39,94 @@
     action: null
   };
 
-  function setName() {
-    let value = document.getElementById("player-name").value;
+  async function setName() {
+    let value = document.getElementById("hero-name").value;
     playerName = value;
+    const res = await fetch("http://localhost:4000/api/player/name", {
+      method: "POST",
+      body: JSON.stringify({
+        name: playerName
+      })
+    });
   }
 
-  function setGame(name) {
+  async function setGame(name) {
     game = name;
-    if (game === "texas") {
-      playerNumCards = 2;
-    }
-    if (game === "omaha5") {
-      playerNumCards = 5;
-    }
-    init();
+    const res = await fetch("http://localhost:4000/api/reset");
+    let text = await res.text();
+    let data = JSON.parse(text);
+    const { state } = data;
+    playerNumCards = state.hero_cards.length / 2;
+    availActions = getAvailActions(state.action_mask);
+    hero.hand = await getCards(state.hero_cards);
+    hero.bank = state.hero_stack;
+    hero.dealer = state.hero_position == 0 ? true : false;
+    villain.bank = state.villain_stack;
+    villain.dealer = state.villain_position == 0 ? true : false;
+    pot = state.pot;
+    potClass = "active";
+    heroActiveClass = "active";
   }
 
-  function init() {
-    calculateBlind();
-    let deck = shuffle();
-    deal(deck);
-    setTimeout(() => {
-      playerTurn = true;
-      potClass = "active";
-      firstAction = true;
-    }, 100);
-  }
-
-  function calculateBlind() {
-    if (player.dealer) {
-      pokerBot.bank -= 25;
+  function divideActions(side) {
+    if (availActions.length > 2) {
+      if (side === "left") {
+        return availActions.slice(0, 2);
+      }
+      return availActions.slice(2);
     } else {
-      player.bank -= 25;
-    }
-    pot += 25;
-    maxBet = player.bank;
-    return;
-  }
-
-  function deal(deck) {
-    let card = 0;
-    for (let i = 0; i < playerNumCards; i++) {
-      player.hand.push(deck[card]);
-      card++;
-      pokerBot.hand.push(deck[card]);
-      card++;
+      if (side === "left") {
+        return availActions.slice(0, 1);
+      }
+      return availActions.slice(1);
     }
   }
 
-  function toggleTurn() {
-    playerTurn = !playerTurn;
-    if (!playerTurn) {
-      playerActions = "inactive";
+  async function endTurn(action, betSize) {
+    action = action.slice(0, 1).toLowerCase() + action.slice(1);
+    heroActiveClass = "inactive";
+    messageObj.currPlayer = playerName;
+    messageObj.othPlayer = 'PokerBot';
+    messageObj.action = action;
+    if (betSize > 0) {
+      messageObj.amount = betSize;
     } else {
-      playerActions = "active";
+      if (action === 'fold') {
+        messageObj.amount = pot;
+      }
+      messageObj.amount = null;
     }
+    messageObj.action = action;
+    const res = await fetch("http://localhost:4000/api/step", {
+      method: "POST",
+      body: JSON.stringify({
+        action,
+        betsize: betSize
+      })
+    });
+    let text = await res.text();
+    let data = JSON.parse(text);
+    const { state } = data;
+    setTimeout(function(){
+      console.log(state)
+      // messageObj.currPlayer = 'PokerBot';
+      // messageObj.othPlayer = playerName;
+      // messageObj.action = `${state.action}s`;
+      // betSize > 0 ? messageObj.amount = betSize : messageObj.amount = null;
+      // messageObj.action = state.action;
+      availActions = getAvailActions(state.action_mask);
+      pot = state.pot;
+      villain.bank = state.villain_stack;
+      heroActiveClass = "active";
+    }, 3000);
   }
 
-  function reset() {
-    pokerBot.hand = [];
-    player.hand = [];
-    community = [];
-    pot = 0;
-    pokerBot.dealer = !pokerBot.dealer;
-    player.dealer = !player.dealer;
-    if (pokerBot.dealer) {
-      playerTurn = true;
-      playerActions = "active";
+  function checkAllIn() {
+    if (betSize === hero.bank) {
+      allIn = true;
     } else {
-      playerTurn = false;
-      playerActions = "inactive";
+      allIn = false;
     }
-    calculateBlind();
-    let deck = shuffle();
-    deal(deck);
-  }
-
-  function fold(bot) {
-    if (bot) {
-      messageObj.currPlayer = "Poker Bot";
-      messageObj.othPlayer = playerName;
-      player.bank += pot;
-    } else {
-      messageObj.currPlayer = playerName;
-      messageObj.othPlayer = "Poker Bot";
-      pokerBot.bank += pot;
-    }
-    messageObj.pot = pot;
-    messageObj.action = "fold";
-    reset();
-  }
-
-  function endTurn(action) {
-    if (action === "check") {
-      toggleTurn();
-    }
-    setTimeout(getPokerBotAction, 2000);
-  }
-
-  async function getPokerBotAction() {
-    let max;
-    let actions = [];
-    if (firstAction) {
-      max = 3;
-      actions = ["fold", "check", "bet"];
-    } else {
-      max = 4;
-      actions = ["fold", "check", "call", "raise"];
-    }
-    let randomIndex = Math.floor(Math.random() * Math.floor(max));
-    let action = actions[randomIndex];
-    console.log(action)
-    // if (action === "fold") {
-    //   fold(true)
-    // } else {
-    //   endTurn(action)
-    // }
   }
 </script>
 
@@ -163,7 +135,7 @@
     <div class="container text-center">
       <h1>Enter Your Name</h1>
       <div id="name-field">
-        <input type="text" id="player-name" />
+        <input type="text" id="hero-name" />
       </div>
       <div class="btn-wrapper">
         <div class="btn hover-effect" on:click={setName}>Play</div>
@@ -173,44 +145,39 @@
     <div class="container text-center">
       <h1>Pick A Game</h1>
       <ul id="game-menu">
-        <li on:click={() => setGame('texas')}>
-          <div class="btn hover-effect">Texas Hold 'Em</div>
-        </li>
-        <li on:click={() => setGame('omaha5')}>
-          <div class="btn hover-effect">Omaha 5 Card</div>
+        <li on:click={() => setGame('omaha')}>
+          <div class="btn hover-effect">Omaha</div>
         </li>
       </ul>
     </div>
   {:else}
     <div class="container no-margin-bottom">
-      <div id="poker-bot" class="hand" style="width: {pokerBotHandWidth}px">
-        {#each pokerBot.hand as card}
-          {#if !showdown}
+      <div id="villian" class="hand" style="width: {pokerBotHandWidth}px">
+        {#if villain.hand.length === 0}
+          {#each Array(playerNumCards) as _}
             <div class="card-container">
               <img src="images/cards/card_back.png" alt="Card Back" />
             </div>
-          {/if}
-          {#if showdown}
+          {/each}
+        {:else}
+          {#each villain.hand as card}
             <div class="card-container">
               <img src="images/cards/{card}.png" alt={card} />
             </div>
-          {/if}
-        {/each}
+          {/each}
+        {/if}
       </div>
     </div>
     <div class="container no-margin-bottom no-margin-top">
-      <div
-        id="poker-bot-info"
-        class="d-flex column"
-        on:click={getPokerBotAction}>
+      <div id="villian-info" class="d-flex column">
         <div class="d-flex justify-center" style="margin-bottom: 8px">
           Morgan's Poker Bot
-          {#if pokerBot.dealer}
+          {#if villain.dealer}
             <div class="dealer-chip">D</div>
           {/if}
         </div>
         <hr />
-        <p>${pokerBot.bank}</p>
+        <p>${villain.bank}</p>
       </div>
     </div>
     <div class="container">
@@ -232,8 +199,8 @@
       </div>
     </div>
     <div class="container no-margin-bottom">
-      <div id="player" class="hand" style="width: {playerHandWidth}px">
-        {#each player.hand as card}
+      <div id="hero" class="hand" style="width: {heroHandWidth}px">
+        {#each hero.hand as card}
           <div class="card-container">
             <img src="images/cards/{card}.png" alt={card} />
           </div>
@@ -243,52 +210,55 @@
     <div class="container d-flex justify-center flex-wrap no-margin-top">
       <div
         id="bet-slider"
-        class="{playerActions} d-flex justify-center flex-wrap">
+        class="{heroActiveClass} d-flex justify-center flex-wrap">
         <div class="input-wrapper d-flex justify-center">
           <span>$0</span>
           <input
             type="range"
             min="0"
             max={maxBet}
-            step="25"
-            bind:value={betAmount} />
+            step="1"
+            bind:value={betSize}
+            on:input={checkAllIn} />
           <span>${maxBet}</span>
         </div>
       </div>
-      <div class="left {playerActions} actions d-flex align-center">
-        <div class="btn hover-effect" on:click={() => fold(false)}>
-          <span>Fold</span>
-        </div>
-        <div class="btn hover-effect" on:click={() => endTurn('check')}>
-          <span>Check</span>
-        </div>
+      <div class="left {heroActiveClass} actions d-flex align-center">
+        {#if availActions}
+          {#each divideActions('left') as action}
+            <div
+              class="btn hover-effect"
+              on:click={() => endTurn(action, betSize)}>
+              <span>
+                {action}
+                {#if action === 'Bet' || action === 'Raise'}{betSize}{/if}
+              </span>
+            </div>
+          {/each}
+        {/if}
       </div>
-      <div id="player-info" class="d-flex column">
+      <div id="hero-info" class="d-flex column">
         <div class="d-flex justify-center" style="margin-bottom: 8px">
           {playerName}
-          {#if player.dealer}
+          {#if hero.dealer}
             <div class="dealer-chip">D</div>
           {/if}
         </div>
         <hr />
-        <p>${player.bank}</p>
+        <p>${hero.bank}</p>
       </div>
-      <div class="right {playerActions} actions d-flex align-center">
-        {#if !firstAction}
-          <div class="btn hover-effect" on:click={() => endTurn('call')}>
-            <span>Call</span>
-          </div>
-          <div class="btn hover-effect" on:click={() => endTurn('raise')}>
-            <span>
-              {#if allIn}Go All In!{:else}Raise {betAmount}{/if}
-            </span>
-          </div>
-        {:else}
-          <div class="btn hover-effect" on:click={() => endTurn('bet')}>
-            <span>
-              {#if allIn}Go All In!{:else}Bet {betAmount}{/if}
-            </span>
-          </div>
+      <div class="right {heroActiveClass} actions d-flex align-center">
+        {#if availActions}
+          {#each divideActions('right') as action}
+            <div
+              class="btn hover-effect"
+              on:click={() => endTurn(action, betSize)}>
+              <span>
+                {action}
+                {#if action === 'Bet' || action === 'Raise'}{betSize}{/if}
+              </span>
+            </div>
+          {/each}
         {/if}
       </div>
     </div>

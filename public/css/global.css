@@ -122,11 +122,11 @@ input[type="range" i]::-webkit-slider-thumb {
   padding: 20px 0;
 }
 
-#player .card-container {
+#hero .card-container {
   width: 100px;
 }
 
-#poker-bot .card-container img {
+#villian .card-container img {
   max-width: 100px;
 }
 
@@ -134,7 +134,7 @@ input[type="range" i]::-webkit-slider-thumb {
   max-width: 160px;
 }
 
-#player .card-container img {
+#hero .card-container img {
   max-width: 160px;
 }
 
@@ -143,11 +143,11 @@ input[type="range" i]::-webkit-slider-thumb {
   margin: auto;
 }
 
-#poker-bot {
+#villian {
   min-height: 160px;
 }
 
-#poker-bot .card-container {
+#villian .card-container {
   width: 60px;
 }
 
@@ -188,7 +188,7 @@ input[type="range" i]::-webkit-slider-thumb {
   visibility: visible;
 }
 
-#player {
+#hero {
   min-height: 250px;
   position: relative;
 }
@@ -247,7 +247,7 @@ input[type="range" i]::-webkit-slider-thumb {
   transition-duration: 0.5s;
 }
 
-#poker-bot-info {
+#villian-info {
   height: 80px;
   width: 300px;
   background-color: rgb(0, 0, 0);
@@ -259,7 +259,7 @@ input[type="range" i]::-webkit-slider-thumb {
   transform: perspective(200px) rotateX(10deg);
 }
 
-#player-info {
+#hero-info {
   height: 80px;
   width: 600px;
   background-color: rgb(0, 0, 0);

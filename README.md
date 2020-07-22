@@ -3,7 +3,7 @@
 Install the dependencies...
 
 ```bash
-cd poker-app
+cd src
 npm install
 ```
 

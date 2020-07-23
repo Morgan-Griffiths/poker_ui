@@ -17,6 +17,46 @@ body {
   background-repeat: no-repeat;
 }
 
+#stats {
+  position:fixed;
+  top:20px;
+  right:20px;
+  height:300px;
+  width:250px;
+  background:rgba(0, 0, 0, 0.6);
+}
+
+#stats-content {
+  position:fixed;
+  top:20px;
+  right:20px;
+  height:300px;
+  width:250px;
+  background:rgba(0, 0, 0, 0.6);
+}
+
+#history {
+  position:fixed;
+  top:20px;
+  left:20px;
+  height:400px;
+  width:250px;
+  background:rgba(0, 0, 0, 0.6);
+}
+
+#history h2 {
+  text-align: center;
+}
+
+#history div {
+  padding-top:10px;
+  text-align: center;
+}
+
+#history-content {
+  overflow-y:scroll;
+}
+
 p {
   margin: 8px 0;
 }

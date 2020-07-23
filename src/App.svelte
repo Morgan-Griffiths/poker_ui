@@ -291,9 +291,6 @@
         {#each gameHistory as step}
           <div>{step}</div>
         {/each}
-      </div>
-<<<<<<< HEAD
-      {/each}
     </div>
   </div>
   <div id="stats">
@@ -304,8 +301,6 @@
         <tr><td>results</td> <td class="text-right">{playerStats.results}</td></tr>
         <tr><td>total_hands</td> <td class="text-right">{playerStats.total_hands}</td></tr>
       </table>
-=======
->>>>>>> 3951c49f9fd6c28348bcea3c7e2c07ffd29e3a1e
     </div>
     <div class="container no-margin-bottom">
       <div id="villian" class="hand" style="width: {pokerBotHandWidth}px">

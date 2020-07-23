@@ -150,7 +150,7 @@
     availBetsizes = getAvailBetsizes(state.betsize_mask, state.betsizes);
     decodeHistory(state);
     potClass = "active";
-    heroActiveClass = "active";
+    activeDisplayClass = "active";
     await getStats();
   }
 

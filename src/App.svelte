@@ -2,6 +2,7 @@
   import { getCards } from "./cards.js";
   import { actions, getAvailActions } from "./actions.js";
   import ActionDialog from "./ActionDialog.svelte";
+
   export let game = null;
   export let playerName = null;
   let playerNumCards;
@@ -19,20 +20,24 @@
   export let heroActiveClass = "inactive";
   export let villain = {
     hand: [],
-    bank: 1000,
-    dealer: true
+    stack: 1000,
+    dealer: true,
+    position: null,
+    streetTotal: 0,
   };
   export let hero = {
     hand: [],
-    bank: 1000,
-    dealer: false
+    stack: 1000,
+    dealer: false,
+    position: null,
+    streetTotal: 0,
   };
   export let community = [];
   export let betSize = 0;
   export let maxBet;
-  $: maxBet = hero.bank;
+  $: maxBet = hero.stack;
   export let allIn;
-  $: allIn = betSize === hero.bank ? true : false;
+  $: allIn = betSize === hero.stack ? true : false;
   let showdown;
   export let messageObj = {
     currPlayer: null,
@@ -41,7 +46,40 @@
     amount: null,
     action: null
   };
+  let gameType;
   let gameState;
+  let playerStats
+  let street;
+  let availBetsizes;
+
+  function getAvailBetsizes(betsize_mask,betsizes) {
+    // This is useful for only allowing categorical betsizes, as opposed to continuous.
+    // Takes boolean mask array, and betsizes array of nums between 0 and 1.
+    // Returns new array of allowable betsizes.
+    console.log('betsize_mask,betsizes',betsize_mask,betsizes)
+    availBetsizes = new Array(betsize_mask.length);
+    for(var i = 0; i < betsize_mask.length; i++) {
+      availBetsizes[i] = (betsize_mask[i]*betsizes[i]) * pot;
+    }
+    console.log('availBetsizes',availBetsizes)
+    return availBetsizes
+  }
+
+  function updatePlayers(state) {
+    hero.stack = state.hero_stack;
+    hero.dealer = state.hero_position == 0 ? true : false;
+    hero.position = state.hero_position
+    hero.streetTotal = state.hero_position == 0 ? state.player1_street_total : state.player2_street_total;
+    villain.position = state.hero_position == 0 ? state.player2_position : state.player1_position;
+    villain.stack = villain.position == 1 ? state.player2_stack : state.player1_stack;
+    villain.dealer = state.villain_position == 0 ? true : false;
+    villain.streetTotal = state.villain_position == 0 ? state.player2_street_total : state.player1_street_total;
+  }
+
+  function updateGame(state) {
+    street = state.street
+    pot = state.pot
+  }
 
   async function setName() {
     let value = document.getElementById("hero-name").value;
@@ -54,8 +92,21 @@
     });
   }
 
+  async function getStats() {
+    const res = await fetch("http://localhost:4000/api/player/stats");
+    let text = await res.text();
+    playerStats = JSON.parse(text);
+    console.log('playerStats',playerStats)
+  }
+
   async function setGame(name) {
-    game = name;
+    game = name
+    gameType = name;
+    newHand()
+  }
+
+  async function newHand() {
+    villain.hand = [];
     const res = await fetch("http://localhost:4000/api/reset");
     let text = await res.text();
     gameState = JSON.parse(text);
@@ -64,13 +115,23 @@
     availActions = getAvailActions(state.action_mask);
     hero.hand = await getCards(state.hero_cards);
     community = await getCards(state.board_cards);
-    hero.bank = state.hero_stack;
-    hero.dealer = state.hero_position == 0 ? true : false;
-    villain.bank = state.villain_stack;
-    villain.dealer = state.villain_position == 0 ? true : false;
-    pot = state.pot;
+    updatePlayers(state)
+    updateGame(state)
     potClass = "active";
     heroActiveClass = "active";
+    await getStats()
+    decodeHistory(state)
+  }
+
+  function decodeHistory(gameData) {
+    const { history,mapping } = gameData
+    console.log(mapping)
+    const gameHistory = history[0]
+    for (var i = 0; i < gameHistory.length; i++) {
+      gameHistory[i][mapping.last_action]
+      gameHistory[i][mapping.last_betsize]
+      gameHistory[i][mapping.last_position]
+    }
   }
 
   async function endTurn(action, betSize) {
@@ -94,18 +155,20 @@
     let text = await res.text();
     let data = JSON.parse(text);
     console.log('data', data);
-    setMessage(data.state, true);
-    availActions = getAvailActions(data.state.action_mask);
-    console.log(availActions)
-    pot = data.state.pot;
-    villain.bank = data.state.villain_stack;
+    const { state,outcome } = data
+    setMessage(state, true);
+    decodeHistory(state)
+    community = await getCards(state.board_cards);
+    updatePlayers(state)
+    updateGame(state)
+    availActions = getAvailActions(state.action_mask);
+    availBetsizes = getAvailBetsizes(state.betsize_mask,state.betsizes)
     heroActiveClass = "active";
-    console.log(pot)
-    console.log(data.state.done)
-    if (data.state.done) {
-       villain.dealer ? villain.hand = await getCards(data.outcome.player1_hand) : villain.hand = await getCards(data.outcome.player2_hand);
-       heroActiveClass = "inactive";
-       setTimeout(setGame('omaha'), 10000);
+    if (state.done) {
+      villain.dealer ? villain.hand = await getCards(outcome.player1_hand) : villain.hand = await getCards(outcome.player2_hand);
+      //  heroActiveClass = "inactive";
+      await getStats()
+      setTimeout(newHand(), 10000);
     }
     console.log(villain.hand)
     // setTimeout(async function() {
@@ -114,7 +177,7 @@
     //   availActions = getAvailActions(state.action_mask);
     //   console.log(availActions)
     //   pot = data.state.pot;
-    //   villain.bank = data.state.villain_stack;
+    //   villain.stack = data.state.villain_stack;
     //   heroActiveClass = "active";
     // }, 3000);
   }
@@ -151,7 +214,7 @@
   }
 
   function checkAllIn() {
-    if (betSize === hero.bank) {
+    if (betSize === hero.stack) {
       allIn = true;
     } else {
       allIn = false;
@@ -206,7 +269,7 @@
           {/if}
         </div>
         <hr />
-        <p>${villain.bank}</p>
+        <p>${villain.stack}</p>
       </div>
     </div>
     <div class="container">
@@ -274,7 +337,7 @@
           {/if}
         </div>
         <hr />
-        <p>${hero.bank}</p>
+        <p>${hero.stack}</p>
       </div>
       <div class="right {heroActiveClass} actions d-flex align-center">
         {#if availActions}

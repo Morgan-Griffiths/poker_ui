@@ -8,8 +8,12 @@
   let playerNumCards;
   export let availActions = [];
   export let leftAvailActions, rightAvailActions;
-  $: leftAvailActions = availActions.length > 2 ? availActions.slice(0, 2) : availActions.slice(0, 1);
-  $: rightAvailActions = availActions.length > 2 ? availActions.slice(2) : availActions.slice(1);
+  $: leftAvailActions =
+    availActions.length > 2
+      ? availActions.slice(0, 2)
+      : availActions.slice(0, 1);
+  $: rightAvailActions =
+    availActions.length > 2 ? availActions.slice(2) : availActions.slice(1);
   export let pokerBotHandWidth;
   $: pokerBotHandWidth = playerNumCards * 60 + 40;
   export let heroHandWidth;
@@ -17,20 +21,20 @@
   export let pot = 0;
   let potClass;
   let heroTurn;
-  export let heroActiveClass = "inactive";
+  export let activeDisplayClass = "inactive";
   export let villain = {
     hand: [],
     stack: 1000,
     dealer: true,
     position: null,
-    streetTotal: 0,
+    streetTotal: 0
   };
   export let hero = {
     hand: [],
     stack: 1000,
     dealer: false,
     position: null,
-    streetTotal: 0,
+    streetTotal: 0
   };
   export let community = [];
   export let betSize = 0;
@@ -48,37 +52,48 @@
   };
   let gameType;
   let gameState;
-  let playerStats
+  let playerStats;
   let street;
-  let availBetsizes;
+  export let availBetsizes = [];
 
-  function getAvailBetsizes(betsize_mask,betsizes) {
+  function getAvailBetsizes(betsize_mask, betsizes) {
     // This is useful for only allowing categorical betsizes, as opposed to continuous.
     // Takes boolean mask array, and betsizes array of nums between 0 and 1.
     // Returns new array of allowable betsizes.
-    console.log('betsize_mask,betsizes',betsize_mask,betsizes)
+    console.log("betsize_mask,betsizes", betsize_mask, betsizes);
     availBetsizes = new Array(betsize_mask.length);
-    for(var i = 0; i < betsize_mask.length; i++) {
-      availBetsizes[i] = (betsize_mask[i]*betsizes[i]) * pot;
+    for (var i = 0; i < betsize_mask.length; i++) {
+      console.log(pot)
+      availBetsizes[i] = (betsize_mask[i] * betsizes[i]) * pot;
     }
-    console.log('availBetsizes',availBetsizes)
-    return availBetsizes
+    console.log("availBetsizes", availBetsizes);
+    return availBetsizes;
   }
 
   function updatePlayers(state) {
     hero.stack = state.hero_stack;
     hero.dealer = state.hero_position == 0 ? true : false;
-    hero.position = state.hero_position
-    hero.streetTotal = state.hero_position == 0 ? state.player1_street_total : state.player2_street_total;
-    villain.position = state.hero_position == 0 ? state.player2_position : state.player1_position;
-    villain.stack = villain.position == 1 ? state.player2_stack : state.player1_stack;
+    hero.position = state.hero_position;
+    hero.streetTotal =
+      state.hero_position == 0
+        ? state.player1_street_total
+        : state.player2_street_total;
+    villain.position =
+      state.hero_position == 0
+        ? state.player2_position
+        : state.player1_position;
+    villain.stack =
+      villain.position == 1 ? state.player2_stack : state.player1_stack;
     villain.dealer = state.villain_position == 0 ? true : false;
-    villain.streetTotal = state.villain_position == 0 ? state.player2_street_total : state.player1_street_total;
+    villain.streetTotal =
+      state.villain_position == 0
+        ? state.player2_street_total
+        : state.player1_street_total;
   }
 
   function updateGame(state) {
-    street = state.street
-    pot = state.pot
+    street = state.street;
+    pot = state.pot;
   }
 
   async function setName() {
@@ -96,13 +111,13 @@
     const res = await fetch("http://localhost:4000/api/player/stats");
     let text = await res.text();
     playerStats = JSON.parse(text);
-    console.log('playerStats',playerStats)
+    console.log("playerStats", playerStats);
   }
 
   async function setGame(name) {
-    game = name
+    game = name;
     gameType = name;
-    newHand()
+    newHand();
   }
 
   async function newHand() {
@@ -111,40 +126,34 @@
     let text = await res.text();
     gameState = JSON.parse(text);
     const { state } = gameState;
+    console.log(state)
     playerNumCards = state.hero_cards.length / 2;
     availActions = getAvailActions(state.action_mask);
     hero.hand = await getCards(state.hero_cards);
     community = await getCards(state.board_cards);
-    updatePlayers(state)
-    updateGame(state)
+    updatePlayers(state);
+    updateGame(state);
+    availBetsizes = getAvailBetsizes(state.betsize_mask, state.betsizes);
     potClass = "active";
-    heroActiveClass = "active";
-    await getStats()
-    decodeHistory(state)
+    activeDisplayClass = "active";
+    await getStats();
+    decodeHistory(state);
   }
 
   function decodeHistory(gameData) {
-    const { history,mapping } = gameData
-    console.log(mapping)
-    const gameHistory = history[0]
+    const { history, mapping } = gameData;
+    console.log(mapping);
+    const gameHistory = history[0];
     for (var i = 0; i < gameHistory.length; i++) {
-      gameHistory[i][mapping.last_action]
-      gameHistory[i][mapping.last_betsize]
-      gameHistory[i][mapping.last_position]
+      gameHistory[i][mapping.last_action];
+      gameHistory[i][mapping.last_betsize];
+      gameHistory[i][mapping.last_position];
     }
   }
 
   async function endTurn(action, betSize) {
     action = action.slice(0, 1).toLowerCase() + action.slice(1);
-    heroActiveClass = "inactive";
-    if (action === "call") {
-      betSize = gameState.state.last_betsize;
-    }
-    console.log(JSON.stringify({
-        action,
-        betsize: betSize
-      }))
-    setMessage({action, betSize}, false);
+    activeDisplayClass = "inactive";
     const res = await fetch("http://localhost:4000/api/step", {
       method: "POST",
       body: JSON.stringify({
@@ -154,63 +163,28 @@
     });
     let text = await res.text();
     let data = JSON.parse(text);
-    console.log('data', data);
-    const { state,outcome } = data
-    setMessage(state, true);
-    decodeHistory(state)
+    console.log("data", data);
+    const { state, outcome } = data;
+    decodeHistory(state);
     community = await getCards(state.board_cards);
-    updatePlayers(state)
-    updateGame(state)
+    updatePlayers(state);
+    updateGame(state);
     availActions = getAvailActions(state.action_mask);
-    availBetsizes = getAvailBetsizes(state.betsize_mask,state.betsizes)
-    heroActiveClass = "active";
+    availBetsizes = getAvailBetsizes(state.betsize_mask, state.betsizes);
+    activeDisplayClass = "active";
     if (state.done) {
-      villain.dealer ? villain.hand = await getCards(outcome.player1_hand) : villain.hand = await getCards(outcome.player2_hand);
-      //  heroActiveClass = "inactive";
-      await getStats()
-      setTimeout(newHand(), 10000);
+      villain.dealer
+        ? (villain.hand = await getCards(outcome.player1_hand))
+        : (villain.hand = await getCards(outcome.player2_hand));
+      //  activeDisplayClass = "inactive";
+      await getStats();
+      setTimeout(newHand, 10000);
     }
-    console.log(villain.hand)
-    // setTimeout(async function() {
-    //   console.log('data', data);
-    //   setMessage(data.state, true);
-    //   availActions = getAvailActions(state.action_mask);
-    //   console.log(availActions)
-    //   pot = data.state.pot;
-    //   villain.stack = data.state.villain_stack;
-    //   heroActiveClass = "active";
-    // }, 3000);
+    console.log(villain.hand);
   }
 
-  function setMessage(payload, botAction) {
-    // if (botAction) {
-    //   let {last_action, last_betsize, pot} = payload;
-    //   let betSize = last_betsize;
-    //   messageObj.currPlayer = "PokerBot";
-    //   messageObj.othPlayer = playerName;
-    //   messageObj.action = actions[last_action];
-    //   if (betSize > 0) {
-    //     messageObj.amount = betSize;
-    //   } else {
-    //     if (action === "fold") {
-    //       messageObj.pot = pot;
-    //     }
-    //     messageObj.amount = null;
-    //   }
-    // } else {
-    //   let { action, betSize } = payload;
-    //   messageObj.currPlayer = playerName;
-    //   messageObj.othPlayer = "PokerBot";
-    //   messageObj.action = action;
-    //   if (betSize > 0) {
-    //     messageObj.amount = betSize;
-    //   } else {
-    //     if (action === "fold") {
-    //       messageObj.pot = pot;
-    //     }
-    //     messageObj.amount = null;
-    //   }
-    // }
+  function setBetAmount(amount) {
+    betSize = amount;
   }
 
   function checkAllIn() {
@@ -271,6 +245,9 @@
         <hr />
         <p>${villain.stack}</p>
       </div>
+      <div class="{activeDisplayClass} street-total">
+        <span>${villain.streetTotal}</span>
+      </div>
     </div>
     <div class="container">
       <div id="pot" class={potClass}>
@@ -291,6 +268,9 @@
       </div>
     </div>
     <div class="container no-margin-bottom">
+      <div class="{activeDisplayClass} street-total">
+        <span>${hero.streetTotal}</span>
+      </div>
       <div id="hero" class="hand" style="width: {heroHandWidth}px">
         {#each hero.hand as card}
           <div class="card-container">
@@ -299,10 +279,15 @@
         {/each}
       </div>
     </div>
+    <div id="bet-options" class="{activeDisplayClass} d-flex flex-wrap">
+      {#each availBetsizes as availBet}
+        <div on:click={() => setBetAmount(availBet)} class="btn hover-effect">${availBet}</div>
+      {/each}
+    </div>
     <div class="container d-flex justify-center flex-wrap no-margin-top">
-      <div
+      <!-- <div
         id="bet-slider"
-        class="{heroActiveClass} d-flex justify-center flex-wrap">
+        class="{activeDisplayClass} d-flex justify-center flex-wrap">
         <div class="input-wrapper d-flex justify-center">
           <span>$0</span>
           <input
@@ -314,8 +299,8 @@
             on:input={checkAllIn} />
           <span>${maxBet}</span>
         </div>
-      </div>
-      <div class="left {heroActiveClass} actions d-flex align-center">
+      </div> -->
+      <div class="left {activeDisplayClass} actions d-flex align-center">
         {#if availActions}
           {#each leftAvailActions as action}
             <div
@@ -339,7 +324,7 @@
         <hr />
         <p>${hero.stack}</p>
       </div>
-      <div class="right {heroActiveClass} actions d-flex align-center">
+      <div class="right {activeDisplayClass} actions d-flex align-center">
         {#if availActions}
           {#each rightAvailActions as action}
             <div

@@ -55,6 +55,17 @@
   let playerStats;
   let street;
   export let availBetsizes = [];
+  export let gameHistory = [];
+  let actionDict = {
+    0: "check",
+    1: "fold",
+    2: "call",
+    3: "bet",
+    4: "raise",
+    5: "unopened"
+  };
+  let positionDict = { 0: "SB", 1: "BB", 2: "dealer" };
+  let streetStart = { 0: "SB", 1: "BB", 2: "BB", 3: "BB" };
 
   function getAvailBetsizes(betsize_mask, betsizes) {
     // This is useful for only allowing categorical betsizes, as opposed to continuous.
@@ -63,32 +74,35 @@
     console.log("betsize_mask,betsizes", betsize_mask, betsizes);
     availBetsizes = new Array(betsize_mask.length);
     for (var i = 0; i < betsize_mask.length; i++) {
-      console.log(pot)
-      availBetsizes[i] = (betsize_mask[i] * betsizes[i]) * pot;
+      console.log(pot);
+      availBetsizes[i] = betsize_mask[i] * betsizes[i] * pot;
     }
     console.log("availBetsizes", availBetsizes);
     return availBetsizes;
   }
 
   function updatePlayers(state) {
+    console.log("updatePlayers", state);
     hero.stack = state.hero_stack;
     hero.dealer = state.hero_position == 0 ? true : false;
     hero.position = state.hero_position;
     hero.streetTotal =
-      state.hero_position == 0
+      state.hero_position == state.player1_position
         ? state.player1_street_total
         : state.player2_street_total;
     villain.position =
-      state.hero_position == 0
+      state.hero_position == state.player1_position
         ? state.player2_position
         : state.player1_position;
     villain.stack =
-      villain.position == 1 ? state.player2_stack : state.player1_stack;
+      villain.position == state.player1_position
+        ? state.player1_stack
+        : state.player2_stack;
     villain.dealer = state.villain_position == 0 ? true : false;
     villain.streetTotal =
-      state.villain_position == 0
-        ? state.player2_street_total
-        : state.player1_street_total;
+      state.villain_position == state.player1_position
+        ? state.player1_street_total
+        : state.player2_street_total;
   }
 
   function updateGame(state) {
@@ -126,7 +140,7 @@
     let text = await res.text();
     gameState = JSON.parse(text);
     const { state } = gameState;
-    console.log(state)
+    console.log(state);
     playerNumCards = state.hero_cards.length / 2;
     availActions = getAvailActions(state.action_mask);
     hero.hand = await getCards(state.hero_cards);
@@ -134,26 +148,79 @@
     updatePlayers(state);
     updateGame(state);
     availBetsizes = getAvailBetsizes(state.betsize_mask, state.betsizes);
-    potClass = "active";
-    activeDisplayClass = "active";
-    await getStats();
     decodeHistory(state);
+    potClass = "active";
+    heroActiveClass = "active";
+    await getStats();
+  }
+
+  function buildString(
+    last_position,
+    last_action,
+    last_betsize,
+    amount_to_call,
+    last_street_total,
+    street
+  ) {
+    let displayString;
+    if (last_position === "dealer") {
+      displayString = `${streetStart[street]} is first to act`;
+    } else if (last_action === "call") {
+      displayString = `${last_position} calls ${amount_to_call}`;
+    } else if (last_action === "fold") {
+      displayString = `${last_position} folds`;
+    } else if (last_action === "check") {
+      displayString = `${last_position} checks`;
+    } else if (last_action === "bet") {
+      displayString = `${last_position} bets ${last_betsize}`;
+    } else if (last_action === "raise") {
+      displayString = `${last_position} raises to ${last_betsize +
+        Math.max(last_street_total - last_betsize, 0)}`;
+    }
+    return displayString;
   }
 
   function decodeHistory(gameData) {
+    gameHistory = [];
     const { history, mapping } = gameData;
-    console.log(mapping);
-    const gameHistory = history[0];
-    for (var i = 0; i < gameHistory.length; i++) {
-      gameHistory[i][mapping.last_action];
-      gameHistory[i][mapping.last_betsize];
-      gameHistory[i][mapping.last_position];
+    // console.log(mapping)
+    const hist = history[0];
+    for (var i = 0; i < hist.length; i++) {
+      let amount_to_call;
+      if (i > 0) {
+        amount_to_call = hist[i - 1][mapping.amount_to_call];
+      } else {
+        amount_to_call = hist[i][mapping.amount_to_call];
+      }
+      let last_street_total =
+        hist[i][mapping.last_position] == hist[i][mapping.player1_position]
+          ? hist[i][mapping.player1_street_total]
+          : hist[i][mapping.player2_street_total];
+      let displayString = buildString(
+        positionDict[hist[i][mapping.last_position]],
+        actionDict[hist[i][mapping.last_action]],
+        hist[i][mapping.last_aggressive_betsize],
+        amount_to_call,
+        last_street_total,
+        hist[i][mapping.street]
+      );
+      gameHistory.push(displayString);
     }
+    console.log(gameHistory);
   }
 
   async function endTurn(action, betSize) {
     action = action.slice(0, 1).toLowerCase() + action.slice(1);
     activeDisplayClass = "inactive";
+    if (action === "call") {
+      betSize = gameState.state.last_betsize;
+    }
+    console.log(
+      JSON.stringify({
+        action,
+        betsize: betSize
+      })
+    );
     const res = await fetch("http://localhost:4000/api/step", {
       method: "POST",
       body: JSON.stringify({
@@ -217,6 +284,15 @@
       </ul>
     </div>
   {:else}
+    <div id="history">
+      <h2>History</h2>
+      <hr />
+      <div id="history-content">
+        {#each gameHistory as step}
+          <div>{step}</div>
+        {/each}
+      </div>
+    </div>
     <div class="container no-margin-bottom">
       <div id="villian" class="hand" style="width: {pokerBotHandWidth}px">
         {#if villain.hand.length === 0}
@@ -281,7 +357,9 @@
     </div>
     <div id="bet-options" class="{activeDisplayClass} d-flex flex-wrap">
       {#each availBetsizes as availBet}
-        <div on:click={() => setBetAmount(availBet)} class="btn hover-effect">${availBet}</div>
+        <div on:click={() => setBetAmount(availBet)} class="btn hover-effect">
+          ${availBet}
+        </div>
       {/each}
     </div>
     <div class="container d-flex justify-center flex-wrap no-margin-top">

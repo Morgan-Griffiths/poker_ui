@@ -52,7 +52,7 @@
   };
   let gameType;
   let gameState;
-  let playerStats;
+  let playerStats = {'results':0,'bb_per_hand':0,'total_hands':0}
   let street;
   export let availBetsizes = [];
   export let gameHistory = [];
@@ -291,7 +291,16 @@
         {#each gameHistory as step}
           <div>{step}</div>
         {/each}
-      </div>
+    </div>
+  </div>
+  <div id="stats">
+    <h2>Stats</h2>
+    <hr>
+      <table id="stats-content">
+        <tr><td>bb per hand</td> <td class="text-right">{playerStats.bb_per_hand.toFixed(2)}</td></tr>
+        <tr><td>results</td> <td class="text-right">{playerStats.results}</td></tr>
+        <tr><td>total_hands</td> <td class="text-right">{playerStats.total_hands}</td></tr>
+      </table>
     </div>
     <div class="container no-margin-bottom">
       <div id="villian" class="hand" style="width: {pokerBotHandWidth}px">

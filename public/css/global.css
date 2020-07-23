@@ -131,7 +131,7 @@ input[type="range" i]::-webkit-slider-thumb {
 }
 
 #community .card-container img {
-  max-width: 160px;
+  max-width: 110px;
 }
 
 #hero .card-container img {
@@ -162,7 +162,7 @@ input[type="range" i]::-webkit-slider-thumb {
   margin: 0 5px;
 }
 
-#pot {
+#pot, .street-total {
   font-size: 20px;
   height: 30px;
   width: 30px;
@@ -193,22 +193,39 @@ input[type="range" i]::-webkit-slider-thumb {
   position: relative;
 }
 
+.street-total {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+}
+
 .actions {
   width: 320px;
+}
+
+#bet-options {
+  margin: 40px auto 0 auto;
+  width: 600px;
+  align-content: flex-end;
 }
 
 #bet-slider {
   width: 100%;
 }
 
-#bet-slider.inactive {
-  -webkit-transform: translateY(100px);
-  transform: translateY(100px);
+#bet-options .btn {
+  width: 300px;
+  height: 60px;
+}
+
+#bet-slider.inactive, #bet-options.inactive {
+  -webkit-transform: translateY(60px); /*100px for slider*/
+  transform: translateY(60px); /*100px for slider*/
   -webkit-transition-duration: 0.5s;
   transition-duration: 0.5s;
 }
 
-#bet-slider.active {
+#bet-slider.active, #bet-options.active  {
   -webkit-transform: translateY(0);
   transform: translateY(0);
   -webkit-transition-duration: 0.5s;

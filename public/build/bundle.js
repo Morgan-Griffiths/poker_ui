@@ -62,16 +62,8 @@ var app = (function () {
         else if (node.getAttribute(attribute) !== value)
             node.setAttribute(attribute, value);
     }
-    function to_number(value) {
-        return value === '' ? undefined : +value;
-    }
     function children(element) {
         return Array.from(element.childNodes);
-    }
-    function set_input_value(input, value) {
-        if (value != null || input.value) {
-            input.value = value;
-        }
     }
     function set_style(node, key, value, important) {
         node.style.setProperty(key, value, important ? 'important' : '');
@@ -664,103 +656,134 @@ var app = (function () {
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[29] = list[i];
+    	child_ctx[45] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[29] = list[i];
+    	child_ctx[45] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[34] = list[i];
+    	child_ctx[50] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_3(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[34] = list[i];
-    	return child_ctx;
-    }
-
-    function get_each_context_5(ctx, list, i) {
-    	const child_ctx = ctx.slice();
-    	child_ctx[34] = list[i];
+    	child_ctx[53] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_4(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[39] = list[i];
+    	child_ctx[53] = list[i];
     	return child_ctx;
     }
 
-    // (182:2) {:else}
+    function get_each_context_6(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[53] = list[i];
+    	return child_ctx;
+    }
+
+    function get_each_context_5(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[58] = list[i];
+    	return child_ctx;
+    }
+
+    function get_each_context_7(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[63] = list[i];
+    	return child_ctx;
+    }
+
+    // (286:2) {:else}
     function create_else_block(ctx) {
     	let div1;
+    	let h2;
+    	let t1;
+    	let hr0;
+    	let t2;
     	let div0;
-    	let t0;
-    	let div4;
+    	let t3;
     	let div3;
     	let div2;
-    	let t1;
-    	let t2;
-    	let hr0;
-    	let t3;
-    	let p0;
     	let t4;
-    	let t5_value = /*villain*/ ctx[9].bank + "";
-    	let t5;
-    	let t6;
     	let div7;
     	let div5;
-    	let img;
-    	let img_src_value;
+    	let div4;
+    	let t5;
+    	let t6;
+    	let hr1;
     	let t7;
-    	let span0;
+    	let p0;
     	let t8;
+    	let t9_value = /*villain*/ ctx[9].stack + "";
     	let t9;
     	let t10;
     	let div6;
+    	let span0;
     	let t11;
+    	let t12_value = /*villain*/ ctx[9].streetTotal + "";
     	let t12;
-    	let div9;
-    	let div8;
+    	let div6_class_value;
     	let t13;
-    	let div16;
-    	let div11;
     	let div10;
+    	let div8;
+    	let img;
+    	let img_src_value;
+    	let t14;
     	let span1;
     	let t15;
-    	let input;
     	let t16;
-    	let span2;
     	let t17;
+    	let div9;
     	let t18;
-    	let div11_class_value;
     	let t19;
-    	let div12;
-    	let div12_class_value;
-    	let t20;
-    	let div14;
     	let div13;
+    	let div11;
+    	let span2;
+    	let t20;
+    	let t21_value = /*hero*/ ctx[10].streetTotal + "";
     	let t21;
+    	let div11_class_value;
     	let t22;
+    	let div12;
     	let t23;
-    	let hr1;
+    	let div14;
+    	let div14_class_value;
     	let t24;
-    	let p1;
-    	let t25;
-    	let t26_value = /*hero*/ ctx[10].bank + "";
-    	let t26;
-    	let t27;
+    	let div19;
     	let div15;
     	let div15_class_value;
+    	let t25;
+    	let div17;
+    	let div16;
+    	let t26;
+    	let t27;
+    	let t28;
+    	let hr2;
+    	let t29;
+    	let p1;
+    	let t30;
+    	let t31_value = /*hero*/ ctx[10].stack + "";
+    	let t31;
+    	let t32;
+    	let div18;
+    	let div18_class_value;
     	let current;
-    	let dispose;
+    	let each_value_7 = /*gameHistory*/ ctx[14];
+    	validate_each_argument(each_value_7);
+    	let each_blocks_3 = [];
+
+    	for (let i = 0; i < each_value_7.length; i += 1) {
+    		each_blocks_3[i] = create_each_block_7(get_each_context_7(ctx, each_value_7, i));
+    	}
 
     	function select_block_type_1(ctx, dirty) {
     		if (/*villain*/ ctx[9].hand.length === 0) return create_if_block_8;
@@ -772,11 +795,19 @@ var app = (function () {
     	let if_block1 = /*villain*/ ctx[9].dealer && create_if_block_7(ctx);
 
     	const actiondialog = new ActionDialog({
-    			props: { messageObj: /*messageObj*/ ctx[14] },
+    			props: { messageObj: /*messageObj*/ ctx[15] },
     			$$inline: true
     		});
 
-    	let each_value_3 = /*community*/ ctx[11];
+    	let each_value_4 = /*community*/ ctx[11];
+    	validate_each_argument(each_value_4);
+    	let each_blocks_2 = [];
+
+    	for (let i = 0; i < each_value_4.length; i += 1) {
+    		each_blocks_2[i] = create_each_block_4(get_each_context_4(ctx, each_value_4, i));
+    	}
+
+    	let each_value_3 = /*hero*/ ctx[10].hand;
     	validate_each_argument(each_value_3);
     	let each_blocks_1 = [];
 
@@ -784,7 +815,7 @@ var app = (function () {
     		each_blocks_1[i] = create_each_block_3(get_each_context_3(ctx, each_value_3, i));
     	}
 
-    	let each_value_2 = /*hero*/ ctx[10].hand;
+    	let each_value_2 = /*availBetsizes*/ ctx[13];
     	validate_each_argument(each_value_2);
     	let each_blocks = [];
 
@@ -799,219 +830,276 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			div1 = element("div");
+    			h2 = element("h2");
+    			h2.textContent = "History";
+    			t1 = space();
+    			hr0 = element("hr");
+    			t2 = space();
     			div0 = element("div");
-    			if_block0.c();
-    			t0 = space();
-    			div4 = element("div");
+
+    			for (let i = 0; i < each_blocks_3.length; i += 1) {
+    				each_blocks_3[i].c();
+    			}
+
+    			t3 = space();
     			div3 = element("div");
     			div2 = element("div");
-    			t1 = text("Morgan's Poker Bot\n          ");
-    			if (if_block1) if_block1.c();
-    			t2 = space();
-    			hr0 = element("hr");
-    			t3 = space();
-    			p0 = element("p");
-    			t4 = text("$");
-    			t5 = text(t5_value);
-    			t6 = space();
+    			if_block0.c();
+    			t4 = space();
     			div7 = element("div");
     			div5 = element("div");
-    			img = element("img");
+    			div4 = element("div");
+    			t5 = text("Morgan's Poker Bot\n          ");
+    			if (if_block1) if_block1.c();
+    			t6 = space();
+    			hr1 = element("hr");
     			t7 = space();
-    			span0 = element("span");
+    			p0 = element("p");
     			t8 = text("$");
-    			t9 = text(/*pot*/ ctx[7]);
+    			t9 = text(t9_value);
     			t10 = space();
     			div6 = element("div");
+    			span0 = element("span");
+    			t11 = text("$");
+    			t12 = text(t12_value);
+    			t13 = space();
+    			div10 = element("div");
+    			div8 = element("div");
+    			img = element("img");
+    			t14 = space();
+    			span1 = element("span");
+    			t15 = text("$");
+    			t16 = text(/*pot*/ ctx[7]);
+    			t17 = space();
+    			div9 = element("div");
     			create_component(actiondialog.$$.fragment);
-    			t11 = space();
+    			t18 = space();
+
+    			for (let i = 0; i < each_blocks_2.length; i += 1) {
+    				each_blocks_2[i].c();
+    			}
+
+    			t19 = space();
+    			div13 = element("div");
+    			div11 = element("div");
+    			span2 = element("span");
+    			t20 = text("$");
+    			t21 = text(t21_value);
+    			t22 = space();
+    			div12 = element("div");
 
     			for (let i = 0; i < each_blocks_1.length; i += 1) {
     				each_blocks_1[i].c();
     			}
 
-    			t12 = space();
-    			div9 = element("div");
-    			div8 = element("div");
+    			t23 = space();
+    			div14 = element("div");
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
 
-    			t13 = space();
-    			div16 = element("div");
-    			div11 = element("div");
-    			div10 = element("div");
-    			span1 = element("span");
-    			span1.textContent = "$0";
-    			t15 = space();
-    			input = element("input");
-    			t16 = space();
-    			span2 = element("span");
-    			t17 = text("$");
-    			t18 = text(/*maxBet*/ ctx[13]);
-    			t19 = space();
-    			div12 = element("div");
-    			if (if_block2) if_block2.c();
-    			t20 = space();
-    			div14 = element("div");
-    			div13 = element("div");
-    			t21 = text(/*playerName*/ ctx[1]);
-    			t22 = space();
-    			if (if_block3) if_block3.c();
-    			t23 = space();
-    			hr1 = element("hr");
     			t24 = space();
-    			p1 = element("p");
-    			t25 = text("$");
-    			t26 = text(t26_value);
-    			t27 = space();
+    			div19 = element("div");
     			div15 = element("div");
+    			if (if_block2) if_block2.c();
+    			t25 = space();
+    			div17 = element("div");
+    			div16 = element("div");
+    			t26 = text(/*playerName*/ ctx[1]);
+    			t27 = space();
+    			if (if_block3) if_block3.c();
+    			t28 = space();
+    			hr2 = element("hr");
+    			t29 = space();
+    			p1 = element("p");
+    			t30 = text("$");
+    			t31 = text(t31_value);
+    			t32 = space();
+    			div18 = element("div");
     			if (if_block4) if_block4.c();
-    			attr_dev(div0, "id", "villian");
-    			attr_dev(div0, "class", "hand");
-    			set_style(div0, "width", /*pokerBotHandWidth*/ ctx[5] + "px");
-    			add_location(div0, file$1, 183, 6, 5502);
-    			attr_dev(div1, "class", "container no-margin-bottom");
-    			add_location(div1, file$1, 182, 4, 5455);
-    			attr_dev(div2, "class", "d-flex justify-center");
-    			set_style(div2, "margin-bottom", "8px");
-    			add_location(div2, file$1, 201, 8, 6158);
-    			add_location(hr0, file$1, 207, 8, 6365);
-    			add_location(p0, file$1, 208, 8, 6380);
-    			attr_dev(div3, "id", "villian-info");
-    			attr_dev(div3, "class", "d-flex column");
-    			add_location(div3, file$1, 200, 6, 6104);
-    			attr_dev(div4, "class", "container no-margin-bottom no-margin-top");
-    			add_location(div4, file$1, 199, 4, 6043);
+    			add_location(h2, file$1, 287, 6, 8426);
+    			add_location(hr0, file$1, 288, 6, 8449);
+    			attr_dev(div0, "id", "history-content");
+    			add_location(div0, file$1, 289, 6, 8462);
+    			attr_dev(div1, "id", "history");
+    			add_location(div1, file$1, 286, 4, 8401);
+    			attr_dev(div2, "id", "villian");
+    			attr_dev(div2, "class", "hand");
+    			set_style(div2, "width", /*pokerBotHandWidth*/ ctx[5] + "px");
+    			add_location(div2, file$1, 296, 6, 8644);
+    			attr_dev(div3, "class", "container no-margin-bottom");
+    			add_location(div3, file$1, 295, 4, 8597);
+    			attr_dev(div4, "class", "d-flex justify-center");
+    			set_style(div4, "margin-bottom", "8px");
+    			add_location(div4, file$1, 314, 8, 9300);
+    			add_location(hr1, file$1, 320, 8, 9507);
+    			add_location(p0, file$1, 321, 8, 9522);
+    			attr_dev(div5, "id", "villian-info");
+    			attr_dev(div5, "class", "d-flex column");
+    			add_location(div5, file$1, 313, 6, 9246);
+    			add_location(span0, file$1, 324, 8, 9621);
+    			attr_dev(div6, "class", div6_class_value = "" + (/*activeDisplayClass*/ ctx[8] + " street-total"));
+    			add_location(div6, file$1, 323, 6, 9565);
+    			attr_dev(div7, "class", "container no-margin-bottom no-margin-top");
+    			add_location(div7, file$1, 312, 4, 9185);
     			if (img.src !== (img_src_value = "images/poker-chip.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Poker Chip");
     			attr_dev(img, "height", "105%");
     			set_style(img, "margin-right", "10px");
-    			add_location(img, file$1, 213, 8, 6501);
-    			add_location(span0, file$1, 218, 8, 6642);
-    			attr_dev(div5, "id", "pot");
-    			attr_dev(div5, "class", /*potClass*/ ctx[16]);
-    			add_location(div5, file$1, 212, 6, 6461);
-    			attr_dev(div6, "id", "community");
-    			attr_dev(div6, "class", "hand");
-    			add_location(div6, file$1, 220, 6, 6681);
-    			attr_dev(div7, "class", "container");
-    			add_location(div7, file$1, 211, 4, 6431);
-    			attr_dev(div8, "id", "hero");
-    			attr_dev(div8, "class", "hand");
-    			set_style(div8, "width", /*heroHandWidth*/ ctx[6] + "px");
-    			add_location(div8, file$1, 230, 6, 6995);
-    			attr_dev(div9, "class", "container no-margin-bottom");
-    			add_location(div9, file$1, 229, 4, 6948);
-    			add_location(span1, file$1, 243, 10, 7492);
-    			attr_dev(input, "type", "range");
-    			attr_dev(input, "min", "0");
-    			attr_dev(input, "max", /*maxBet*/ ctx[13]);
-    			attr_dev(input, "step", "1");
-    			add_location(input, file$1, 244, 10, 7518);
-    			add_location(span2, file$1, 251, 10, 7696);
-    			attr_dev(div10, "class", "input-wrapper d-flex justify-center");
-    			add_location(div10, file$1, 242, 8, 7432);
-    			attr_dev(div11, "id", "bet-slider");
-    			attr_dev(div11, "class", div11_class_value = "" + (/*heroActiveClass*/ ctx[8] + " d-flex justify-center flex-wrap"));
-    			add_location(div11, file$1, 239, 6, 7328);
-    			attr_dev(div12, "class", div12_class_value = "left " + /*heroActiveClass*/ ctx[8] + " actions d-flex align-center");
-    			add_location(div12, file$1, 254, 6, 7753);
-    			attr_dev(div13, "class", "d-flex justify-center");
-    			set_style(div13, "margin-bottom", "8px");
-    			add_location(div13, file$1, 269, 8, 8267);
-    			add_location(hr1, file$1, 275, 8, 8465);
-    			add_location(p1, file$1, 276, 8, 8480);
-    			attr_dev(div14, "id", "hero-info");
-    			attr_dev(div14, "class", "d-flex column");
-    			add_location(div14, file$1, 268, 6, 8216);
-    			attr_dev(div15, "class", div15_class_value = "right " + /*heroActiveClass*/ ctx[8] + " actions d-flex align-center");
-    			add_location(div15, file$1, 278, 6, 8519);
-    			attr_dev(div16, "class", "container d-flex justify-center flex-wrap no-margin-top");
-    			add_location(div16, file$1, 238, 4, 7252);
+    			add_location(img, file$1, 329, 8, 9755);
+    			add_location(span1, file$1, 334, 8, 9896);
+    			attr_dev(div8, "id", "pot");
+    			attr_dev(div8, "class", /*potClass*/ ctx[17]);
+    			add_location(div8, file$1, 328, 6, 9715);
+    			attr_dev(div9, "id", "community");
+    			attr_dev(div9, "class", "hand");
+    			add_location(div9, file$1, 336, 6, 9935);
+    			attr_dev(div10, "class", "container");
+    			add_location(div10, file$1, 327, 4, 9685);
+    			add_location(span2, file$1, 347, 8, 10305);
+    			attr_dev(div11, "class", div11_class_value = "" + (/*activeDisplayClass*/ ctx[8] + " street-total"));
+    			add_location(div11, file$1, 346, 6, 10249);
+    			attr_dev(div12, "id", "hero");
+    			attr_dev(div12, "class", "hand");
+    			set_style(div12, "width", /*heroHandWidth*/ ctx[6] + "px");
+    			add_location(div12, file$1, 349, 6, 10357);
+    			attr_dev(div13, "class", "container no-margin-bottom");
+    			add_location(div13, file$1, 345, 4, 10202);
+    			attr_dev(div14, "id", "bet-options");
+    			attr_dev(div14, "class", div14_class_value = "" + (/*activeDisplayClass*/ ctx[8] + " d-flex flex-wrap"));
+    			add_location(div14, file$1, 357, 4, 10614);
+    			attr_dev(div15, "class", div15_class_value = "left " + /*activeDisplayClass*/ ctx[8] + " actions d-flex align-center");
+    			add_location(div15, file$1, 380, 6, 11381);
+    			attr_dev(div16, "class", "d-flex justify-center");
+    			set_style(div16, "margin-bottom", "8px");
+    			add_location(div16, file$1, 395, 8, 11898);
+    			add_location(hr2, file$1, 401, 8, 12096);
+    			add_location(p1, file$1, 402, 8, 12111);
+    			attr_dev(div17, "id", "hero-info");
+    			attr_dev(div17, "class", "d-flex column");
+    			add_location(div17, file$1, 394, 6, 11847);
+    			attr_dev(div18, "class", div18_class_value = "right " + /*activeDisplayClass*/ ctx[8] + " actions d-flex align-center");
+    			add_location(div18, file$1, 404, 6, 12151);
+    			attr_dev(div19, "class", "container d-flex justify-center flex-wrap no-margin-top");
+    			add_location(div19, file$1, 364, 4, 10868);
     		},
-    		m: function mount(target, anchor, remount) {
+    		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
+    			append_dev(div1, h2);
+    			append_dev(div1, t1);
+    			append_dev(div1, hr0);
+    			append_dev(div1, t2);
     			append_dev(div1, div0);
-    			if_block0.m(div0, null);
-    			insert_dev(target, t0, anchor);
-    			insert_dev(target, div4, anchor);
-    			append_dev(div4, div3);
+
+    			for (let i = 0; i < each_blocks_3.length; i += 1) {
+    				each_blocks_3[i].m(div0, null);
+    			}
+
+    			insert_dev(target, t3, anchor);
+    			insert_dev(target, div3, anchor);
     			append_dev(div3, div2);
-    			append_dev(div2, t1);
-    			if (if_block1) if_block1.m(div2, null);
-    			append_dev(div3, t2);
-    			append_dev(div3, hr0);
-    			append_dev(div3, t3);
-    			append_dev(div3, p0);
-    			append_dev(p0, t4);
-    			append_dev(p0, t5);
-    			insert_dev(target, t6, anchor);
+    			if_block0.m(div2, null);
+    			insert_dev(target, t4, anchor);
     			insert_dev(target, div7, anchor);
     			append_dev(div7, div5);
-    			append_dev(div5, img);
+    			append_dev(div5, div4);
+    			append_dev(div4, t5);
+    			if (if_block1) if_block1.m(div4, null);
+    			append_dev(div5, t6);
+    			append_dev(div5, hr1);
     			append_dev(div5, t7);
-    			append_dev(div5, span0);
-    			append_dev(span0, t8);
-    			append_dev(span0, t9);
+    			append_dev(div5, p0);
+    			append_dev(p0, t8);
+    			append_dev(p0, t9);
     			append_dev(div7, t10);
     			append_dev(div7, div6);
-    			mount_component(actiondialog, div6, null);
-    			append_dev(div6, t11);
+    			append_dev(div6, span0);
+    			append_dev(span0, t11);
+    			append_dev(span0, t12);
+    			insert_dev(target, t13, anchor);
+    			insert_dev(target, div10, anchor);
+    			append_dev(div10, div8);
+    			append_dev(div8, img);
+    			append_dev(div8, t14);
+    			append_dev(div8, span1);
+    			append_dev(span1, t15);
+    			append_dev(span1, t16);
+    			append_dev(div10, t17);
+    			append_dev(div10, div9);
+    			mount_component(actiondialog, div9, null);
+    			append_dev(div9, t18);
+
+    			for (let i = 0; i < each_blocks_2.length; i += 1) {
+    				each_blocks_2[i].m(div9, null);
+    			}
+
+    			insert_dev(target, t19, anchor);
+    			insert_dev(target, div13, anchor);
+    			append_dev(div13, div11);
+    			append_dev(div11, span2);
+    			append_dev(span2, t20);
+    			append_dev(span2, t21);
+    			append_dev(div13, t22);
+    			append_dev(div13, div12);
 
     			for (let i = 0; i < each_blocks_1.length; i += 1) {
-    				each_blocks_1[i].m(div6, null);
+    				each_blocks_1[i].m(div12, null);
     			}
 
-    			insert_dev(target, t12, anchor);
-    			insert_dev(target, div9, anchor);
-    			append_dev(div9, div8);
+    			insert_dev(target, t23, anchor);
+    			insert_dev(target, div14, anchor);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
-    				each_blocks[i].m(div8, null);
+    				each_blocks[i].m(div14, null);
     			}
 
-    			insert_dev(target, t13, anchor);
-    			insert_dev(target, div16, anchor);
-    			append_dev(div16, div11);
-    			append_dev(div11, div10);
-    			append_dev(div10, span1);
-    			append_dev(div10, t15);
-    			append_dev(div10, input);
-    			set_input_value(input, /*betSize*/ ctx[12]);
-    			append_dev(div10, t16);
-    			append_dev(div10, span2);
-    			append_dev(span2, t17);
-    			append_dev(span2, t18);
-    			append_dev(div16, t19);
-    			append_dev(div16, div12);
-    			if (if_block2) if_block2.m(div12, null);
-    			append_dev(div16, t20);
-    			append_dev(div16, div14);
-    			append_dev(div14, div13);
-    			append_dev(div13, t21);
-    			append_dev(div13, t22);
-    			if (if_block3) if_block3.m(div13, null);
-    			append_dev(div14, t23);
-    			append_dev(div14, hr1);
-    			append_dev(div14, t24);
-    			append_dev(div14, p1);
-    			append_dev(p1, t25);
-    			append_dev(p1, t26);
+    			insert_dev(target, t24, anchor);
+    			insert_dev(target, div19, anchor);
+    			append_dev(div19, div15);
+    			if (if_block2) if_block2.m(div15, null);
+    			append_dev(div19, t25);
+    			append_dev(div19, div17);
+    			append_dev(div17, div16);
+    			append_dev(div16, t26);
     			append_dev(div16, t27);
-    			append_dev(div16, div15);
-    			if (if_block4) if_block4.m(div15, null);
+    			if (if_block3) if_block3.m(div16, null);
+    			append_dev(div17, t28);
+    			append_dev(div17, hr2);
+    			append_dev(div17, t29);
+    			append_dev(div17, p1);
+    			append_dev(p1, t30);
+    			append_dev(p1, t31);
+    			append_dev(div19, t32);
+    			append_dev(div19, div18);
+    			if (if_block4) if_block4.m(div18, null);
     			current = true;
-    			if (remount) run_all(dispose);
-
-    			dispose = [
-    				listen_dev(input, "change", /*input_change_input_handler*/ ctx[26]),
-    				listen_dev(input, "input", /*input_change_input_handler*/ ctx[26]),
-    				listen_dev(input, "input", /*checkAllIn*/ ctx[20], false, false, false)
-    			];
     		},
     		p: function update(ctx, dirty) {
+    			if (dirty[0] & /*gameHistory*/ 16384) {
+    				each_value_7 = /*gameHistory*/ ctx[14];
+    				validate_each_argument(each_value_7);
+    				let i;
+
+    				for (i = 0; i < each_value_7.length; i += 1) {
+    					const child_ctx = get_each_context_7(ctx, each_value_7, i);
+
+    					if (each_blocks_3[i]) {
+    						each_blocks_3[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks_3[i] = create_each_block_7(child_ctx);
+    						each_blocks_3[i].c();
+    						each_blocks_3[i].m(div0, null);
+    					}
+    				}
+
+    				for (; i < each_blocks_3.length; i += 1) {
+    					each_blocks_3[i].d(1);
+    				}
+
+    				each_blocks_3.length = each_value_7.length;
+    			}
+
     			if (current_block_type === (current_block_type = select_block_type_1(ctx)) && if_block0) {
     				if_block0.p(ctx, dirty);
     			} else {
@@ -1020,38 +1108,74 @@ var app = (function () {
 
     				if (if_block0) {
     					if_block0.c();
-    					if_block0.m(div0, null);
+    					if_block0.m(div2, null);
     				}
     			}
 
     			if (!current || dirty[0] & /*pokerBotHandWidth*/ 32) {
-    				set_style(div0, "width", /*pokerBotHandWidth*/ ctx[5] + "px");
+    				set_style(div2, "width", /*pokerBotHandWidth*/ ctx[5] + "px");
     			}
 
     			if (/*villain*/ ctx[9].dealer) {
     				if (if_block1) ; else {
     					if_block1 = create_if_block_7(ctx);
     					if_block1.c();
-    					if_block1.m(div2, null);
+    					if_block1.m(div4, null);
     				}
     			} else if (if_block1) {
     				if_block1.d(1);
     				if_block1 = null;
     			}
 
-    			if ((!current || dirty[0] & /*villain*/ 512) && t5_value !== (t5_value = /*villain*/ ctx[9].bank + "")) set_data_dev(t5, t5_value);
-    			if (!current || dirty[0] & /*pot*/ 128) set_data_dev(t9, /*pot*/ ctx[7]);
+    			if ((!current || dirty[0] & /*villain*/ 512) && t9_value !== (t9_value = /*villain*/ ctx[9].stack + "")) set_data_dev(t9, t9_value);
+    			if ((!current || dirty[0] & /*villain*/ 512) && t12_value !== (t12_value = /*villain*/ ctx[9].streetTotal + "")) set_data_dev(t12, t12_value);
 
-    			if (!current || dirty[0] & /*potClass*/ 65536) {
-    				attr_dev(div5, "class", /*potClass*/ ctx[16]);
+    			if (!current || dirty[0] & /*activeDisplayClass*/ 256 && div6_class_value !== (div6_class_value = "" + (/*activeDisplayClass*/ ctx[8] + " street-total"))) {
+    				attr_dev(div6, "class", div6_class_value);
+    			}
+
+    			if (!current || dirty[0] & /*pot*/ 128) set_data_dev(t16, /*pot*/ ctx[7]);
+
+    			if (!current || dirty[0] & /*potClass*/ 131072) {
+    				attr_dev(div8, "class", /*potClass*/ ctx[17]);
     			}
 
     			const actiondialog_changes = {};
-    			if (dirty[0] & /*messageObj*/ 16384) actiondialog_changes.messageObj = /*messageObj*/ ctx[14];
+    			if (dirty[0] & /*messageObj*/ 32768) actiondialog_changes.messageObj = /*messageObj*/ ctx[15];
     			actiondialog.$set(actiondialog_changes);
 
     			if (dirty[0] & /*community*/ 2048) {
-    				each_value_3 = /*community*/ ctx[11];
+    				each_value_4 = /*community*/ ctx[11];
+    				validate_each_argument(each_value_4);
+    				let i;
+
+    				for (i = 0; i < each_value_4.length; i += 1) {
+    					const child_ctx = get_each_context_4(ctx, each_value_4, i);
+
+    					if (each_blocks_2[i]) {
+    						each_blocks_2[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks_2[i] = create_each_block_4(child_ctx);
+    						each_blocks_2[i].c();
+    						each_blocks_2[i].m(div9, null);
+    					}
+    				}
+
+    				for (; i < each_blocks_2.length; i += 1) {
+    					each_blocks_2[i].d(1);
+    				}
+
+    				each_blocks_2.length = each_value_4.length;
+    			}
+
+    			if ((!current || dirty[0] & /*hero*/ 1024) && t21_value !== (t21_value = /*hero*/ ctx[10].streetTotal + "")) set_data_dev(t21, t21_value);
+
+    			if (!current || dirty[0] & /*activeDisplayClass*/ 256 && div11_class_value !== (div11_class_value = "" + (/*activeDisplayClass*/ ctx[8] + " street-total"))) {
+    				attr_dev(div11, "class", div11_class_value);
+    			}
+
+    			if (dirty[0] & /*hero*/ 1024) {
+    				each_value_3 = /*hero*/ ctx[10].hand;
     				validate_each_argument(each_value_3);
     				let i;
 
@@ -1063,7 +1187,7 @@ var app = (function () {
     					} else {
     						each_blocks_1[i] = create_each_block_3(child_ctx);
     						each_blocks_1[i].c();
-    						each_blocks_1[i].m(div6, null);
+    						each_blocks_1[i].m(div12, null);
     					}
     				}
 
@@ -1074,8 +1198,12 @@ var app = (function () {
     				each_blocks_1.length = each_value_3.length;
     			}
 
-    			if (dirty[0] & /*hero*/ 1024) {
-    				each_value_2 = /*hero*/ ctx[10].hand;
+    			if (!current || dirty[0] & /*heroHandWidth*/ 64) {
+    				set_style(div12, "width", /*heroHandWidth*/ ctx[6] + "px");
+    			}
+
+    			if (dirty[0] & /*setBetAmount, availBetsizes*/ 2105344) {
+    				each_value_2 = /*availBetsizes*/ ctx[13];
     				validate_each_argument(each_value_2);
     				let i;
 
@@ -1087,7 +1215,7 @@ var app = (function () {
     					} else {
     						each_blocks[i] = create_each_block_2(child_ctx);
     						each_blocks[i].c();
-    						each_blocks[i].m(div8, null);
+    						each_blocks[i].m(div14, null);
     					}
     				}
 
@@ -1098,22 +1226,8 @@ var app = (function () {
     				each_blocks.length = each_value_2.length;
     			}
 
-    			if (!current || dirty[0] & /*heroHandWidth*/ 64) {
-    				set_style(div8, "width", /*heroHandWidth*/ ctx[6] + "px");
-    			}
-
-    			if (!current || dirty[0] & /*maxBet*/ 8192) {
-    				attr_dev(input, "max", /*maxBet*/ ctx[13]);
-    			}
-
-    			if (dirty[0] & /*betSize*/ 4096) {
-    				set_input_value(input, /*betSize*/ ctx[12]);
-    			}
-
-    			if (!current || dirty[0] & /*maxBet*/ 8192) set_data_dev(t18, /*maxBet*/ ctx[13]);
-
-    			if (!current || dirty[0] & /*heroActiveClass*/ 256 && div11_class_value !== (div11_class_value = "" + (/*heroActiveClass*/ ctx[8] + " d-flex justify-center flex-wrap"))) {
-    				attr_dev(div11, "class", div11_class_value);
+    			if (!current || dirty[0] & /*activeDisplayClass*/ 256 && div14_class_value !== (div14_class_value = "" + (/*activeDisplayClass*/ ctx[8] + " d-flex flex-wrap"))) {
+    				attr_dev(div14, "class", div14_class_value);
     			}
 
     			if (/*availActions*/ ctx[2]) {
@@ -1122,31 +1236,31 @@ var app = (function () {
     				} else {
     					if_block2 = create_if_block_5(ctx);
     					if_block2.c();
-    					if_block2.m(div12, null);
+    					if_block2.m(div15, null);
     				}
     			} else if (if_block2) {
     				if_block2.d(1);
     				if_block2 = null;
     			}
 
-    			if (!current || dirty[0] & /*heroActiveClass*/ 256 && div12_class_value !== (div12_class_value = "left " + /*heroActiveClass*/ ctx[8] + " actions d-flex align-center")) {
-    				attr_dev(div12, "class", div12_class_value);
+    			if (!current || dirty[0] & /*activeDisplayClass*/ 256 && div15_class_value !== (div15_class_value = "left " + /*activeDisplayClass*/ ctx[8] + " actions d-flex align-center")) {
+    				attr_dev(div15, "class", div15_class_value);
     			}
 
-    			if (!current || dirty[0] & /*playerName*/ 2) set_data_dev(t21, /*playerName*/ ctx[1]);
+    			if (!current || dirty[0] & /*playerName*/ 2) set_data_dev(t26, /*playerName*/ ctx[1]);
 
     			if (/*hero*/ ctx[10].dealer) {
     				if (if_block3) ; else {
     					if_block3 = create_if_block_4(ctx);
     					if_block3.c();
-    					if_block3.m(div13, null);
+    					if_block3.m(div16, null);
     				}
     			} else if (if_block3) {
     				if_block3.d(1);
     				if_block3 = null;
     			}
 
-    			if ((!current || dirty[0] & /*hero*/ 1024) && t26_value !== (t26_value = /*hero*/ ctx[10].bank + "")) set_data_dev(t26, t26_value);
+    			if ((!current || dirty[0] & /*hero*/ 1024) && t31_value !== (t31_value = /*hero*/ ctx[10].stack + "")) set_data_dev(t31, t31_value);
 
     			if (/*availActions*/ ctx[2]) {
     				if (if_block4) {
@@ -1154,15 +1268,15 @@ var app = (function () {
     				} else {
     					if_block4 = create_if_block_2(ctx);
     					if_block4.c();
-    					if_block4.m(div15, null);
+    					if_block4.m(div18, null);
     				}
     			} else if (if_block4) {
     				if_block4.d(1);
     				if_block4 = null;
     			}
 
-    			if (!current || dirty[0] & /*heroActiveClass*/ 256 && div15_class_value !== (div15_class_value = "right " + /*heroActiveClass*/ ctx[8] + " actions d-flex align-center")) {
-    				attr_dev(div15, "class", div15_class_value);
+    			if (!current || dirty[0] & /*activeDisplayClass*/ 256 && div18_class_value !== (div18_class_value = "right " + /*activeDisplayClass*/ ctx[8] + " actions d-flex align-center")) {
+    				attr_dev(div18, "class", div18_class_value);
     			}
     		},
     		i: function intro(local) {
@@ -1176,23 +1290,28 @@ var app = (function () {
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div1);
+    			destroy_each(each_blocks_3, detaching);
+    			if (detaching) detach_dev(t3);
+    			if (detaching) detach_dev(div3);
     			if_block0.d();
-    			if (detaching) detach_dev(t0);
-    			if (detaching) detach_dev(div4);
-    			if (if_block1) if_block1.d();
-    			if (detaching) detach_dev(t6);
+    			if (detaching) detach_dev(t4);
     			if (detaching) detach_dev(div7);
-    			destroy_component(actiondialog);
-    			destroy_each(each_blocks_1, detaching);
-    			if (detaching) detach_dev(t12);
-    			if (detaching) detach_dev(div9);
-    			destroy_each(each_blocks, detaching);
+    			if (if_block1) if_block1.d();
     			if (detaching) detach_dev(t13);
-    			if (detaching) detach_dev(div16);
+    			if (detaching) detach_dev(div10);
+    			destroy_component(actiondialog);
+    			destroy_each(each_blocks_2, detaching);
+    			if (detaching) detach_dev(t19);
+    			if (detaching) detach_dev(div13);
+    			destroy_each(each_blocks_1, detaching);
+    			if (detaching) detach_dev(t23);
+    			if (detaching) detach_dev(div14);
+    			destroy_each(each_blocks, detaching);
+    			if (detaching) detach_dev(t24);
+    			if (detaching) detach_dev(div19);
     			if (if_block2) if_block2.d();
     			if (if_block3) if_block3.d();
     			if (if_block4) if_block4.d();
-    			run_all(dispose);
     		}
     	};
 
@@ -1200,14 +1319,14 @@ var app = (function () {
     		block,
     		id: create_else_block.name,
     		type: "else",
-    		source: "(182:2) {:else}",
+    		source: "(286:2) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (173:32) 
+    // (277:32) 
     function create_if_block_1(ctx) {
     	let div1;
     	let h1;
@@ -1227,14 +1346,14 @@ var app = (function () {
     			li = element("li");
     			div0 = element("div");
     			div0.textContent = "Omaha";
-    			add_location(h1, file$1, 174, 6, 5258);
+    			add_location(h1, file$1, 278, 6, 8204);
     			attr_dev(div0, "class", "btn hover-effect");
-    			add_location(div0, file$1, 177, 10, 5362);
-    			add_location(li, file$1, 176, 8, 5313);
+    			add_location(div0, file$1, 281, 10, 8308);
+    			add_location(li, file$1, 280, 8, 8259);
     			attr_dev(ul, "id", "game-menu");
-    			add_location(ul, file$1, 175, 6, 5285);
+    			add_location(ul, file$1, 279, 6, 8231);
     			attr_dev(div1, "class", "container text-center");
-    			add_location(div1, file$1, 173, 4, 5216);
+    			add_location(div1, file$1, 277, 4, 8162);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div1, anchor);
@@ -1244,7 +1363,7 @@ var app = (function () {
     			append_dev(ul, li);
     			append_dev(li, div0);
     			if (remount) dispose();
-    			dispose = listen_dev(li, "click", /*click_handler*/ ctx[25], false, false, false);
+    			dispose = listen_dev(li, "click", /*click_handler*/ ctx[41], false, false, false);
     		},
     		p: noop,
     		i: noop,
@@ -1259,14 +1378,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(173:32) ",
+    		source: "(277:32) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (163:2) {#if !game && !playerName}
+    // (267:2) {#if !game && !playerName}
     function create_if_block$1(ctx) {
     	let div3;
     	let h1;
@@ -1290,18 +1409,18 @@ var app = (function () {
     			div2 = element("div");
     			div1 = element("div");
     			div1.textContent = "Play";
-    			add_location(h1, file$1, 164, 6, 4944);
+    			add_location(h1, file$1, 268, 6, 7890);
     			attr_dev(input, "type", "text");
     			attr_dev(input, "id", "hero-name");
-    			add_location(input, file$1, 166, 8, 5005);
+    			add_location(input, file$1, 270, 8, 7951);
     			attr_dev(div0, "id", "name-field");
-    			add_location(div0, file$1, 165, 6, 4975);
+    			add_location(div0, file$1, 269, 6, 7921);
     			attr_dev(div1, "class", "btn hover-effect");
-    			add_location(div1, file$1, 169, 8, 5095);
+    			add_location(div1, file$1, 273, 8, 8041);
     			attr_dev(div2, "class", "btn-wrapper");
-    			add_location(div2, file$1, 168, 6, 5061);
+    			add_location(div2, file$1, 272, 6, 8007);
     			attr_dev(div3, "class", "container text-center");
-    			add_location(div3, file$1, 163, 4, 4902);
+    			add_location(div3, file$1, 267, 4, 7848);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div3, anchor);
@@ -1313,7 +1432,7 @@ var app = (function () {
     			append_dev(div3, div2);
     			append_dev(div2, div1);
     			if (remount) dispose();
-    			dispose = listen_dev(div1, "click", /*setName*/ ctx[17], false, false, false);
+    			dispose = listen_dev(div1, "click", /*setName*/ ctx[18], false, false, false);
     		},
     		p: noop,
     		i: noop,
@@ -1328,17 +1447,120 @@ var app = (function () {
     		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(163:2) {#if !game && !playerName}",
+    		source: "(267:2) {#if !game && !playerName}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (191:8) {:else}
+    // (291:8) {#each gameHistory as step}
+    function create_each_block_7(ctx) {
+    	let div;
+    	let t_value = /*step*/ ctx[63] + "";
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			t = text(t_value);
+    			add_location(div, file$1, 291, 10, 8535);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, t);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty[0] & /*gameHistory*/ 16384 && t_value !== (t_value = /*step*/ ctx[63] + "")) set_data_dev(t, t_value);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block_7.name,
+    		type: "each",
+    		source: "(291:8) {#each gameHistory as step}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (304:8) {:else}
     function create_else_block_1(ctx) {
     	let each_1_anchor;
-    	let each_value_5 = /*villain*/ ctx[9].hand;
+    	let each_value_6 = /*villain*/ ctx[9].hand;
+    	validate_each_argument(each_value_6);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value_6.length; i += 1) {
+    		each_blocks[i] = create_each_block_6(get_each_context_6(ctx, each_value_6, i));
+    	}
+
+    	const block = {
+    		c: function create() {
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			each_1_anchor = empty();
+    		},
+    		m: function mount(target, anchor) {
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].m(target, anchor);
+    			}
+
+    			insert_dev(target, each_1_anchor, anchor);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty[0] & /*villain*/ 512) {
+    				each_value_6 = /*villain*/ ctx[9].hand;
+    				validate_each_argument(each_value_6);
+    				let i;
+
+    				for (i = 0; i < each_value_6.length; i += 1) {
+    					const child_ctx = get_each_context_6(ctx, each_value_6, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks[i] = create_each_block_6(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value_6.length;
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			destroy_each(each_blocks, detaching);
+    			if (detaching) detach_dev(each_1_anchor);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_else_block_1.name,
+    		type: "else",
+    		source: "(304:8) {:else}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (298:8) {#if villain.hand.length === 0}
+    function create_if_block_8(ctx) {
+    	let each_1_anchor;
+    	let each_value_5 = Array(/*playerNumCards*/ ctx[16]);
     	validate_each_argument(each_value_5);
     	let each_blocks = [];
 
@@ -1362,24 +1584,23 @@ var app = (function () {
     			insert_dev(target, each_1_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*villain*/ 512) {
-    				each_value_5 = /*villain*/ ctx[9].hand;
+    			if (dirty[0] & /*playerNumCards*/ 65536) {
+    				const old_length = each_value_5.length;
+    				each_value_5 = Array(/*playerNumCards*/ ctx[16]);
     				validate_each_argument(each_value_5);
     				let i;
 
-    				for (i = 0; i < each_value_5.length; i += 1) {
+    				for (i = old_length; i < each_value_5.length; i += 1) {
     					const child_ctx = get_each_context_5(ctx, each_value_5, i);
 
-    					if (each_blocks[i]) {
-    						each_blocks[i].p(child_ctx, dirty);
-    					} else {
+    					if (!each_blocks[i]) {
     						each_blocks[i] = create_each_block_5(child_ctx);
     						each_blocks[i].c();
     						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
     					}
     				}
 
-    				for (; i < each_blocks.length; i += 1) {
+    				for (i = each_value_5.length; i < old_length; i += 1) {
     					each_blocks[i].d(1);
     				}
 
@@ -1394,84 +1615,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_else_block_1.name,
-    		type: "else",
-    		source: "(191:8) {:else}",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    // (185:8) {#if villain.hand.length === 0}
-    function create_if_block_8(ctx) {
-    	let each_1_anchor;
-    	let each_value_4 = Array(/*playerNumCards*/ ctx[15]);
-    	validate_each_argument(each_value_4);
-    	let each_blocks = [];
-
-    	for (let i = 0; i < each_value_4.length; i += 1) {
-    		each_blocks[i] = create_each_block_4(get_each_context_4(ctx, each_value_4, i));
-    	}
-
-    	const block = {
-    		c: function create() {
-    			for (let i = 0; i < each_blocks.length; i += 1) {
-    				each_blocks[i].c();
-    			}
-
-    			each_1_anchor = empty();
-    		},
-    		m: function mount(target, anchor) {
-    			for (let i = 0; i < each_blocks.length; i += 1) {
-    				each_blocks[i].m(target, anchor);
-    			}
-
-    			insert_dev(target, each_1_anchor, anchor);
-    		},
-    		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*playerNumCards*/ 32768) {
-    				const old_length = each_value_4.length;
-    				each_value_4 = Array(/*playerNumCards*/ ctx[15]);
-    				validate_each_argument(each_value_4);
-    				let i;
-
-    				for (i = old_length; i < each_value_4.length; i += 1) {
-    					const child_ctx = get_each_context_4(ctx, each_value_4, i);
-
-    					if (!each_blocks[i]) {
-    						each_blocks[i] = create_each_block_4(child_ctx);
-    						each_blocks[i].c();
-    						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
-    					}
-    				}
-
-    				for (i = each_value_4.length; i < old_length; i += 1) {
-    					each_blocks[i].d(1);
-    				}
-
-    				each_blocks.length = each_value_4.length;
-    			}
-    		},
-    		d: function destroy(detaching) {
-    			destroy_each(each_blocks, detaching);
-    			if (detaching) detach_dev(each_1_anchor);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
     		id: create_if_block_8.name,
     		type: "if",
-    		source: "(185:8) {#if villain.hand.length === 0}",
+    		source: "(298:8) {#if villain.hand.length === 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (192:10) {#each villain.hand as card}
-    function create_each_block_5(ctx) {
+    // (305:10) {#each villain.hand as card}
+    function create_each_block_6(ctx) {
     	let div;
     	let img;
     	let img_src_value;
@@ -1483,11 +1637,11 @@ var app = (function () {
     			div = element("div");
     			img = element("img");
     			t = space();
-    			if (img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[34] + ".png")) attr_dev(img, "src", img_src_value);
-    			attr_dev(img, "alt", img_alt_value = /*card*/ ctx[34]);
-    			add_location(img, file$1, 193, 14, 5915);
+    			if (img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[53] + ".png")) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "alt", img_alt_value = /*card*/ ctx[53]);
+    			add_location(img, file$1, 306, 14, 9057);
     			attr_dev(div, "class", "card-container");
-    			add_location(div, file$1, 192, 12, 5872);
+    			add_location(div, file$1, 305, 12, 9014);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1495,11 +1649,11 @@ var app = (function () {
     			append_dev(div, t);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*villain*/ 512 && img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[34] + ".png")) {
+    			if (dirty[0] & /*villain*/ 512 && img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[53] + ".png")) {
     				attr_dev(img, "src", img_src_value);
     			}
 
-    			if (dirty[0] & /*villain*/ 512 && img_alt_value !== (img_alt_value = /*card*/ ctx[34])) {
+    			if (dirty[0] & /*villain*/ 512 && img_alt_value !== (img_alt_value = /*card*/ ctx[53])) {
     				attr_dev(img, "alt", img_alt_value);
     			}
     		},
@@ -1510,17 +1664,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block_5.name,
+    		id: create_each_block_6.name,
     		type: "each",
-    		source: "(192:10) {#each villain.hand as card}",
+    		source: "(305:10) {#each villain.hand as card}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (186:10) {#each Array(playerNumCards) as _}
-    function create_each_block_4(ctx) {
+    // (299:10) {#each Array(playerNumCards) as _}
+    function create_each_block_5(ctx) {
     	let div;
     	let img;
     	let img_src_value;
@@ -1533,9 +1687,9 @@ var app = (function () {
     			t = space();
     			if (img.src !== (img_src_value = "images/cards/card_back.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Card Back");
-    			add_location(img, file$1, 187, 14, 5711);
+    			add_location(img, file$1, 300, 14, 8853);
     			attr_dev(div, "class", "card-container");
-    			add_location(div, file$1, 186, 12, 5668);
+    			add_location(div, file$1, 299, 12, 8810);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1549,16 +1703,16 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block_4.name,
+    		id: create_each_block_5.name,
     		type: "each",
-    		source: "(186:10) {#each Array(playerNumCards) as _}",
+    		source: "(299:10) {#each Array(playerNumCards) as _}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (204:10) {#if villain.dealer}
+    // (317:10) {#if villain.dealer}
     function create_if_block_7(ctx) {
     	let div;
 
@@ -1567,7 +1721,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = "D";
     			attr_dev(div, "class", "dealer-chip");
-    			add_location(div, file$1, 204, 12, 6293);
+    			add_location(div, file$1, 317, 12, 9435);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1581,14 +1735,63 @@ var app = (function () {
     		block,
     		id: create_if_block_7.name,
     		type: "if",
-    		source: "(204:10) {#if villain.dealer}",
+    		source: "(317:10) {#if villain.dealer}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (223:8) {#each community as card}
+    // (339:8) {#each community as card}
+    function create_each_block_4(ctx) {
+    	let div;
+    	let img;
+    	let img_src_value;
+    	let img_alt_value;
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			img = element("img");
+    			t = space();
+    			if (img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[53] + ".png")) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "alt", img_alt_value = /*card*/ ctx[53]);
+    			add_location(img, file$1, 340, 12, 10092);
+    			attr_dev(div, "class", "card-container");
+    			add_location(div, file$1, 339, 10, 10051);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, img);
+    			append_dev(div, t);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty[0] & /*community*/ 2048 && img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[53] + ".png")) {
+    				attr_dev(img, "src", img_src_value);
+    			}
+
+    			if (dirty[0] & /*community*/ 2048 && img_alt_value !== (img_alt_value = /*card*/ ctx[53])) {
+    				attr_dev(img, "alt", img_alt_value);
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block_4.name,
+    		type: "each",
+    		source: "(339:8) {#each community as card}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (351:8) {#each hero.hand as card}
     function create_each_block_3(ctx) {
     	let div;
     	let img;
@@ -1601,11 +1804,11 @@ var app = (function () {
     			div = element("div");
     			img = element("img");
     			t = space();
-    			if (img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[34] + ".png")) attr_dev(img, "src", img_src_value);
-    			attr_dev(img, "alt", img_alt_value = /*card*/ ctx[34]);
-    			add_location(img, file$1, 224, 12, 6838);
+    			if (img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[53] + ".png")) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "alt", img_alt_value = /*card*/ ctx[53]);
+    			add_location(img, file$1, 352, 12, 10504);
     			attr_dev(div, "class", "card-container");
-    			add_location(div, file$1, 223, 10, 6797);
+    			add_location(div, file$1, 351, 10, 10463);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1613,11 +1816,11 @@ var app = (function () {
     			append_dev(div, t);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*community*/ 2048 && img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[34] + ".png")) {
+    			if (dirty[0] & /*hero*/ 1024 && img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[53] + ".png")) {
     				attr_dev(img, "src", img_src_value);
     			}
 
-    			if (dirty[0] & /*community*/ 2048 && img_alt_value !== (img_alt_value = /*card*/ ctx[34])) {
+    			if (dirty[0] & /*hero*/ 1024 && img_alt_value !== (img_alt_value = /*card*/ ctx[53])) {
     				attr_dev(img, "alt", img_alt_value);
     			}
     		},
@@ -1630,48 +1833,50 @@ var app = (function () {
     		block,
     		id: create_each_block_3.name,
     		type: "each",
-    		source: "(223:8) {#each community as card}",
+    		source: "(351:8) {#each hero.hand as card}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (232:8) {#each hero.hand as card}
+    // (359:6) {#each availBetsizes as availBet}
     function create_each_block_2(ctx) {
     	let div;
-    	let img;
-    	let img_src_value;
-    	let img_alt_value;
-    	let t;
+    	let t0;
+    	let t1_value = /*availBet*/ ctx[50] + "";
+    	let t1;
+    	let t2;
+    	let dispose;
+
+    	function click_handler_1(...args) {
+    		return /*click_handler_1*/ ctx[42](/*availBet*/ ctx[50], ...args);
+    	}
 
     	const block = {
     		c: function create() {
     			div = element("div");
-    			img = element("img");
-    			t = space();
-    			if (img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[34] + ".png")) attr_dev(img, "src", img_src_value);
-    			attr_dev(img, "alt", img_alt_value = /*card*/ ctx[34]);
-    			add_location(img, file$1, 233, 12, 7142);
-    			attr_dev(div, "class", "card-container");
-    			add_location(div, file$1, 232, 10, 7101);
+    			t0 = text("$");
+    			t1 = text(t1_value);
+    			t2 = space();
+    			attr_dev(div, "class", "btn hover-effect");
+    			add_location(div, file$1, 359, 8, 10731);
     		},
-    		m: function mount(target, anchor) {
+    		m: function mount(target, anchor, remount) {
     			insert_dev(target, div, anchor);
-    			append_dev(div, img);
-    			append_dev(div, t);
+    			append_dev(div, t0);
+    			append_dev(div, t1);
+    			append_dev(div, t2);
+    			if (remount) dispose();
+    			dispose = listen_dev(div, "click", click_handler_1, false, false, false);
     		},
-    		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*hero*/ 1024 && img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[34] + ".png")) {
-    				attr_dev(img, "src", img_src_value);
-    			}
-
-    			if (dirty[0] & /*hero*/ 1024 && img_alt_value !== (img_alt_value = /*card*/ ctx[34])) {
-    				attr_dev(img, "alt", img_alt_value);
-    			}
+    		p: function update(new_ctx, dirty) {
+    			ctx = new_ctx;
+    			if (dirty[0] & /*availBetsizes*/ 8192 && t1_value !== (t1_value = /*availBet*/ ctx[50] + "")) set_data_dev(t1, t1_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
+    			dispose();
     		}
     	};
 
@@ -1679,14 +1884,14 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(232:8) {#each hero.hand as card}",
+    		source: "(359:6) {#each availBetsizes as availBet}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (256:8) {#if availActions}
+    // (382:8) {#if availActions}
     function create_if_block_5(ctx) {
     	let each_1_anchor;
     	let each_value_1 = /*leftAvailActions*/ ctx[3];
@@ -1713,7 +1918,7 @@ var app = (function () {
     			insert_dev(target, each_1_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*endTurn, leftAvailActions, betSize*/ 528392) {
+    			if (dirty[0] & /*endTurn, leftAvailActions, betSize*/ 1052680) {
     				each_value_1 = /*leftAvailActions*/ ctx[3];
     				validate_each_argument(each_value_1);
     				let i;
@@ -1747,14 +1952,14 @@ var app = (function () {
     		block,
     		id: create_if_block_5.name,
     		type: "if",
-    		source: "(256:8) {#if availActions}",
+    		source: "(382:8) {#if availActions}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (263:16) {#if action === 'Bet' || action === 'Raise'}
+    // (389:16) {#if action === 'Bet' || action === 'Raise'}
     function create_if_block_6(ctx) {
     	let t;
 
@@ -1777,26 +1982,26 @@ var app = (function () {
     		block,
     		id: create_if_block_6.name,
     		type: "if",
-    		source: "(263:16) {#if action === 'Bet' || action === 'Raise'}",
+    		source: "(389:16) {#if action === 'Bet' || action === 'Raise'}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (257:10) {#each leftAvailActions as action}
+    // (383:10) {#each leftAvailActions as action}
     function create_each_block_1(ctx) {
     	let div;
     	let span;
-    	let t0_value = /*action*/ ctx[29] + "";
+    	let t0_value = /*action*/ ctx[45] + "";
     	let t0;
     	let t1;
     	let t2;
     	let dispose;
-    	let if_block = (/*action*/ ctx[29] === "Bet" || /*action*/ ctx[29] === "Raise") && create_if_block_6(ctx);
+    	let if_block = (/*action*/ ctx[45] === "Bet" || /*action*/ ctx[45] === "Raise") && create_if_block_6(ctx);
 
-    	function click_handler_1(...args) {
-    		return /*click_handler_1*/ ctx[27](/*action*/ ctx[29], ...args);
+    	function click_handler_2(...args) {
+    		return /*click_handler_2*/ ctx[43](/*action*/ ctx[45], ...args);
     	}
 
     	const block = {
@@ -1807,9 +2012,9 @@ var app = (function () {
     			t1 = space();
     			if (if_block) if_block.c();
     			t2 = space();
-    			add_location(span, file$1, 260, 14, 8017);
+    			add_location(span, file$1, 386, 14, 11648);
     			attr_dev(div, "class", "btn hover-effect");
-    			add_location(div, file$1, 257, 12, 7902);
+    			add_location(div, file$1, 383, 12, 11533);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div, anchor);
@@ -1819,13 +2024,13 @@ var app = (function () {
     			if (if_block) if_block.m(span, null);
     			append_dev(div, t2);
     			if (remount) dispose();
-    			dispose = listen_dev(div, "click", click_handler_1, false, false, false);
+    			dispose = listen_dev(div, "click", click_handler_2, false, false, false);
     		},
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
-    			if (dirty[0] & /*leftAvailActions*/ 8 && t0_value !== (t0_value = /*action*/ ctx[29] + "")) set_data_dev(t0, t0_value);
+    			if (dirty[0] & /*leftAvailActions*/ 8 && t0_value !== (t0_value = /*action*/ ctx[45] + "")) set_data_dev(t0, t0_value);
 
-    			if (/*action*/ ctx[29] === "Bet" || /*action*/ ctx[29] === "Raise") {
+    			if (/*action*/ ctx[45] === "Bet" || /*action*/ ctx[45] === "Raise") {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
@@ -1849,14 +2054,14 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(257:10) {#each leftAvailActions as action}",
+    		source: "(383:10) {#each leftAvailActions as action}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (272:10) {#if hero.dealer}
+    // (398:10) {#if hero.dealer}
     function create_if_block_4(ctx) {
     	let div;
 
@@ -1865,7 +2070,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = "D";
     			attr_dev(div, "class", "dealer-chip");
-    			add_location(div, file$1, 272, 12, 8393);
+    			add_location(div, file$1, 398, 12, 12024);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1879,14 +2084,14 @@ var app = (function () {
     		block,
     		id: create_if_block_4.name,
     		type: "if",
-    		source: "(272:10) {#if hero.dealer}",
+    		source: "(398:10) {#if hero.dealer}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (280:8) {#if availActions}
+    // (406:8) {#if availActions}
     function create_if_block_2(ctx) {
     	let each_1_anchor;
     	let each_value = /*rightAvailActions*/ ctx[4];
@@ -1913,7 +2118,7 @@ var app = (function () {
     			insert_dev(target, each_1_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*endTurn, rightAvailActions, betSize*/ 528400) {
+    			if (dirty[0] & /*endTurn, rightAvailActions, betSize*/ 1052688) {
     				each_value = /*rightAvailActions*/ ctx[4];
     				validate_each_argument(each_value);
     				let i;
@@ -1947,14 +2152,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(280:8) {#if availActions}",
+    		source: "(406:8) {#if availActions}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (287:16) {#if action === 'Bet' || action === 'Raise'}
+    // (413:16) {#if action === 'Bet' || action === 'Raise'}
     function create_if_block_3(ctx) {
     	let t;
 
@@ -1977,26 +2182,26 @@ var app = (function () {
     		block,
     		id: create_if_block_3.name,
     		type: "if",
-    		source: "(287:16) {#if action === 'Bet' || action === 'Raise'}",
+    		source: "(413:16) {#if action === 'Bet' || action === 'Raise'}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (281:10) {#each rightAvailActions as action}
+    // (407:10) {#each rightAvailActions as action}
     function create_each_block(ctx) {
     	let div;
     	let span;
-    	let t0_value = /*action*/ ctx[29] + "";
+    	let t0_value = /*action*/ ctx[45] + "";
     	let t0;
     	let t1;
     	let t2;
     	let dispose;
-    	let if_block = (/*action*/ ctx[29] === "Bet" || /*action*/ ctx[29] === "Raise") && create_if_block_3(ctx);
+    	let if_block = (/*action*/ ctx[45] === "Bet" || /*action*/ ctx[45] === "Raise") && create_if_block_3(ctx);
 
-    	function click_handler_2(...args) {
-    		return /*click_handler_2*/ ctx[28](/*action*/ ctx[29], ...args);
+    	function click_handler_3(...args) {
+    		return /*click_handler_3*/ ctx[44](/*action*/ ctx[45], ...args);
     	}
 
     	const block = {
@@ -2007,9 +2212,9 @@ var app = (function () {
     			t1 = space();
     			if (if_block) if_block.c();
     			t2 = space();
-    			add_location(span, file$1, 284, 14, 8785);
+    			add_location(span, file$1, 410, 14, 12420);
     			attr_dev(div, "class", "btn hover-effect");
-    			add_location(div, file$1, 281, 12, 8670);
+    			add_location(div, file$1, 407, 12, 12305);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div, anchor);
@@ -2019,13 +2224,13 @@ var app = (function () {
     			if (if_block) if_block.m(span, null);
     			append_dev(div, t2);
     			if (remount) dispose();
-    			dispose = listen_dev(div, "click", click_handler_2, false, false, false);
+    			dispose = listen_dev(div, "click", click_handler_3, false, false, false);
     		},
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
-    			if (dirty[0] & /*rightAvailActions*/ 16 && t0_value !== (t0_value = /*action*/ ctx[29] + "")) set_data_dev(t0, t0_value);
+    			if (dirty[0] & /*rightAvailActions*/ 16 && t0_value !== (t0_value = /*action*/ ctx[45] + "")) set_data_dev(t0, t0_value);
 
-    			if (/*action*/ ctx[29] === "Bet" || /*action*/ ctx[29] === "Raise") {
+    			if (/*action*/ ctx[45] === "Bet" || /*action*/ ctx[45] === "Raise") {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
@@ -2049,7 +2254,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(281:10) {#each rightAvailActions as action}",
+    		source: "(407:10) {#each rightAvailActions as action}",
     		ctx
     	});
 
@@ -2078,7 +2283,7 @@ var app = (function () {
     			div = element("div");
     			if_block.c();
     			attr_dev(div, "id", "table");
-    			add_location(div, file$1, 161, 0, 4852);
+    			add_location(div, file$1, 265, 0, 7798);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -2139,11 +2344,6 @@ var app = (function () {
     	return block;
     }
 
-    function setMessage(payload, botAction) {
-    	
-    } // if (botAction) {
-    //   let {last_action, last_betsize, pot} = payload;
-
     function instance$1($$self, $$props, $$invalidate) {
     	let { game = null } = $$props;
     	let { playerName = null } = $$props;
@@ -2155,9 +2355,24 @@ var app = (function () {
     	let { pot = 0 } = $$props;
     	let potClass;
     	let heroTurn;
-    	let { heroActiveClass = "inactive" } = $$props;
-    	let { villain = { hand: [], bank: 1000, dealer: true } } = $$props;
-    	let { hero = { hand: [], bank: 1000, dealer: false } } = $$props;
+    	let { activeDisplayClass = "inactive" } = $$props;
+
+    	let { villain = {
+    		hand: [],
+    		stack: 1000,
+    		dealer: true,
+    		position: null,
+    		streetTotal: 0
+    	} } = $$props;
+
+    	let { hero = {
+    		hand: [],
+    		stack: 1000,
+    		dealer: false,
+    		position: null,
+    		streetTotal: 0
+    	} } = $$props;
+
     	let { community = [] } = $$props;
     	let { betSize = 0 } = $$props;
     	let { maxBet } = $$props;
@@ -2172,7 +2387,87 @@ var app = (function () {
     		action: null
     	} } = $$props;
 
+    	let gameType;
     	let gameState;
+    	let playerStats;
+    	let street;
+    	let { availBetsizes = [] } = $$props;
+    	let { gameHistory = [] } = $$props;
+
+    	let actionDict = {
+    		0: "check",
+    		1: "fold",
+    		2: "call",
+    		3: "bet",
+    		4: "raise",
+    		5: "unopened"
+    	};
+
+    	let positionDict = { 0: "SB", 1: "BB", 2: "dealer" };
+    	let streetStart = { 0: "SB", 1: "BB", 2: "BB", 3: "BB" };
+
+    	function getAvailBetsizes(betsize_mask, betsizes) {
+    		// This is useful for only allowing categorical betsizes, as opposed to continuous.
+    		// Takes boolean mask array, and betsizes array of nums between 0 and 1.
+    		// Returns new array of allowable betsizes.
+    		console.log("betsize_mask,betsizes", betsize_mask, betsizes);
+
+    		$$invalidate(13, availBetsizes = new Array(betsize_mask.length));
+
+    		for (var i = 0; i < betsize_mask.length; i++) {
+    			console.log(pot);
+    			$$invalidate(13, availBetsizes[i] = betsize_mask[i] * betsizes[i] * pot, availBetsizes);
+    		}
+
+    		console.log("availBetsizes", availBetsizes);
+    		return availBetsizes;
+    	}
+
+    	function updatePlayers(state) {
+    		console.log("updatePlayers", state);
+    		$$invalidate(10, hero.stack = state.hero_stack, hero);
+    		$$invalidate(10, hero.dealer = state.hero_position == 0 ? true : false, hero);
+    		$$invalidate(10, hero.position = state.hero_position, hero);
+
+    		$$invalidate(
+    			10,
+    			hero.streetTotal = state.hero_position == state.player1_position
+    			? state.player1_street_total
+    			: state.player2_street_total,
+    			hero
+    		);
+
+    		$$invalidate(
+    			9,
+    			villain.position = state.hero_position == state.player1_position
+    			? state.player2_position
+    			: state.player1_position,
+    			villain
+    		);
+
+    		$$invalidate(
+    			9,
+    			villain.stack = villain.position == state.player1_position
+    			? state.player1_stack
+    			: state.player2_stack,
+    			villain
+    		);
+
+    		$$invalidate(9, villain.dealer = state.villain_position == 0 ? true : false, villain);
+
+    		$$invalidate(
+    			9,
+    			villain.streetTotal = state.villain_position == state.player1_position
+    			? state.player1_street_total
+    			: state.player2_street_total,
+    			villain
+    		);
+    	}
+
+    	function updateGame(state) {
+    		street = state.street;
+    		$$invalidate(7, pot = state.pot);
+    	}
 
     	async function setName() {
     		let value = document.getElementById("hero-name").value;
@@ -2184,28 +2479,96 @@ var app = (function () {
     		});
     	}
 
+    	async function getStats() {
+    		const res = await fetch("http://localhost:4000/api/player/stats");
+    		let text = await res.text();
+    		playerStats = JSON.parse(text);
+    		console.log("playerStats", playerStats);
+    	}
+
     	async function setGame(name) {
     		$$invalidate(0, game = name);
+    		gameType = name;
+    		newHand();
+    	}
+
+    	async function newHand() {
+    		$$invalidate(9, villain.hand = [], villain);
     		const res = await fetch("http://localhost:4000/api/reset");
     		let text = await res.text();
     		gameState = JSON.parse(text);
     		const { state } = gameState;
-    		$$invalidate(15, playerNumCards = state.hero_cards.length / 2);
+    		console.log(state);
+    		$$invalidate(16, playerNumCards = state.hero_cards.length / 2);
     		$$invalidate(2, availActions = getAvailActions(state.action_mask));
     		$$invalidate(10, hero.hand = await getCards(state.hero_cards), hero);
     		$$invalidate(11, community = await getCards(state.board_cards));
-    		$$invalidate(10, hero.bank = state.hero_stack, hero);
-    		$$invalidate(10, hero.dealer = state.hero_position == 0 ? true : false, hero);
-    		$$invalidate(9, villain.bank = state.villain_stack, villain);
-    		$$invalidate(9, villain.dealer = state.villain_position == 0 ? true : false, villain);
-    		$$invalidate(7, pot = state.pot);
-    		$$invalidate(16, potClass = "active");
-    		$$invalidate(8, heroActiveClass = "active");
+    		updatePlayers(state);
+    		updateGame(state);
+    		$$invalidate(13, availBetsizes = getAvailBetsizes(state.betsize_mask, state.betsizes));
+    		decodeHistory(state);
+    		$$invalidate(17, potClass = "active");
+    		$$invalidate(8, activeDisplayClass = "active");
+    		await getStats();
+    	}
+
+    	function buildString(
+    		last_position,
+    	last_action,
+    	last_betsize,
+    	amount_to_call,
+    	last_street_total,
+    	street
+    	) {
+    		let displayString;
+
+    		if (last_position === "dealer") {
+    			displayString = `${streetStart[street]} is first to act`;
+    		} else if (last_action === "call") {
+    			displayString = `${last_position} calls ${amount_to_call}`;
+    		} else if (last_action === "fold") {
+    			displayString = `${last_position} folds`;
+    		} else if (last_action === "check") {
+    			displayString = `${last_position} checks`;
+    		} else if (last_action === "bet") {
+    			displayString = `${last_position} bets ${last_betsize}`;
+    		} else if (last_action === "raise") {
+    			displayString = `${last_position} raises to ${last_betsize + Math.max(last_street_total - last_betsize, 0)}`;
+    		}
+
+    		return displayString;
+    	}
+
+    	function decodeHistory(gameData) {
+    		$$invalidate(14, gameHistory = []);
+    		const { history, mapping } = gameData;
+
+    		// console.log(mapping)
+    		const hist = history[0];
+
+    		for (var i = 0; i < hist.length; i++) {
+    			let amount_to_call;
+
+    			if (i > 0) {
+    				amount_to_call = hist[i - 1][mapping.amount_to_call];
+    			} else {
+    				amount_to_call = hist[i][mapping.amount_to_call];
+    			}
+
+    			let last_street_total = hist[i][mapping.last_position] == hist[i][mapping.player1_position]
+    			? hist[i][mapping.player1_street_total]
+    			: hist[i][mapping.player2_street_total];
+
+    			let displayString = buildString(positionDict[hist[i][mapping.last_position]], actionDict[hist[i][mapping.last_action]], hist[i][mapping.last_aggressive_betsize], amount_to_call, last_street_total, hist[i][mapping.street]);
+    			gameHistory.push(displayString);
+    		}
+
+    		console.log(gameHistory);
     	}
 
     	async function endTurn(action, betSize) {
     		action = action.slice(0, 1).toLowerCase() + action.slice(1);
-    		$$invalidate(8, heroActiveClass = "inactive");
+    		$$invalidate(8, activeDisplayClass = "inactive");
 
     		if (action === "call") {
     			betSize = gameState.state.last_betsize;
@@ -2221,59 +2584,38 @@ var app = (function () {
     		let text = await res.text();
     		let data = JSON.parse(text);
     		console.log("data", data);
-    		setMessage(data.state);
-    		$$invalidate(2, availActions = getAvailActions(data.state.action_mask));
-    		console.log(availActions);
-    		$$invalidate(7, pot = data.state.pot);
-    		$$invalidate(9, villain.bank = data.state.villain_stack, villain);
-    		$$invalidate(8, heroActiveClass = "active");
-    		console.log(pot);
-    		console.log(data.state.done);
+    		const { state, outcome } = data;
+    		decodeHistory(state);
+    		$$invalidate(11, community = await getCards(state.board_cards));
+    		updatePlayers(state);
+    		updateGame(state);
+    		$$invalidate(2, availActions = getAvailActions(state.action_mask));
+    		$$invalidate(13, availBetsizes = getAvailBetsizes(state.betsize_mask, state.betsizes));
+    		$$invalidate(8, activeDisplayClass = "active");
 
-    		if (data.state.done) {
+    		if (state.done) {
     			villain.dealer
-    			? $$invalidate(9, villain.hand = await getCards(data.outcome.player1_hand), villain)
-    			: $$invalidate(9, villain.hand = await getCards(data.outcome.player2_hand), villain);
+    			? $$invalidate(9, villain.hand = await getCards(outcome.player1_hand), villain)
+    			: $$invalidate(9, villain.hand = await getCards(outcome.player2_hand), villain);
 
-    			$$invalidate(8, heroActiveClass = "inactive");
-    			setTimeout(setGame("omaha"), 10000);
+    			//  activeDisplayClass = "inactive";
+    			await getStats();
+
+    			setTimeout(newHand, 10000);
     		}
 
     		console.log(villain.hand);
-    	} // setTimeout(async function() {
-    	//   console.log('data', data);
+    	}
 
-    	//   let betSize = last_betsize;
-    	//   messageObj.currPlayer = "PokerBot";
-    	//   messageObj.othPlayer = playerName;
-    	//   messageObj.action = actions[last_action];
-    	//   if (betSize > 0) {
-    	//     messageObj.amount = betSize;
-    	//   } else {
-    	//     if (action === "fold") {
-    	//       messageObj.pot = pot;
-    	//     }
-    	//     messageObj.amount = null;
-    	//   }
-    	// } else {
-    	//   let { action, betSize } = payload;
-    	//   messageObj.currPlayer = playerName;
-    	//   messageObj.othPlayer = "PokerBot";
-    	//   messageObj.action = action;
-    	//   if (betSize > 0) {
-    	//     messageObj.amount = betSize;
-    	//   } else {
-    	//     if (action === "fold") {
-    	//       messageObj.pot = pot;
-    	//     }
-    	//     messageObj.amount = null;
-    	//   }
-    	// }
+    	function setBetAmount(amount) {
+    		$$invalidate(12, betSize = amount);
+    	}
+
     	function checkAllIn() {
-    		if (betSize === hero.bank) {
-    			$$invalidate(21, allIn = true);
+    		if (betSize === hero.stack) {
+    			$$invalidate(23, allIn = true);
     		} else {
-    			$$invalidate(21, allIn = false);
+    			$$invalidate(23, allIn = false);
     		}
     	}
 
@@ -2286,14 +2628,16 @@ var app = (function () {
     		"pokerBotHandWidth",
     		"heroHandWidth",
     		"pot",
-    		"heroActiveClass",
+    		"activeDisplayClass",
     		"villain",
     		"hero",
     		"community",
     		"betSize",
     		"maxBet",
     		"allIn",
-    		"messageObj"
+    		"messageObj",
+    		"availBetsizes",
+    		"gameHistory"
     	];
 
     	Object.keys($$props).forEach(key => {
@@ -2303,14 +2647,9 @@ var app = (function () {
     	let { $$slots = {}, $$scope } = $$props;
     	validate_slots("App", $$slots, []);
     	const click_handler = () => setGame("omaha");
-
-    	function input_change_input_handler() {
-    		betSize = to_number(this.value);
-    		$$invalidate(12, betSize);
-    	}
-
-    	const click_handler_1 = action => endTurn(action, betSize);
+    	const click_handler_1 = availBet => setBetAmount(availBet);
     	const click_handler_2 = action => endTurn(action, betSize);
+    	const click_handler_3 = action => endTurn(action, betSize);
 
     	$$self.$set = $$props => {
     		if ("game" in $$props) $$invalidate(0, game = $$props.game);
@@ -2321,14 +2660,16 @@ var app = (function () {
     		if ("pokerBotHandWidth" in $$props) $$invalidate(5, pokerBotHandWidth = $$props.pokerBotHandWidth);
     		if ("heroHandWidth" in $$props) $$invalidate(6, heroHandWidth = $$props.heroHandWidth);
     		if ("pot" in $$props) $$invalidate(7, pot = $$props.pot);
-    		if ("heroActiveClass" in $$props) $$invalidate(8, heroActiveClass = $$props.heroActiveClass);
+    		if ("activeDisplayClass" in $$props) $$invalidate(8, activeDisplayClass = $$props.activeDisplayClass);
     		if ("villain" in $$props) $$invalidate(9, villain = $$props.villain);
     		if ("hero" in $$props) $$invalidate(10, hero = $$props.hero);
     		if ("community" in $$props) $$invalidate(11, community = $$props.community);
     		if ("betSize" in $$props) $$invalidate(12, betSize = $$props.betSize);
-    		if ("maxBet" in $$props) $$invalidate(13, maxBet = $$props.maxBet);
-    		if ("allIn" in $$props) $$invalidate(21, allIn = $$props.allIn);
-    		if ("messageObj" in $$props) $$invalidate(14, messageObj = $$props.messageObj);
+    		if ("maxBet" in $$props) $$invalidate(22, maxBet = $$props.maxBet);
+    		if ("allIn" in $$props) $$invalidate(23, allIn = $$props.allIn);
+    		if ("messageObj" in $$props) $$invalidate(15, messageObj = $$props.messageObj);
+    		if ("availBetsizes" in $$props) $$invalidate(13, availBetsizes = $$props.availBetsizes);
+    		if ("gameHistory" in $$props) $$invalidate(14, gameHistory = $$props.gameHistory);
     	};
 
     	$$self.$capture_state = () => ({
@@ -2347,7 +2688,7 @@ var app = (function () {
     		pot,
     		potClass,
     		heroTurn,
-    		heroActiveClass,
+    		activeDisplayClass,
     		villain,
     		hero,
     		community,
@@ -2356,36 +2697,59 @@ var app = (function () {
     		allIn,
     		showdown,
     		messageObj,
+    		gameType,
     		gameState,
+    		playerStats,
+    		street,
+    		availBetsizes,
+    		gameHistory,
+    		actionDict,
+    		positionDict,
+    		streetStart,
+    		getAvailBetsizes,
+    		updatePlayers,
+    		updateGame,
     		setName,
+    		getStats,
     		setGame,
+    		newHand,
+    		buildString,
+    		decodeHistory,
     		endTurn,
-    		setMessage,
+    		setBetAmount,
     		checkAllIn
     	});
 
     	$$self.$inject_state = $$props => {
     		if ("game" in $$props) $$invalidate(0, game = $$props.game);
     		if ("playerName" in $$props) $$invalidate(1, playerName = $$props.playerName);
-    		if ("playerNumCards" in $$props) $$invalidate(15, playerNumCards = $$props.playerNumCards);
+    		if ("playerNumCards" in $$props) $$invalidate(16, playerNumCards = $$props.playerNumCards);
     		if ("availActions" in $$props) $$invalidate(2, availActions = $$props.availActions);
     		if ("leftAvailActions" in $$props) $$invalidate(3, leftAvailActions = $$props.leftAvailActions);
     		if ("rightAvailActions" in $$props) $$invalidate(4, rightAvailActions = $$props.rightAvailActions);
     		if ("pokerBotHandWidth" in $$props) $$invalidate(5, pokerBotHandWidth = $$props.pokerBotHandWidth);
     		if ("heroHandWidth" in $$props) $$invalidate(6, heroHandWidth = $$props.heroHandWidth);
     		if ("pot" in $$props) $$invalidate(7, pot = $$props.pot);
-    		if ("potClass" in $$props) $$invalidate(16, potClass = $$props.potClass);
+    		if ("potClass" in $$props) $$invalidate(17, potClass = $$props.potClass);
     		if ("heroTurn" in $$props) heroTurn = $$props.heroTurn;
-    		if ("heroActiveClass" in $$props) $$invalidate(8, heroActiveClass = $$props.heroActiveClass);
+    		if ("activeDisplayClass" in $$props) $$invalidate(8, activeDisplayClass = $$props.activeDisplayClass);
     		if ("villain" in $$props) $$invalidate(9, villain = $$props.villain);
     		if ("hero" in $$props) $$invalidate(10, hero = $$props.hero);
     		if ("community" in $$props) $$invalidate(11, community = $$props.community);
     		if ("betSize" in $$props) $$invalidate(12, betSize = $$props.betSize);
-    		if ("maxBet" in $$props) $$invalidate(13, maxBet = $$props.maxBet);
-    		if ("allIn" in $$props) $$invalidate(21, allIn = $$props.allIn);
+    		if ("maxBet" in $$props) $$invalidate(22, maxBet = $$props.maxBet);
+    		if ("allIn" in $$props) $$invalidate(23, allIn = $$props.allIn);
     		if ("showdown" in $$props) showdown = $$props.showdown;
-    		if ("messageObj" in $$props) $$invalidate(14, messageObj = $$props.messageObj);
+    		if ("messageObj" in $$props) $$invalidate(15, messageObj = $$props.messageObj);
+    		if ("gameType" in $$props) gameType = $$props.gameType;
     		if ("gameState" in $$props) gameState = $$props.gameState;
+    		if ("playerStats" in $$props) playerStats = $$props.playerStats;
+    		if ("street" in $$props) street = $$props.street;
+    		if ("availBetsizes" in $$props) $$invalidate(13, availBetsizes = $$props.availBetsizes);
+    		if ("gameHistory" in $$props) $$invalidate(14, gameHistory = $$props.gameHistory);
+    		if ("actionDict" in $$props) actionDict = $$props.actionDict;
+    		if ("positionDict" in $$props) positionDict = $$props.positionDict;
+    		if ("streetStart" in $$props) streetStart = $$props.streetStart;
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -2405,20 +2769,20 @@ var app = (function () {
     			: availActions.slice(1));
     		}
 
-    		if ($$self.$$.dirty[0] & /*playerNumCards*/ 32768) {
+    		if ($$self.$$.dirty[0] & /*playerNumCards*/ 65536) {
     			 $$invalidate(5, pokerBotHandWidth = playerNumCards * 60 + 40);
     		}
 
-    		if ($$self.$$.dirty[0] & /*playerNumCards*/ 32768) {
+    		if ($$self.$$.dirty[0] & /*playerNumCards*/ 65536) {
     			 $$invalidate(6, heroHandWidth = playerNumCards * 100 + 60);
     		}
 
     		if ($$self.$$.dirty[0] & /*hero*/ 1024) {
-    			 $$invalidate(13, maxBet = hero.bank);
+    			 $$invalidate(22, maxBet = hero.stack);
     		}
 
     		if ($$self.$$.dirty[0] & /*betSize, hero*/ 5120) {
-    			 $$invalidate(21, allIn = betSize === hero.bank ? true : false);
+    			 $$invalidate(23, allIn = betSize === hero.stack ? true : false);
     		}
     	};
 
@@ -2431,27 +2795,43 @@ var app = (function () {
     		pokerBotHandWidth,
     		heroHandWidth,
     		pot,
-    		heroActiveClass,
+    		activeDisplayClass,
     		villain,
     		hero,
     		community,
     		betSize,
-    		maxBet,
+    		availBetsizes,
+    		gameHistory,
     		messageObj,
     		playerNumCards,
     		potClass,
     		setName,
     		setGame,
     		endTurn,
-    		checkAllIn,
+    		setBetAmount,
+    		maxBet,
     		allIn,
+    		gameType,
     		gameState,
+    		playerStats,
+    		street,
     		heroTurn,
     		showdown,
+    		actionDict,
+    		positionDict,
+    		streetStart,
+    		getAvailBetsizes,
+    		updatePlayers,
+    		updateGame,
+    		getStats,
+    		newHand,
+    		buildString,
+    		decodeHistory,
+    		checkAllIn,
     		click_handler,
-    		input_change_input_handler,
     		click_handler_1,
-    		click_handler_2
+    		click_handler_2,
+    		click_handler_3
     	];
     }
 
@@ -2474,16 +2854,18 @@ var app = (function () {
     				pokerBotHandWidth: 5,
     				heroHandWidth: 6,
     				pot: 7,
-    				heroActiveClass: 8,
+    				activeDisplayClass: 8,
     				villain: 9,
     				hero: 10,
     				community: 11,
     				betSize: 12,
-    				maxBet: 13,
-    				allIn: 21,
-    				messageObj: 14
+    				maxBet: 22,
+    				allIn: 23,
+    				messageObj: 15,
+    				availBetsizes: 13,
+    				gameHistory: 14
     			},
-    			[-1, -1]
+    			[-1, -1, -1]
     		);
 
     		dispatch_dev("SvelteRegisterComponent", {
@@ -2512,11 +2894,11 @@ var app = (function () {
     			console_1.warn("<App> was created without expected prop 'heroHandWidth'");
     		}
 
-    		if (/*maxBet*/ ctx[13] === undefined && !("maxBet" in props)) {
+    		if (/*maxBet*/ ctx[22] === undefined && !("maxBet" in props)) {
     			console_1.warn("<App> was created without expected prop 'maxBet'");
     		}
 
-    		if (/*allIn*/ ctx[21] === undefined && !("allIn" in props)) {
+    		if (/*allIn*/ ctx[23] === undefined && !("allIn" in props)) {
     			console_1.warn("<App> was created without expected prop 'allIn'");
     		}
     	}
@@ -2585,11 +2967,11 @@ var app = (function () {
     		throw new Error("<App>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
-    	get heroActiveClass() {
+    	get activeDisplayClass() {
     		throw new Error("<App>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
-    	set heroActiveClass(value) {
+    	set activeDisplayClass(value) {
     		throw new Error("<App>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
@@ -2646,6 +3028,22 @@ var app = (function () {
     	}
 
     	set messageObj(value) {
+    		throw new Error("<App>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get availBetsizes() {
+    		throw new Error("<App>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set availBetsizes(value) {
+    		throw new Error("<App>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get gameHistory() {
+    		throw new Error("<App>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set gameHistory(value) {
     		throw new Error("<App>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }

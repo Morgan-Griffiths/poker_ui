@@ -705,77 +705,104 @@ var app = (function () {
     // (286:2) {:else}
     function create_else_block(ctx) {
     	let div1;
-    	let h2;
+    	let h20;
     	let t1;
     	let hr0;
     	let t2;
     	let div0;
     	let t3;
-    	let div3;
     	let div2;
-    	let t4;
-    	let div7;
-    	let div5;
-    	let div4;
+    	let h21;
     	let t5;
-    	let t6;
     	let hr1;
-    	let t7;
-    	let p0;
+    	let t6;
+    	let table;
+    	let tr0;
+    	let td0;
     	let t8;
-    	let t9_value = /*villain*/ ctx[9].stack + "";
+    	let td1;
+    	let t9_value = /*playerStats*/ ctx[18].bb_per_hand.toFixed(2) + "";
     	let t9;
     	let t10;
-    	let div6;
-    	let span0;
-    	let t11;
-    	let t12_value = /*villain*/ ctx[9].streetTotal + "";
+    	let tr1;
+    	let td2;
     	let t12;
-    	let div6_class_value;
+    	let td3;
+    	let t13_value = /*playerStats*/ ctx[18].results + "";
     	let t13;
-    	let div10;
+    	let t14;
+    	let tr2;
+    	let td4;
+    	let t16;
+    	let td5;
+    	let t17_value = /*playerStats*/ ctx[18].total_hands + "";
+    	let t17;
+    	let t18;
+    	let div4;
+    	let div3;
+    	let t19;
     	let div8;
+    	let div6;
+    	let div5;
+    	let t20;
+    	let t21;
+    	let hr2;
+    	let t22;
+    	let p0;
+    	let t23;
+    	let t24_value = /*villain*/ ctx[9].stack + "";
+    	let t24;
+    	let t25;
+    	let div7;
+    	let span0;
+    	let t26;
+    	let t27_value = /*villain*/ ctx[9].streetTotal + "";
+    	let t27;
+    	let div7_class_value;
+    	let t28;
+    	let div11;
+    	let div9;
     	let img;
     	let img_src_value;
-    	let t14;
-    	let span1;
-    	let t15;
-    	let t16;
-    	let t17;
-    	let div9;
-    	let t18;
-    	let t19;
-    	let div13;
-    	let div11;
-    	let span2;
-    	let t20;
-    	let t21_value = /*hero*/ ctx[10].streetTotal + "";
-    	let t21;
-    	let div11_class_value;
-    	let t22;
-    	let div12;
-    	let t23;
-    	let div14;
-    	let div14_class_value;
-    	let t24;
-    	let div19;
-    	let div15;
-    	let div15_class_value;
-    	let t25;
-    	let div17;
-    	let div16;
-    	let t26;
-    	let t27;
-    	let t28;
-    	let hr2;
     	let t29;
-    	let p1;
+    	let span1;
     	let t30;
-    	let t31_value = /*hero*/ ctx[10].stack + "";
     	let t31;
     	let t32;
+    	let div10;
+    	let t33;
+    	let t34;
+    	let div14;
+    	let div12;
+    	let span2;
+    	let t35;
+    	let t36_value = /*hero*/ ctx[10].streetTotal + "";
+    	let t36;
+    	let div12_class_value;
+    	let t37;
+    	let div13;
+    	let t38;
+    	let div15;
+    	let div15_class_value;
+    	let t39;
+    	let div20;
+    	let div16;
+    	let div16_class_value;
+    	let t40;
     	let div18;
-    	let div18_class_value;
+    	let div17;
+    	let t41;
+    	let t42;
+    	let t43;
+    	let hr3;
+    	let t44;
+    	let p1;
+    	let t45;
+    	let t46_value = /*hero*/ ctx[10].stack + "";
+    	let t46;
+    	let t47;
+    	let div19;
+    	let div19_class_value;
     	let current;
     	let each_value_7 = /*gameHistory*/ ctx[14];
     	validate_each_argument(each_value_7);
@@ -830,8 +857,8 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			div1 = element("div");
-    			h2 = element("h2");
-    			h2.textContent = "History";
+    			h20 = element("h2");
+    			h20.textContent = "History";
     			t1 = space();
     			hr0 = element("hr");
     			t2 = space();
@@ -842,151 +869,197 @@ var app = (function () {
     			}
 
     			t3 = space();
-    			div3 = element("div");
     			div2 = element("div");
-    			if_block0.c();
-    			t4 = space();
-    			div7 = element("div");
-    			div5 = element("div");
-    			div4 = element("div");
-    			t5 = text("Morgan's Poker Bot\n          ");
-    			if (if_block1) if_block1.c();
-    			t6 = space();
+    			h21 = element("h2");
+    			h21.textContent = "Stats";
+    			t5 = space();
     			hr1 = element("hr");
-    			t7 = space();
-    			p0 = element("p");
-    			t8 = text("$");
+    			t6 = space();
+    			table = element("table");
+    			tr0 = element("tr");
+    			td0 = element("td");
+    			td0.textContent = "bb per hand";
+    			t8 = space();
+    			td1 = element("td");
     			t9 = text(t9_value);
     			t10 = space();
-    			div6 = element("div");
-    			span0 = element("span");
-    			t11 = text("$");
-    			t12 = text(t12_value);
-    			t13 = space();
-    			div10 = element("div");
-    			div8 = element("div");
-    			img = element("img");
+    			tr1 = element("tr");
+    			td2 = element("td");
+    			td2.textContent = "results";
+    			t12 = space();
+    			td3 = element("td");
+    			t13 = text(t13_value);
     			t14 = space();
-    			span1 = element("span");
-    			t15 = text("$");
-    			t16 = text(/*pot*/ ctx[7]);
-    			t17 = space();
-    			div9 = element("div");
-    			create_component(actiondialog.$$.fragment);
+    			tr2 = element("tr");
+    			td4 = element("td");
+    			td4.textContent = "total_hands";
+    			t16 = space();
+    			td5 = element("td");
+    			t17 = text(t17_value);
     			t18 = space();
+    			div4 = element("div");
+    			div3 = element("div");
+    			if_block0.c();
+    			t19 = space();
+    			div8 = element("div");
+    			div6 = element("div");
+    			div5 = element("div");
+    			t20 = text("Morgan's Poker Bot\n          ");
+    			if (if_block1) if_block1.c();
+    			t21 = space();
+    			hr2 = element("hr");
+    			t22 = space();
+    			p0 = element("p");
+    			t23 = text("$");
+    			t24 = text(t24_value);
+    			t25 = space();
+    			div7 = element("div");
+    			span0 = element("span");
+    			t26 = text("$");
+    			t27 = text(t27_value);
+    			t28 = space();
+    			div11 = element("div");
+    			div9 = element("div");
+    			img = element("img");
+    			t29 = space();
+    			span1 = element("span");
+    			t30 = text("$");
+    			t31 = text(/*pot*/ ctx[7]);
+    			t32 = space();
+    			div10 = element("div");
+    			create_component(actiondialog.$$.fragment);
+    			t33 = space();
 
     			for (let i = 0; i < each_blocks_2.length; i += 1) {
     				each_blocks_2[i].c();
     			}
 
-    			t19 = space();
-    			div13 = element("div");
-    			div11 = element("div");
-    			span2 = element("span");
-    			t20 = text("$");
-    			t21 = text(t21_value);
-    			t22 = space();
+    			t34 = space();
+    			div14 = element("div");
     			div12 = element("div");
+    			span2 = element("span");
+    			t35 = text("$");
+    			t36 = text(t36_value);
+    			t37 = space();
+    			div13 = element("div");
 
     			for (let i = 0; i < each_blocks_1.length; i += 1) {
     				each_blocks_1[i].c();
     			}
 
-    			t23 = space();
-    			div14 = element("div");
+    			t38 = space();
+    			div15 = element("div");
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
 
-    			t24 = space();
-    			div19 = element("div");
-    			div15 = element("div");
-    			if (if_block2) if_block2.c();
-    			t25 = space();
-    			div17 = element("div");
+    			t39 = space();
+    			div20 = element("div");
     			div16 = element("div");
-    			t26 = text(/*playerName*/ ctx[1]);
-    			t27 = space();
-    			if (if_block3) if_block3.c();
-    			t28 = space();
-    			hr2 = element("hr");
-    			t29 = space();
-    			p1 = element("p");
-    			t30 = text("$");
-    			t31 = text(t31_value);
-    			t32 = space();
+    			if (if_block2) if_block2.c();
+    			t40 = space();
     			div18 = element("div");
+    			div17 = element("div");
+    			t41 = text(/*playerName*/ ctx[1]);
+    			t42 = space();
+    			if (if_block3) if_block3.c();
+    			t43 = space();
+    			hr3 = element("hr");
+    			t44 = space();
+    			p1 = element("p");
+    			t45 = text("$");
+    			t46 = text(t46_value);
+    			t47 = space();
+    			div19 = element("div");
     			if (if_block4) if_block4.c();
-    			add_location(h2, file$1, 287, 6, 8426);
-    			add_location(hr0, file$1, 288, 6, 8449);
+    			add_location(h20, file$1, 287, 6, 8473);
+    			add_location(hr0, file$1, 288, 6, 8496);
     			attr_dev(div0, "id", "history-content");
-    			add_location(div0, file$1, 289, 6, 8462);
+    			add_location(div0, file$1, 289, 6, 8509);
     			attr_dev(div1, "id", "history");
-    			add_location(div1, file$1, 286, 4, 8401);
-    			attr_dev(div2, "id", "villian");
-    			attr_dev(div2, "class", "hand");
-    			set_style(div2, "width", /*pokerBotHandWidth*/ ctx[5] + "px");
-    			add_location(div2, file$1, 296, 6, 8644);
-    			attr_dev(div3, "class", "container no-margin-bottom");
-    			add_location(div3, file$1, 295, 4, 8597);
-    			attr_dev(div4, "class", "d-flex justify-center");
-    			set_style(div4, "margin-bottom", "8px");
-    			add_location(div4, file$1, 314, 8, 9300);
-    			add_location(hr1, file$1, 320, 8, 9507);
-    			add_location(p0, file$1, 321, 8, 9522);
-    			attr_dev(div5, "id", "villian-info");
-    			attr_dev(div5, "class", "d-flex column");
-    			add_location(div5, file$1, 313, 6, 9246);
-    			add_location(span0, file$1, 324, 8, 9621);
-    			attr_dev(div6, "class", div6_class_value = "" + (/*activeDisplayClass*/ ctx[8] + " street-total"));
-    			add_location(div6, file$1, 323, 6, 9565);
-    			attr_dev(div7, "class", "container no-margin-bottom no-margin-top");
-    			add_location(div7, file$1, 312, 4, 9185);
+    			add_location(div1, file$1, 286, 4, 8448);
+    			add_location(h21, file$1, 296, 4, 8659);
+    			add_location(hr1, file$1, 297, 4, 8678);
+    			add_location(td0, file$1, 299, 12, 8728);
+    			attr_dev(td1, "class", "text-right");
+    			add_location(td1, file$1, 299, 33, 8749);
+    			add_location(tr0, file$1, 299, 8, 8724);
+    			add_location(td2, file$1, 300, 12, 8831);
+    			attr_dev(td3, "class", "text-right");
+    			add_location(td3, file$1, 300, 29, 8848);
+    			add_location(tr1, file$1, 300, 8, 8827);
+    			add_location(td4, file$1, 301, 12, 8915);
+    			attr_dev(td5, "class", "text-right");
+    			add_location(td5, file$1, 301, 33, 8936);
+    			add_location(tr2, file$1, 301, 8, 8911);
+    			attr_dev(table, "id", "stats-content");
+    			add_location(table, file$1, 298, 6, 8689);
+    			attr_dev(div2, "id", "stats");
+    			add_location(div2, file$1, 295, 2, 8638);
+    			attr_dev(div3, "id", "villian");
+    			attr_dev(div3, "class", "hand");
+    			set_style(div3, "width", /*pokerBotHandWidth*/ ctx[5] + "px");
+    			add_location(div3, file$1, 305, 6, 9072);
+    			attr_dev(div4, "class", "container no-margin-bottom");
+    			add_location(div4, file$1, 304, 4, 9025);
+    			attr_dev(div5, "class", "d-flex justify-center");
+    			set_style(div5, "margin-bottom", "8px");
+    			add_location(div5, file$1, 323, 8, 9728);
+    			add_location(hr2, file$1, 329, 8, 9935);
+    			add_location(p0, file$1, 330, 8, 9950);
+    			attr_dev(div6, "id", "villian-info");
+    			attr_dev(div6, "class", "d-flex column");
+    			add_location(div6, file$1, 322, 6, 9674);
+    			add_location(span0, file$1, 333, 8, 10049);
+    			attr_dev(div7, "class", div7_class_value = "" + (/*activeDisplayClass*/ ctx[8] + " street-total"));
+    			add_location(div7, file$1, 332, 6, 9993);
+    			attr_dev(div8, "class", "container no-margin-bottom no-margin-top");
+    			add_location(div8, file$1, 321, 4, 9613);
     			if (img.src !== (img_src_value = "images/poker-chip.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Poker Chip");
     			attr_dev(img, "height", "105%");
     			set_style(img, "margin-right", "10px");
-    			add_location(img, file$1, 329, 8, 9755);
-    			add_location(span1, file$1, 334, 8, 9896);
-    			attr_dev(div8, "id", "pot");
-    			attr_dev(div8, "class", /*potClass*/ ctx[17]);
-    			add_location(div8, file$1, 328, 6, 9715);
-    			attr_dev(div9, "id", "community");
-    			attr_dev(div9, "class", "hand");
-    			add_location(div9, file$1, 336, 6, 9935);
-    			attr_dev(div10, "class", "container");
-    			add_location(div10, file$1, 327, 4, 9685);
-    			add_location(span2, file$1, 347, 8, 10305);
-    			attr_dev(div11, "class", div11_class_value = "" + (/*activeDisplayClass*/ ctx[8] + " street-total"));
-    			add_location(div11, file$1, 346, 6, 10249);
-    			attr_dev(div12, "id", "hero");
-    			attr_dev(div12, "class", "hand");
-    			set_style(div12, "width", /*heroHandWidth*/ ctx[6] + "px");
-    			add_location(div12, file$1, 349, 6, 10357);
-    			attr_dev(div13, "class", "container no-margin-bottom");
-    			add_location(div13, file$1, 345, 4, 10202);
-    			attr_dev(div14, "id", "bet-options");
-    			attr_dev(div14, "class", div14_class_value = "" + (/*activeDisplayClass*/ ctx[8] + " d-flex flex-wrap"));
-    			add_location(div14, file$1, 357, 4, 10614);
-    			attr_dev(div15, "class", div15_class_value = "left " + /*activeDisplayClass*/ ctx[8] + " actions d-flex align-center");
-    			add_location(div15, file$1, 380, 6, 11381);
-    			attr_dev(div16, "class", "d-flex justify-center");
-    			set_style(div16, "margin-bottom", "8px");
-    			add_location(div16, file$1, 395, 8, 11898);
-    			add_location(hr2, file$1, 401, 8, 12096);
-    			add_location(p1, file$1, 402, 8, 12111);
-    			attr_dev(div17, "id", "hero-info");
-    			attr_dev(div17, "class", "d-flex column");
-    			add_location(div17, file$1, 394, 6, 11847);
-    			attr_dev(div18, "class", div18_class_value = "right " + /*activeDisplayClass*/ ctx[8] + " actions d-flex align-center");
-    			add_location(div18, file$1, 404, 6, 12151);
-    			attr_dev(div19, "class", "container d-flex justify-center flex-wrap no-margin-top");
-    			add_location(div19, file$1, 364, 4, 10868);
+    			add_location(img, file$1, 338, 8, 10183);
+    			add_location(span1, file$1, 343, 8, 10324);
+    			attr_dev(div9, "id", "pot");
+    			attr_dev(div9, "class", /*potClass*/ ctx[17]);
+    			add_location(div9, file$1, 337, 6, 10143);
+    			attr_dev(div10, "id", "community");
+    			attr_dev(div10, "class", "hand");
+    			add_location(div10, file$1, 345, 6, 10363);
+    			attr_dev(div11, "class", "container");
+    			add_location(div11, file$1, 336, 4, 10113);
+    			add_location(span2, file$1, 356, 8, 10733);
+    			attr_dev(div12, "class", div12_class_value = "" + (/*activeDisplayClass*/ ctx[8] + " street-total"));
+    			add_location(div12, file$1, 355, 6, 10677);
+    			attr_dev(div13, "id", "hero");
+    			attr_dev(div13, "class", "hand");
+    			set_style(div13, "width", /*heroHandWidth*/ ctx[6] + "px");
+    			add_location(div13, file$1, 358, 6, 10785);
+    			attr_dev(div14, "class", "container no-margin-bottom");
+    			add_location(div14, file$1, 354, 4, 10630);
+    			attr_dev(div15, "id", "bet-options");
+    			attr_dev(div15, "class", div15_class_value = "" + (/*activeDisplayClass*/ ctx[8] + " d-flex flex-wrap"));
+    			add_location(div15, file$1, 366, 4, 11042);
+    			attr_dev(div16, "class", div16_class_value = "left " + /*activeDisplayClass*/ ctx[8] + " actions d-flex align-center");
+    			add_location(div16, file$1, 389, 6, 11809);
+    			attr_dev(div17, "class", "d-flex justify-center");
+    			set_style(div17, "margin-bottom", "8px");
+    			add_location(div17, file$1, 404, 8, 12326);
+    			add_location(hr3, file$1, 410, 8, 12524);
+    			add_location(p1, file$1, 411, 8, 12539);
+    			attr_dev(div18, "id", "hero-info");
+    			attr_dev(div18, "class", "d-flex column");
+    			add_location(div18, file$1, 403, 6, 12275);
+    			attr_dev(div19, "class", div19_class_value = "right " + /*activeDisplayClass*/ ctx[8] + " actions d-flex align-center");
+    			add_location(div19, file$1, 413, 6, 12579);
+    			attr_dev(div20, "class", "container d-flex justify-center flex-wrap no-margin-top");
+    			add_location(div20, file$1, 373, 4, 11296);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
-    			append_dev(div1, h2);
+    			append_dev(div1, h20);
     			append_dev(div1, t1);
     			append_dev(div1, hr0);
     			append_dev(div1, t2);
@@ -997,82 +1070,106 @@ var app = (function () {
     			}
 
     			insert_dev(target, t3, anchor);
-    			insert_dev(target, div3, anchor);
-    			append_dev(div3, div2);
-    			if_block0.m(div2, null);
-    			insert_dev(target, t4, anchor);
-    			insert_dev(target, div7, anchor);
-    			append_dev(div7, div5);
-    			append_dev(div5, div4);
-    			append_dev(div4, t5);
-    			if (if_block1) if_block1.m(div4, null);
-    			append_dev(div5, t6);
-    			append_dev(div5, hr1);
-    			append_dev(div5, t7);
-    			append_dev(div5, p0);
-    			append_dev(p0, t8);
-    			append_dev(p0, t9);
-    			append_dev(div7, t10);
-    			append_dev(div7, div6);
-    			append_dev(div6, span0);
-    			append_dev(span0, t11);
-    			append_dev(span0, t12);
-    			insert_dev(target, t13, anchor);
-    			insert_dev(target, div10, anchor);
-    			append_dev(div10, div8);
-    			append_dev(div8, img);
-    			append_dev(div8, t14);
-    			append_dev(div8, span1);
-    			append_dev(span1, t15);
-    			append_dev(span1, t16);
-    			append_dev(div10, t17);
-    			append_dev(div10, div9);
-    			mount_component(actiondialog, div9, null);
-    			append_dev(div9, t18);
+    			insert_dev(target, div2, anchor);
+    			append_dev(div2, h21);
+    			append_dev(div2, t5);
+    			append_dev(div2, hr1);
+    			append_dev(div2, t6);
+    			append_dev(div2, table);
+    			append_dev(table, tr0);
+    			append_dev(tr0, td0);
+    			append_dev(tr0, t8);
+    			append_dev(tr0, td1);
+    			append_dev(td1, t9);
+    			append_dev(table, t10);
+    			append_dev(table, tr1);
+    			append_dev(tr1, td2);
+    			append_dev(tr1, t12);
+    			append_dev(tr1, td3);
+    			append_dev(td3, t13);
+    			append_dev(table, t14);
+    			append_dev(table, tr2);
+    			append_dev(tr2, td4);
+    			append_dev(tr2, t16);
+    			append_dev(tr2, td5);
+    			append_dev(td5, t17);
+    			insert_dev(target, t18, anchor);
+    			insert_dev(target, div4, anchor);
+    			append_dev(div4, div3);
+    			if_block0.m(div3, null);
+    			insert_dev(target, t19, anchor);
+    			insert_dev(target, div8, anchor);
+    			append_dev(div8, div6);
+    			append_dev(div6, div5);
+    			append_dev(div5, t20);
+    			if (if_block1) if_block1.m(div5, null);
+    			append_dev(div6, t21);
+    			append_dev(div6, hr2);
+    			append_dev(div6, t22);
+    			append_dev(div6, p0);
+    			append_dev(p0, t23);
+    			append_dev(p0, t24);
+    			append_dev(div8, t25);
+    			append_dev(div8, div7);
+    			append_dev(div7, span0);
+    			append_dev(span0, t26);
+    			append_dev(span0, t27);
+    			insert_dev(target, t28, anchor);
+    			insert_dev(target, div11, anchor);
+    			append_dev(div11, div9);
+    			append_dev(div9, img);
+    			append_dev(div9, t29);
+    			append_dev(div9, span1);
+    			append_dev(span1, t30);
+    			append_dev(span1, t31);
+    			append_dev(div11, t32);
+    			append_dev(div11, div10);
+    			mount_component(actiondialog, div10, null);
+    			append_dev(div10, t33);
 
     			for (let i = 0; i < each_blocks_2.length; i += 1) {
-    				each_blocks_2[i].m(div9, null);
+    				each_blocks_2[i].m(div10, null);
     			}
 
-    			insert_dev(target, t19, anchor);
-    			insert_dev(target, div13, anchor);
-    			append_dev(div13, div11);
-    			append_dev(div11, span2);
-    			append_dev(span2, t20);
-    			append_dev(span2, t21);
-    			append_dev(div13, t22);
-    			append_dev(div13, div12);
+    			insert_dev(target, t34, anchor);
+    			insert_dev(target, div14, anchor);
+    			append_dev(div14, div12);
+    			append_dev(div12, span2);
+    			append_dev(span2, t35);
+    			append_dev(span2, t36);
+    			append_dev(div14, t37);
+    			append_dev(div14, div13);
 
     			for (let i = 0; i < each_blocks_1.length; i += 1) {
-    				each_blocks_1[i].m(div12, null);
+    				each_blocks_1[i].m(div13, null);
     			}
 
-    			insert_dev(target, t23, anchor);
-    			insert_dev(target, div14, anchor);
+    			insert_dev(target, t38, anchor);
+    			insert_dev(target, div15, anchor);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
-    				each_blocks[i].m(div14, null);
+    				each_blocks[i].m(div15, null);
     			}
 
-    			insert_dev(target, t24, anchor);
-    			insert_dev(target, div19, anchor);
-    			append_dev(div19, div15);
-    			if (if_block2) if_block2.m(div15, null);
-    			append_dev(div19, t25);
-    			append_dev(div19, div17);
-    			append_dev(div17, div16);
-    			append_dev(div16, t26);
-    			append_dev(div16, t27);
-    			if (if_block3) if_block3.m(div16, null);
-    			append_dev(div17, t28);
-    			append_dev(div17, hr2);
-    			append_dev(div17, t29);
-    			append_dev(div17, p1);
-    			append_dev(p1, t30);
-    			append_dev(p1, t31);
-    			append_dev(div19, t32);
-    			append_dev(div19, div18);
-    			if (if_block4) if_block4.m(div18, null);
+    			insert_dev(target, t39, anchor);
+    			insert_dev(target, div20, anchor);
+    			append_dev(div20, div16);
+    			if (if_block2) if_block2.m(div16, null);
+    			append_dev(div20, t40);
+    			append_dev(div20, div18);
+    			append_dev(div18, div17);
+    			append_dev(div17, t41);
+    			append_dev(div17, t42);
+    			if (if_block3) if_block3.m(div17, null);
+    			append_dev(div18, t43);
+    			append_dev(div18, hr3);
+    			append_dev(div18, t44);
+    			append_dev(div18, p1);
+    			append_dev(p1, t45);
+    			append_dev(p1, t46);
+    			append_dev(div20, t47);
+    			append_dev(div20, div19);
+    			if (if_block4) if_block4.m(div19, null);
     			current = true;
     		},
     		p: function update(ctx, dirty) {
@@ -1100,6 +1197,10 @@ var app = (function () {
     				each_blocks_3.length = each_value_7.length;
     			}
 
+    			if ((!current || dirty[0] & /*playerStats*/ 262144) && t9_value !== (t9_value = /*playerStats*/ ctx[18].bb_per_hand.toFixed(2) + "")) set_data_dev(t9, t9_value);
+    			if ((!current || dirty[0] & /*playerStats*/ 262144) && t13_value !== (t13_value = /*playerStats*/ ctx[18].results + "")) set_data_dev(t13, t13_value);
+    			if ((!current || dirty[0] & /*playerStats*/ 262144) && t17_value !== (t17_value = /*playerStats*/ ctx[18].total_hands + "")) set_data_dev(t17, t17_value);
+
     			if (current_block_type === (current_block_type = select_block_type_1(ctx)) && if_block0) {
     				if_block0.p(ctx, dirty);
     			} else {
@@ -1108,36 +1209,36 @@ var app = (function () {
 
     				if (if_block0) {
     					if_block0.c();
-    					if_block0.m(div2, null);
+    					if_block0.m(div3, null);
     				}
     			}
 
     			if (!current || dirty[0] & /*pokerBotHandWidth*/ 32) {
-    				set_style(div2, "width", /*pokerBotHandWidth*/ ctx[5] + "px");
+    				set_style(div3, "width", /*pokerBotHandWidth*/ ctx[5] + "px");
     			}
 
     			if (/*villain*/ ctx[9].dealer) {
     				if (if_block1) ; else {
     					if_block1 = create_if_block_7(ctx);
     					if_block1.c();
-    					if_block1.m(div4, null);
+    					if_block1.m(div5, null);
     				}
     			} else if (if_block1) {
     				if_block1.d(1);
     				if_block1 = null;
     			}
 
-    			if ((!current || dirty[0] & /*villain*/ 512) && t9_value !== (t9_value = /*villain*/ ctx[9].stack + "")) set_data_dev(t9, t9_value);
-    			if ((!current || dirty[0] & /*villain*/ 512) && t12_value !== (t12_value = /*villain*/ ctx[9].streetTotal + "")) set_data_dev(t12, t12_value);
+    			if ((!current || dirty[0] & /*villain*/ 512) && t24_value !== (t24_value = /*villain*/ ctx[9].stack + "")) set_data_dev(t24, t24_value);
+    			if ((!current || dirty[0] & /*villain*/ 512) && t27_value !== (t27_value = /*villain*/ ctx[9].streetTotal + "")) set_data_dev(t27, t27_value);
 
-    			if (!current || dirty[0] & /*activeDisplayClass*/ 256 && div6_class_value !== (div6_class_value = "" + (/*activeDisplayClass*/ ctx[8] + " street-total"))) {
-    				attr_dev(div6, "class", div6_class_value);
+    			if (!current || dirty[0] & /*activeDisplayClass*/ 256 && div7_class_value !== (div7_class_value = "" + (/*activeDisplayClass*/ ctx[8] + " street-total"))) {
+    				attr_dev(div7, "class", div7_class_value);
     			}
 
-    			if (!current || dirty[0] & /*pot*/ 128) set_data_dev(t16, /*pot*/ ctx[7]);
+    			if (!current || dirty[0] & /*pot*/ 128) set_data_dev(t31, /*pot*/ ctx[7]);
 
     			if (!current || dirty[0] & /*potClass*/ 131072) {
-    				attr_dev(div8, "class", /*potClass*/ ctx[17]);
+    				attr_dev(div9, "class", /*potClass*/ ctx[17]);
     			}
 
     			const actiondialog_changes = {};
@@ -1157,7 +1258,7 @@ var app = (function () {
     					} else {
     						each_blocks_2[i] = create_each_block_4(child_ctx);
     						each_blocks_2[i].c();
-    						each_blocks_2[i].m(div9, null);
+    						each_blocks_2[i].m(div10, null);
     					}
     				}
 
@@ -1168,10 +1269,10 @@ var app = (function () {
     				each_blocks_2.length = each_value_4.length;
     			}
 
-    			if ((!current || dirty[0] & /*hero*/ 1024) && t21_value !== (t21_value = /*hero*/ ctx[10].streetTotal + "")) set_data_dev(t21, t21_value);
+    			if ((!current || dirty[0] & /*hero*/ 1024) && t36_value !== (t36_value = /*hero*/ ctx[10].streetTotal + "")) set_data_dev(t36, t36_value);
 
-    			if (!current || dirty[0] & /*activeDisplayClass*/ 256 && div11_class_value !== (div11_class_value = "" + (/*activeDisplayClass*/ ctx[8] + " street-total"))) {
-    				attr_dev(div11, "class", div11_class_value);
+    			if (!current || dirty[0] & /*activeDisplayClass*/ 256 && div12_class_value !== (div12_class_value = "" + (/*activeDisplayClass*/ ctx[8] + " street-total"))) {
+    				attr_dev(div12, "class", div12_class_value);
     			}
 
     			if (dirty[0] & /*hero*/ 1024) {
@@ -1187,7 +1288,7 @@ var app = (function () {
     					} else {
     						each_blocks_1[i] = create_each_block_3(child_ctx);
     						each_blocks_1[i].c();
-    						each_blocks_1[i].m(div12, null);
+    						each_blocks_1[i].m(div13, null);
     					}
     				}
 
@@ -1199,10 +1300,10 @@ var app = (function () {
     			}
 
     			if (!current || dirty[0] & /*heroHandWidth*/ 64) {
-    				set_style(div12, "width", /*heroHandWidth*/ ctx[6] + "px");
+    				set_style(div13, "width", /*heroHandWidth*/ ctx[6] + "px");
     			}
 
-    			if (dirty[0] & /*setBetAmount, availBetsizes*/ 2105344) {
+    			if (dirty[0] & /*setBetAmount, availBetsizes*/ 4202496) {
     				each_value_2 = /*availBetsizes*/ ctx[13];
     				validate_each_argument(each_value_2);
     				let i;
@@ -1215,7 +1316,7 @@ var app = (function () {
     					} else {
     						each_blocks[i] = create_each_block_2(child_ctx);
     						each_blocks[i].c();
-    						each_blocks[i].m(div14, null);
+    						each_blocks[i].m(div15, null);
     					}
     				}
 
@@ -1226,8 +1327,8 @@ var app = (function () {
     				each_blocks.length = each_value_2.length;
     			}
 
-    			if (!current || dirty[0] & /*activeDisplayClass*/ 256 && div14_class_value !== (div14_class_value = "" + (/*activeDisplayClass*/ ctx[8] + " d-flex flex-wrap"))) {
-    				attr_dev(div14, "class", div14_class_value);
+    			if (!current || dirty[0] & /*activeDisplayClass*/ 256 && div15_class_value !== (div15_class_value = "" + (/*activeDisplayClass*/ ctx[8] + " d-flex flex-wrap"))) {
+    				attr_dev(div15, "class", div15_class_value);
     			}
 
     			if (/*availActions*/ ctx[2]) {
@@ -1236,31 +1337,31 @@ var app = (function () {
     				} else {
     					if_block2 = create_if_block_5(ctx);
     					if_block2.c();
-    					if_block2.m(div15, null);
+    					if_block2.m(div16, null);
     				}
     			} else if (if_block2) {
     				if_block2.d(1);
     				if_block2 = null;
     			}
 
-    			if (!current || dirty[0] & /*activeDisplayClass*/ 256 && div15_class_value !== (div15_class_value = "left " + /*activeDisplayClass*/ ctx[8] + " actions d-flex align-center")) {
-    				attr_dev(div15, "class", div15_class_value);
+    			if (!current || dirty[0] & /*activeDisplayClass*/ 256 && div16_class_value !== (div16_class_value = "left " + /*activeDisplayClass*/ ctx[8] + " actions d-flex align-center")) {
+    				attr_dev(div16, "class", div16_class_value);
     			}
 
-    			if (!current || dirty[0] & /*playerName*/ 2) set_data_dev(t26, /*playerName*/ ctx[1]);
+    			if (!current || dirty[0] & /*playerName*/ 2) set_data_dev(t41, /*playerName*/ ctx[1]);
 
     			if (/*hero*/ ctx[10].dealer) {
     				if (if_block3) ; else {
     					if_block3 = create_if_block_4(ctx);
     					if_block3.c();
-    					if_block3.m(div16, null);
+    					if_block3.m(div17, null);
     				}
     			} else if (if_block3) {
     				if_block3.d(1);
     				if_block3 = null;
     			}
 
-    			if ((!current || dirty[0] & /*hero*/ 1024) && t31_value !== (t31_value = /*hero*/ ctx[10].stack + "")) set_data_dev(t31, t31_value);
+    			if ((!current || dirty[0] & /*hero*/ 1024) && t46_value !== (t46_value = /*hero*/ ctx[10].stack + "")) set_data_dev(t46, t46_value);
 
     			if (/*availActions*/ ctx[2]) {
     				if (if_block4) {
@@ -1268,15 +1369,15 @@ var app = (function () {
     				} else {
     					if_block4 = create_if_block_2(ctx);
     					if_block4.c();
-    					if_block4.m(div18, null);
+    					if_block4.m(div19, null);
     				}
     			} else if (if_block4) {
     				if_block4.d(1);
     				if_block4 = null;
     			}
 
-    			if (!current || dirty[0] & /*activeDisplayClass*/ 256 && div18_class_value !== (div18_class_value = "right " + /*activeDisplayClass*/ ctx[8] + " actions d-flex align-center")) {
-    				attr_dev(div18, "class", div18_class_value);
+    			if (!current || dirty[0] & /*activeDisplayClass*/ 256 && div19_class_value !== (div19_class_value = "right " + /*activeDisplayClass*/ ctx[8] + " actions d-flex align-center")) {
+    				attr_dev(div19, "class", div19_class_value);
     			}
     		},
     		i: function intro(local) {
@@ -1292,23 +1393,25 @@ var app = (function () {
     			if (detaching) detach_dev(div1);
     			destroy_each(each_blocks_3, detaching);
     			if (detaching) detach_dev(t3);
-    			if (detaching) detach_dev(div3);
+    			if (detaching) detach_dev(div2);
+    			if (detaching) detach_dev(t18);
+    			if (detaching) detach_dev(div4);
     			if_block0.d();
-    			if (detaching) detach_dev(t4);
-    			if (detaching) detach_dev(div7);
+    			if (detaching) detach_dev(t19);
+    			if (detaching) detach_dev(div8);
     			if (if_block1) if_block1.d();
-    			if (detaching) detach_dev(t13);
-    			if (detaching) detach_dev(div10);
+    			if (detaching) detach_dev(t28);
+    			if (detaching) detach_dev(div11);
     			destroy_component(actiondialog);
     			destroy_each(each_blocks_2, detaching);
-    			if (detaching) detach_dev(t19);
-    			if (detaching) detach_dev(div13);
-    			destroy_each(each_blocks_1, detaching);
-    			if (detaching) detach_dev(t23);
+    			if (detaching) detach_dev(t34);
     			if (detaching) detach_dev(div14);
+    			destroy_each(each_blocks_1, detaching);
+    			if (detaching) detach_dev(t38);
+    			if (detaching) detach_dev(div15);
     			destroy_each(each_blocks, detaching);
-    			if (detaching) detach_dev(t24);
-    			if (detaching) detach_dev(div19);
+    			if (detaching) detach_dev(t39);
+    			if (detaching) detach_dev(div20);
     			if (if_block2) if_block2.d();
     			if (if_block3) if_block3.d();
     			if (if_block4) if_block4.d();
@@ -1346,14 +1449,14 @@ var app = (function () {
     			li = element("li");
     			div0 = element("div");
     			div0.textContent = "Omaha";
-    			add_location(h1, file$1, 278, 6, 8204);
+    			add_location(h1, file$1, 278, 6, 8251);
     			attr_dev(div0, "class", "btn hover-effect");
-    			add_location(div0, file$1, 281, 10, 8308);
-    			add_location(li, file$1, 280, 8, 8259);
+    			add_location(div0, file$1, 281, 10, 8355);
+    			add_location(li, file$1, 280, 8, 8306);
     			attr_dev(ul, "id", "game-menu");
-    			add_location(ul, file$1, 279, 6, 8231);
+    			add_location(ul, file$1, 279, 6, 8278);
     			attr_dev(div1, "class", "container text-center");
-    			add_location(div1, file$1, 277, 4, 8162);
+    			add_location(div1, file$1, 277, 4, 8209);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div1, anchor);
@@ -1409,18 +1512,18 @@ var app = (function () {
     			div2 = element("div");
     			div1 = element("div");
     			div1.textContent = "Play";
-    			add_location(h1, file$1, 268, 6, 7890);
+    			add_location(h1, file$1, 268, 6, 7937);
     			attr_dev(input, "type", "text");
     			attr_dev(input, "id", "hero-name");
-    			add_location(input, file$1, 270, 8, 7951);
+    			add_location(input, file$1, 270, 8, 7998);
     			attr_dev(div0, "id", "name-field");
-    			add_location(div0, file$1, 269, 6, 7921);
+    			add_location(div0, file$1, 269, 6, 7968);
     			attr_dev(div1, "class", "btn hover-effect");
-    			add_location(div1, file$1, 273, 8, 8041);
+    			add_location(div1, file$1, 273, 8, 8088);
     			attr_dev(div2, "class", "btn-wrapper");
-    			add_location(div2, file$1, 272, 6, 8007);
+    			add_location(div2, file$1, 272, 6, 8054);
     			attr_dev(div3, "class", "container text-center");
-    			add_location(div3, file$1, 267, 4, 7848);
+    			add_location(div3, file$1, 267, 4, 7895);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div3, anchor);
@@ -1432,7 +1535,7 @@ var app = (function () {
     			append_dev(div3, div2);
     			append_dev(div2, div1);
     			if (remount) dispose();
-    			dispose = listen_dev(div1, "click", /*setName*/ ctx[18], false, false, false);
+    			dispose = listen_dev(div1, "click", /*setName*/ ctx[19], false, false, false);
     		},
     		p: noop,
     		i: noop,
@@ -1464,7 +1567,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			t = text(t_value);
-    			add_location(div, file$1, 291, 10, 8535);
+    			add_location(div, file$1, 291, 10, 8582);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1489,7 +1592,7 @@ var app = (function () {
     	return block;
     }
 
-    // (304:8) {:else}
+    // (313:8) {:else}
     function create_else_block_1(ctx) {
     	let each_1_anchor;
     	let each_value_6 = /*villain*/ ctx[9].hand;
@@ -1550,14 +1653,14 @@ var app = (function () {
     		block,
     		id: create_else_block_1.name,
     		type: "else",
-    		source: "(304:8) {:else}",
+    		source: "(313:8) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (298:8) {#if villain.hand.length === 0}
+    // (307:8) {#if villain.hand.length === 0}
     function create_if_block_8(ctx) {
     	let each_1_anchor;
     	let each_value_5 = Array(/*playerNumCards*/ ctx[16]);
@@ -1617,14 +1720,14 @@ var app = (function () {
     		block,
     		id: create_if_block_8.name,
     		type: "if",
-    		source: "(298:8) {#if villain.hand.length === 0}",
+    		source: "(307:8) {#if villain.hand.length === 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (305:10) {#each villain.hand as card}
+    // (314:10) {#each villain.hand as card}
     function create_each_block_6(ctx) {
     	let div;
     	let img;
@@ -1639,9 +1742,9 @@ var app = (function () {
     			t = space();
     			if (img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[53] + ".png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", img_alt_value = /*card*/ ctx[53]);
-    			add_location(img, file$1, 306, 14, 9057);
+    			add_location(img, file$1, 315, 14, 9485);
     			attr_dev(div, "class", "card-container");
-    			add_location(div, file$1, 305, 12, 9014);
+    			add_location(div, file$1, 314, 12, 9442);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1666,14 +1769,14 @@ var app = (function () {
     		block,
     		id: create_each_block_6.name,
     		type: "each",
-    		source: "(305:10) {#each villain.hand as card}",
+    		source: "(314:10) {#each villain.hand as card}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (299:10) {#each Array(playerNumCards) as _}
+    // (308:10) {#each Array(playerNumCards) as _}
     function create_each_block_5(ctx) {
     	let div;
     	let img;
@@ -1687,9 +1790,9 @@ var app = (function () {
     			t = space();
     			if (img.src !== (img_src_value = "images/cards/card_back.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Card Back");
-    			add_location(img, file$1, 300, 14, 8853);
+    			add_location(img, file$1, 309, 14, 9281);
     			attr_dev(div, "class", "card-container");
-    			add_location(div, file$1, 299, 12, 8810);
+    			add_location(div, file$1, 308, 12, 9238);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1705,14 +1808,14 @@ var app = (function () {
     		block,
     		id: create_each_block_5.name,
     		type: "each",
-    		source: "(299:10) {#each Array(playerNumCards) as _}",
+    		source: "(308:10) {#each Array(playerNumCards) as _}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (317:10) {#if villain.dealer}
+    // (326:10) {#if villain.dealer}
     function create_if_block_7(ctx) {
     	let div;
 
@@ -1721,7 +1824,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = "D";
     			attr_dev(div, "class", "dealer-chip");
-    			add_location(div, file$1, 317, 12, 9435);
+    			add_location(div, file$1, 326, 12, 9863);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1735,14 +1838,14 @@ var app = (function () {
     		block,
     		id: create_if_block_7.name,
     		type: "if",
-    		source: "(317:10) {#if villain.dealer}",
+    		source: "(326:10) {#if villain.dealer}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (339:8) {#each community as card}
+    // (348:8) {#each community as card}
     function create_each_block_4(ctx) {
     	let div;
     	let img;
@@ -1757,9 +1860,9 @@ var app = (function () {
     			t = space();
     			if (img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[53] + ".png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", img_alt_value = /*card*/ ctx[53]);
-    			add_location(img, file$1, 340, 12, 10092);
+    			add_location(img, file$1, 349, 12, 10520);
     			attr_dev(div, "class", "card-container");
-    			add_location(div, file$1, 339, 10, 10051);
+    			add_location(div, file$1, 348, 10, 10479);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1784,14 +1887,14 @@ var app = (function () {
     		block,
     		id: create_each_block_4.name,
     		type: "each",
-    		source: "(339:8) {#each community as card}",
+    		source: "(348:8) {#each community as card}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (351:8) {#each hero.hand as card}
+    // (360:8) {#each hero.hand as card}
     function create_each_block_3(ctx) {
     	let div;
     	let img;
@@ -1806,9 +1909,9 @@ var app = (function () {
     			t = space();
     			if (img.src !== (img_src_value = "images/cards/" + /*card*/ ctx[53] + ".png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", img_alt_value = /*card*/ ctx[53]);
-    			add_location(img, file$1, 352, 12, 10504);
+    			add_location(img, file$1, 361, 12, 10932);
     			attr_dev(div, "class", "card-container");
-    			add_location(div, file$1, 351, 10, 10463);
+    			add_location(div, file$1, 360, 10, 10891);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1833,14 +1936,14 @@ var app = (function () {
     		block,
     		id: create_each_block_3.name,
     		type: "each",
-    		source: "(351:8) {#each hero.hand as card}",
+    		source: "(360:8) {#each hero.hand as card}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (359:6) {#each availBetsizes as availBet}
+    // (368:6) {#each availBetsizes as availBet}
     function create_each_block_2(ctx) {
     	let div;
     	let t0;
@@ -1860,7 +1963,7 @@ var app = (function () {
     			t1 = text(t1_value);
     			t2 = space();
     			attr_dev(div, "class", "btn hover-effect");
-    			add_location(div, file$1, 359, 8, 10731);
+    			add_location(div, file$1, 368, 8, 11159);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div, anchor);
@@ -1884,14 +1987,14 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(359:6) {#each availBetsizes as availBet}",
+    		source: "(368:6) {#each availBetsizes as availBet}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (382:8) {#if availActions}
+    // (391:8) {#if availActions}
     function create_if_block_5(ctx) {
     	let each_1_anchor;
     	let each_value_1 = /*leftAvailActions*/ ctx[3];
@@ -1918,7 +2021,7 @@ var app = (function () {
     			insert_dev(target, each_1_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*endTurn, leftAvailActions, betSize*/ 1052680) {
+    			if (dirty[0] & /*endTurn, leftAvailActions, betSize*/ 2101256) {
     				each_value_1 = /*leftAvailActions*/ ctx[3];
     				validate_each_argument(each_value_1);
     				let i;
@@ -1952,14 +2055,14 @@ var app = (function () {
     		block,
     		id: create_if_block_5.name,
     		type: "if",
-    		source: "(382:8) {#if availActions}",
+    		source: "(391:8) {#if availActions}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (389:16) {#if action === 'Bet' || action === 'Raise'}
+    // (398:16) {#if action === 'Bet' || action === 'Raise'}
     function create_if_block_6(ctx) {
     	let t;
 
@@ -1982,14 +2085,14 @@ var app = (function () {
     		block,
     		id: create_if_block_6.name,
     		type: "if",
-    		source: "(389:16) {#if action === 'Bet' || action === 'Raise'}",
+    		source: "(398:16) {#if action === 'Bet' || action === 'Raise'}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (383:10) {#each leftAvailActions as action}
+    // (392:10) {#each leftAvailActions as action}
     function create_each_block_1(ctx) {
     	let div;
     	let span;
@@ -2012,9 +2115,9 @@ var app = (function () {
     			t1 = space();
     			if (if_block) if_block.c();
     			t2 = space();
-    			add_location(span, file$1, 386, 14, 11648);
+    			add_location(span, file$1, 395, 14, 12076);
     			attr_dev(div, "class", "btn hover-effect");
-    			add_location(div, file$1, 383, 12, 11533);
+    			add_location(div, file$1, 392, 12, 11961);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div, anchor);
@@ -2054,14 +2157,14 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(383:10) {#each leftAvailActions as action}",
+    		source: "(392:10) {#each leftAvailActions as action}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (398:10) {#if hero.dealer}
+    // (407:10) {#if hero.dealer}
     function create_if_block_4(ctx) {
     	let div;
 
@@ -2070,7 +2173,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = "D";
     			attr_dev(div, "class", "dealer-chip");
-    			add_location(div, file$1, 398, 12, 12024);
+    			add_location(div, file$1, 407, 12, 12452);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -2084,14 +2187,14 @@ var app = (function () {
     		block,
     		id: create_if_block_4.name,
     		type: "if",
-    		source: "(398:10) {#if hero.dealer}",
+    		source: "(407:10) {#if hero.dealer}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (406:8) {#if availActions}
+    // (415:8) {#if availActions}
     function create_if_block_2(ctx) {
     	let each_1_anchor;
     	let each_value = /*rightAvailActions*/ ctx[4];
@@ -2118,7 +2221,7 @@ var app = (function () {
     			insert_dev(target, each_1_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*endTurn, rightAvailActions, betSize*/ 1052688) {
+    			if (dirty[0] & /*endTurn, rightAvailActions, betSize*/ 2101264) {
     				each_value = /*rightAvailActions*/ ctx[4];
     				validate_each_argument(each_value);
     				let i;
@@ -2152,14 +2255,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(406:8) {#if availActions}",
+    		source: "(415:8) {#if availActions}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (413:16) {#if action === 'Bet' || action === 'Raise'}
+    // (422:16) {#if action === 'Bet' || action === 'Raise'}
     function create_if_block_3(ctx) {
     	let t;
 
@@ -2182,14 +2285,14 @@ var app = (function () {
     		block,
     		id: create_if_block_3.name,
     		type: "if",
-    		source: "(413:16) {#if action === 'Bet' || action === 'Raise'}",
+    		source: "(422:16) {#if action === 'Bet' || action === 'Raise'}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (407:10) {#each rightAvailActions as action}
+    // (416:10) {#each rightAvailActions as action}
     function create_each_block(ctx) {
     	let div;
     	let span;
@@ -2212,9 +2315,9 @@ var app = (function () {
     			t1 = space();
     			if (if_block) if_block.c();
     			t2 = space();
-    			add_location(span, file$1, 410, 14, 12420);
+    			add_location(span, file$1, 419, 14, 12848);
     			attr_dev(div, "class", "btn hover-effect");
-    			add_location(div, file$1, 407, 12, 12305);
+    			add_location(div, file$1, 416, 12, 12733);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div, anchor);
@@ -2254,7 +2357,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(407:10) {#each rightAvailActions as action}",
+    		source: "(416:10) {#each rightAvailActions as action}",
     		ctx
     	});
 
@@ -2283,7 +2386,7 @@ var app = (function () {
     			div = element("div");
     			if_block.c();
     			attr_dev(div, "id", "table");
-    			add_location(div, file$1, 265, 0, 7798);
+    			add_location(div, file$1, 265, 0, 7845);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -2389,7 +2492,13 @@ var app = (function () {
 
     	let gameType;
     	let gameState;
-    	let playerStats;
+
+    	let playerStats = {
+    		"results": 0,
+    		"bb_per_hand": 0,
+    		"total_hands": 0
+    	};
+
     	let street;
     	let { availBetsizes = [] } = $$props;
     	let { gameHistory = [] } = $$props;
@@ -2482,7 +2591,7 @@ var app = (function () {
     	async function getStats() {
     		const res = await fetch("http://localhost:4000/api/player/stats");
     		let text = await res.text();
-    		playerStats = JSON.parse(text);
+    		$$invalidate(18, playerStats = JSON.parse(text));
     		console.log("playerStats", playerStats);
     	}
 
@@ -2613,9 +2722,9 @@ var app = (function () {
 
     	function checkAllIn() {
     		if (betSize === hero.stack) {
-    			$$invalidate(23, allIn = true);
+    			$$invalidate(24, allIn = true);
     		} else {
-    			$$invalidate(23, allIn = false);
+    			$$invalidate(24, allIn = false);
     		}
     	}
 
@@ -2665,8 +2774,8 @@ var app = (function () {
     		if ("hero" in $$props) $$invalidate(10, hero = $$props.hero);
     		if ("community" in $$props) $$invalidate(11, community = $$props.community);
     		if ("betSize" in $$props) $$invalidate(12, betSize = $$props.betSize);
-    		if ("maxBet" in $$props) $$invalidate(22, maxBet = $$props.maxBet);
-    		if ("allIn" in $$props) $$invalidate(23, allIn = $$props.allIn);
+    		if ("maxBet" in $$props) $$invalidate(23, maxBet = $$props.maxBet);
+    		if ("allIn" in $$props) $$invalidate(24, allIn = $$props.allIn);
     		if ("messageObj" in $$props) $$invalidate(15, messageObj = $$props.messageObj);
     		if ("availBetsizes" in $$props) $$invalidate(13, availBetsizes = $$props.availBetsizes);
     		if ("gameHistory" in $$props) $$invalidate(14, gameHistory = $$props.gameHistory);
@@ -2737,13 +2846,13 @@ var app = (function () {
     		if ("hero" in $$props) $$invalidate(10, hero = $$props.hero);
     		if ("community" in $$props) $$invalidate(11, community = $$props.community);
     		if ("betSize" in $$props) $$invalidate(12, betSize = $$props.betSize);
-    		if ("maxBet" in $$props) $$invalidate(22, maxBet = $$props.maxBet);
-    		if ("allIn" in $$props) $$invalidate(23, allIn = $$props.allIn);
+    		if ("maxBet" in $$props) $$invalidate(23, maxBet = $$props.maxBet);
+    		if ("allIn" in $$props) $$invalidate(24, allIn = $$props.allIn);
     		if ("showdown" in $$props) showdown = $$props.showdown;
     		if ("messageObj" in $$props) $$invalidate(15, messageObj = $$props.messageObj);
     		if ("gameType" in $$props) gameType = $$props.gameType;
     		if ("gameState" in $$props) gameState = $$props.gameState;
-    		if ("playerStats" in $$props) playerStats = $$props.playerStats;
+    		if ("playerStats" in $$props) $$invalidate(18, playerStats = $$props.playerStats);
     		if ("street" in $$props) street = $$props.street;
     		if ("availBetsizes" in $$props) $$invalidate(13, availBetsizes = $$props.availBetsizes);
     		if ("gameHistory" in $$props) $$invalidate(14, gameHistory = $$props.gameHistory);
@@ -2778,11 +2887,11 @@ var app = (function () {
     		}
 
     		if ($$self.$$.dirty[0] & /*hero*/ 1024) {
-    			 $$invalidate(22, maxBet = hero.stack);
+    			 $$invalidate(23, maxBet = hero.stack);
     		}
 
     		if ($$self.$$.dirty[0] & /*betSize, hero*/ 5120) {
-    			 $$invalidate(23, allIn = betSize === hero.stack ? true : false);
+    			 $$invalidate(24, allIn = betSize === hero.stack ? true : false);
     		}
     	};
 
@@ -2805,6 +2914,7 @@ var app = (function () {
     		messageObj,
     		playerNumCards,
     		potClass,
+    		playerStats,
     		setName,
     		setGame,
     		endTurn,
@@ -2813,7 +2923,6 @@ var app = (function () {
     		allIn,
     		gameType,
     		gameState,
-    		playerStats,
     		street,
     		heroTurn,
     		showdown,
@@ -2859,8 +2968,8 @@ var app = (function () {
     				hero: 10,
     				community: 11,
     				betSize: 12,
-    				maxBet: 22,
-    				allIn: 23,
+    				maxBet: 23,
+    				allIn: 24,
     				messageObj: 15,
     				availBetsizes: 13,
     				gameHistory: 14
@@ -2894,11 +3003,11 @@ var app = (function () {
     			console_1.warn("<App> was created without expected prop 'heroHandWidth'");
     		}
 
-    		if (/*maxBet*/ ctx[22] === undefined && !("maxBet" in props)) {
+    		if (/*maxBet*/ ctx[23] === undefined && !("maxBet" in props)) {
     			console_1.warn("<App> was created without expected prop 'maxBet'");
     		}
 
-    		if (/*allIn*/ ctx[23] === undefined && !("allIn" in props)) {
+    		if (/*allIn*/ ctx[24] === undefined && !("allIn" in props)) {
     			console_1.warn("<App> was created without expected prop 'allIn'");
     		}
     	}

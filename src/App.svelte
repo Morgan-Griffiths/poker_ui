@@ -1,6 +1,6 @@
 <script>
   import { getCards } from "./cards.js";
-  import { actions, getAvailActions } from "./actions.js";
+  import { actionDict, getAvailActions } from "./actions.js";
   import ActionDialog from "./ActionDialog.svelte";
 
   export let game = null;
@@ -56,14 +56,6 @@
   let street;
   export let availBetsizes = [];
   export let gameHistory = [];
-  let actionDict = {
-    0: "check",
-    1: "fold",
-    2: "call",
-    3: "bet",
-    4: "raise",
-    5: "unopened"
-  };
   let positionDict = { 0: "SB", 1: "BB", 2: "dealer" };
   let streetStart = { 0: "SB", 1: "BB", 2: "BB", 3: "BB" };
 
@@ -74,7 +66,6 @@
     console.log("betsize_mask,betsizes", betsize_mask, betsizes);
     availBetsizes = new Array(betsize_mask.length);
     for (var i = 0; i < betsize_mask.length; i++) {
-      console.log(pot);
       availBetsizes[i] = betsize_mask[i] * betsizes[i] * pot;
     }
     console.log("availBetsizes", availBetsizes);
@@ -108,6 +99,7 @@
   function updateGame(state) {
     street = state.street;
     pot = state.pot;
+    betSize = 0;
   }
 
   async function setName() {
@@ -215,12 +207,6 @@
     if (action === "call") {
       betSize = gameState.state.last_betsize;
     }
-    console.log(
-      JSON.stringify({
-        action,
-        betsize: betSize
-      })
-    );
     const res = await fetch("http://localhost:4000/api/step", {
       method: "POST",
       body: JSON.stringify({
@@ -243,7 +229,7 @@
       villain.dealer
         ? (villain.hand = await getCards(outcome.player1_hand))
         : (villain.hand = await getCards(outcome.player2_hand));
-      //  activeDisplayClass = "inactive";
+       activeDisplayClass = "inactive";
       await getStats();
       setTimeout(newHand, 10000);
     }
@@ -364,11 +350,13 @@
         {/each}
       </div>
     </div>
-    <div id="bet-options" class="{activeDisplayClass} d-flex flex-wrap">
+    <div id="bet-options" class="{activeDisplayClass} d-flex">
       {#each availBetsizes as availBet}
-        <div on:click={() => setBetAmount(availBet)} class="btn hover-effect">
-          ${availBet}
-        </div>
+        {#if availBet > 0}
+          <div on:click={() => setBetAmount(availBet)} class="btn hover-effect">
+            ${availBet}
+          </div>
+        {/if}
       {/each}
     </div>
     <div class="container d-flex justify-center flex-wrap no-margin-top">
@@ -395,7 +383,7 @@
               on:click={() => endTurn(action, betSize)}>
               <span>
                 {action}
-                {#if action === 'Bet' || action === 'Raise'}{betSize}{/if}
+                {#if action === 'bet' || action === 'raise'}{betSize}{/if}
               </span>
             </div>
           {/each}
@@ -419,7 +407,7 @@
               on:click={() => endTurn(action, betSize)}>
               <span>
                 {action}
-                {#if action === 'Bet' || action === 'Raise'}{betSize}{/if}
+                {#if action === 'bet' || action === 'raise'}{betSize}{/if}
               </span>
             </div>
           {/each}

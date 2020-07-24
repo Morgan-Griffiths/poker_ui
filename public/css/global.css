@@ -250,7 +250,7 @@ input[type="range" i]::-webkit-slider-thumb {
 #bet-options {
   margin: 40px auto 0 auto;
   width: 600px;
-  align-content: flex-end;
+  align-items: flex-end;
 }
 
 #bet-slider {
@@ -258,7 +258,8 @@ input[type="range" i]::-webkit-slider-thumb {
 }
 
 #bet-options .btn {
-  width: 300px;
+  min-width: 300px;
+  max-width: 600px;
   height: 60px;
 }
 

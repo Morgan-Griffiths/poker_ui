@@ -59,9 +59,11 @@ export function getCards(array) {
     let suit;
     if ((index + 1) % 2 !== 0) {
       rank = value;
-      suit = array[index + 1];
-      let cardIndex = (rank - 2) * 4 + suit;
-      carry.push(cards[cardIndex]);
+      if (rank != 0) {
+        suit = array[index + 1];
+        let cardIndex = (rank - 2) * 4 + suit;
+        carry.push(cards[cardIndex]);
+      }
     }
     return carry;
   }, []);

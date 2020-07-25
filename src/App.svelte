@@ -200,7 +200,8 @@
     last_betsize,
     amount_to_call,
     last_street_total,
-    street
+    street,
+    blind
   ) {
     let displayString = null;
     if (last_position === "dealer") {
@@ -215,9 +216,17 @@
     } else if (last_action === "check") {
       displayString = `${last_position} checks`;
     } else if (last_action === "bet") {
-      displayString = `${last_position} bets ${last_betsize}`;
+      if (blind) {
+        displayString = `${last_position} posts ${last_betsize}`;
+      } else {
+        displayString = `${last_position} bets ${last_betsize}`;
+      }
     } else if (last_action === "raise") {
-      displayString = `${last_position} raises ${last_betsize} to ${last_betsize + last_street_total}`;
+      if (blind) {
+        displayString = `${last_position} posts ${last_betsize + last_street_total}`;
+      } else {
+        displayString = `${last_position} raises ${last_betsize} to ${last_betsize + last_street_total}`;
+      }
     }
     return displayString;
   }
@@ -248,7 +257,8 @@
         hist[i][mapping.last_aggressive_betsize],
         amount_to_call,
         last_street_total,
-        hist[i][mapping.street]
+        hist[i][mapping.street],
+        hist[i][mapping.blind]
       );
       if (displayString != null) {
         gameHistory.push(displayString);

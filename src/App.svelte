@@ -84,11 +84,13 @@
     if (last_action == 3 || last_action == 4) {
       for (var i = 0; i < betsize_mask.length; i++) {
         let max_raise = Math.min((2 * villain.streetTotal) + (pot - hero.streetTotal),(hero.stack + hero.streetTotal))
-        let previous_bet = villain.streetTotal - hero.streetTotal
-        let min_raise = Math.min(Math.max((previous_bet * 2),2),hero.stack)
+        let previous_bet = Math.max(villain.streetTotal - hero.streetTotal,1)
+        let min_raise = Math.min(Math.max((previous_bet * 2),1),hero.stack)
         let betsize_value = (betsizes[i] * max_raise)
         let betsize = Math.min(Math.max(min_raise,betsize_value),hero.stack)
         availBetsizes[i] = betsize * betsize_mask[i]
+        console.log('previous_bet',previous_bet)
+        console.log('betsize',betsize)
         console.log('min_raise',min_raise)
       }
     } else {
@@ -266,6 +268,7 @@
   }
 
   async function endTurn(action, betSize) {
+    console.log('actual bet',betSize+hero.streetTotal)
     const res = await fetch("http://localhost:4000/api/step", {
       method: "POST",
       body: JSON.stringify({
@@ -290,6 +293,7 @@
     availActions = getAvailActions(state.action_mask);
     availBetsizes = getAvailBetsizes(state.betsize_mask, state.betsizes, state.last_action);
     activeDisplayClass = "active";
+    console.log(state.done)
     if (state.done) {
       activeDisplayClass = "inactive";
       if (state.last_action == 2 || state.last_action == 0 || state.last_action == 5) {

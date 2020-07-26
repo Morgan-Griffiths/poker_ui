@@ -152,7 +152,7 @@
     gameState = JSON.parse(text);
     const { state, outcome } = gameState;
     setDone(state.done)
-    console.log('gameState',gameState.state.last_aggressive_betsize)
+    console.log('villain hand',outcome.player2_hand)
     playerNumCards = state.hero_cards.length / 2;
     availActions = getAvailActions(state.action_mask);
     hero.hand = await getCards(state.hero_cards);
@@ -206,7 +206,6 @@
     let displayString = null;
     if (last_position === "dealer") {
       if (!(hero.stack == 0 || villain.stack == 0)) {
-        console.log('not allin')
         displayString = `${streetStart[street]} is first to act`;
       }
     } else if (last_action === "call") {
@@ -282,8 +281,8 @@
       betSize = gameState.state.last_betsize;
     }
     const { state, outcome } = gameState;
+    console.log('villain hand',outcome.player2_hand)
     setDone(state.done)
-    console.log('done',gameState.state.done)
     community = await getCards(state.board_cards);
     updatePlayers(state);
     updateGame(state);
@@ -293,10 +292,6 @@
     activeDisplayClass = "active";
     if (state.done) {
       activeDisplayClass = "inactive";
-      let displayString
-      console.log('history',state.history[0])
-      console.log('state',state)
-      console.log('outcome',outcome)
       if (state.last_action == 2 || state.last_action == 0 || state.last_action == 5) {
         villain.hand = await getCards(outcome.player2_hand);
         gameHistory.push(`Showdown`);

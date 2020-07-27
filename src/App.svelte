@@ -53,6 +53,9 @@
 
   function checkbox() {
     autoNextHand = !autoNextHand;
+    if (done) {
+      newHand();
+    }
   }
 
   function updatePlayers(state) {

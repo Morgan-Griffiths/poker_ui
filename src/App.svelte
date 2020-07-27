@@ -2,7 +2,6 @@
   import { getCards } from "./cards.js";
   import { decodeHistory, outcomeStrings } from "./history"
   import { getAvailActions, getAvailBetsizes } from "./actions.js";
-  import ActionDialog from "./ActionDialog.svelte";
 
   export let game = null;
   export let playerName = null;
@@ -285,7 +284,6 @@
         <span>${pot}</span>
       </div>
       <div id="community" class="hand">
-        <ActionDialog {messageObj} />
         {#each community as card}
           <div class="card-container">
             <img src="images/cards/{card}.png" alt={card} />

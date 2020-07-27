@@ -190,7 +190,7 @@ input[type="range" i]::-webkit-slider-thumb {
   width: 100px;
 }
 
-#villian .card-container img {
+#villain .card-container img {
   max-width: 100px;
 }
 
@@ -207,11 +207,11 @@ input[type="range" i]::-webkit-slider-thumb {
   margin: auto;
 }
 
-#villian {
+#villain {
   min-height: 160px;
 }
 
-#villian .card-container {
+#villain .card-container {
   width: 60px;
 }
 
@@ -329,7 +329,7 @@ input[type="range" i]::-webkit-slider-thumb {
   transition-duration: 0.5s;
 }
 
-#villian-info {
+#villain-info {
   height: 80px;
   width: 300px;
   background-color: rgb(0, 0, 0);

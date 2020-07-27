@@ -2,7 +2,6 @@
   import { getCards } from "./cards.js";
   import { decodeHistory, outcomeStrings } from "./history"
   import { getAvailActions, getAvailBetsizes } from "./actions.js";
-  import ActionDialog from "./ActionDialog.svelte";
 
   export let game = null;
   export let playerName = null;
@@ -251,7 +250,7 @@
       {/if}
     </div>
     <div class="container no-margin-bottom">
-      <div id="villian" class="hand" style="width: {pokerBotHandWidth}px">
+      <div id="villain" class="hand" style="width: {pokerBotHandWidth}px">
         {#if villain.hand.length === 0}
           {#each Array(playerNumCards) as _}
             <div class="card-container">
@@ -268,7 +267,7 @@
       </div>
     </div>
     <div class="container no-margin-bottom no-margin-top">
-      <div id="villian-info" class="d-flex column">
+      <div id="villain-info" class="d-flex column">
         <div class="d-flex justify-center" style="margin-bottom: 8px">
           Morgan's Poker Bot
           {#if villain.dealer}
@@ -292,7 +291,6 @@
         <span>${pot}</span>
       </div>
       <div id="community" class="hand">
-        <ActionDialog {messageObj} />
         {#each community as card}
           <div class="card-container">
             <img src="images/cards/{card}.png" alt={card} />

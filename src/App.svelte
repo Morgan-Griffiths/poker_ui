@@ -138,11 +138,7 @@
     await getStats();
     if (state.done) {
       activeDisplayClass = "inactive";
-<<<<<<< HEAD
       updateHistory(outcome)
-=======
-      outcomeStrings(outcome);
->>>>>>> 581f1d767d640a3440336266eb334be995635c22
       if (autoNextHand) {
         newHand();
       }
@@ -155,11 +151,7 @@
       method: "POST",
       body: JSON.stringify({
         action,
-<<<<<<< HEAD
         betsize: betSize
-=======
-        betsize: betSize + hero.streetTotal
->>>>>>> 581f1d767d640a3440336266eb334be995635c22
       })
     });
     let text = await res.text();
@@ -170,12 +162,7 @@
       betSize = gameState.state.last_betsize;
     }
     const { state, outcome } = gameState;
-<<<<<<< HEAD
-    console.log('state',state)
-    setDone(state.done)
-=======
     setDone(state.done);
->>>>>>> 581f1d767d640a3440336266eb334be995635c22
     community = await getCards(state.board_cards);
     updatePlayers(state);
     updateGame(state);
@@ -201,14 +188,7 @@
         villain.hand = await getCards(outcome.player2_hand);
         setGameHistory(null, 'Showdown');
       }
-<<<<<<< HEAD
       updateHistory(outcome)
-=======
-      let strings = outcomeStrings(outcome);
-      for (const event in strings) {
-        setGameHistory(null, event);
-      }
->>>>>>> 581f1d767d640a3440336266eb334be995635c22
       await getStats();
       if (autoNextHand) {
         newHand();

@@ -1,8 +1,7 @@
 <script>
   import { getCards } from "./cards.js";
-  import { decodeHistory, outcomeStrings } from "./history"
+  import { decodeHistory, outcomeStrings } from "./history";
   import { getAvailActions, getAvailBetsizes } from "./actions.js";
-
   export let game = null;
   export let playerName = null;
   let playerNumCards;
@@ -41,43 +40,30 @@
   export let maxBet;
   $: maxBet = hero.stack;
   export let allIn;
-  $: allIn = (hero.stack == 0 || villain.stack == 0)
+  $: allIn = hero.stack == 0 || villain.stack == 0;
   let showdown;
-  export let messageObj = {
-    currPlayer: null,
-    othPlayer: null,
-    pot: null,
-    amount: null,
-    action: null
-  };
   export let autoNextHand = true;
-  export let autoNextHandDisplay = 'inactive';
   let gameType;
   let gameState;
   let done;
-  let playerStats = {'results':0,'bb_per_hand':0,'total_hands':0}
+  let playerStats = { results: 0, bb_per_hand: 0, total_hands: 0 };
   let street;
   export let availBetsizes = [];
   export let gameHistory = [];
 
-
   function checkbox() {
-    autoNextHand = !autoNextHand
-    autoNextHandDisplay = autoNextHand == true ? 'inactive' : 'active'
-    if (done) {
-      newHand()
-    }
+    autoNextHand = !autoNextHand;
   }
 
   function updatePlayers(state) {
     hero.stack = state.hero_stack;
     hero.dealer = state.hero_position == 0 ? true : false;
     hero.position = state.hero_position;
-    hero.streetTotal = state.hero_street_total
-    villain.position = state.villain_position
-    villain.stack = state.villain_stack
+    hero.streetTotal = state.hero_street_total;
+    villain.position = state.villain_position;
+    villain.stack = state.villain_stack;
     villain.dealer = state.villain_position == 0 ? true : false;
-    villain.streetTotal = state.villain_street_total
+    villain.streetTotal = state.villain_street_total;
   }
 
   function updateGame(state) {
@@ -87,7 +73,7 @@
   }
 
   function setDone(bool) {
-    done = bool
+    done = bool;
   }
 
   async function setName() {
@@ -122,22 +108,29 @@
     let text = await res.text();
     gameState = JSON.parse(text);
     const { state, outcome } = gameState;
-    setDone(state.done)
+    setDone(state.done);
     playerNumCards = state.hero_cards.length / 2;
     availActions = getAvailActions(state.action_mask);
     hero.hand = await getCards(state.hero_cards);
     community = await getCards(state.board_cards);
     updatePlayers(state);
     updateGame(state);
-    availBetsizes = getAvailBetsizes(state.betsize_mask, state.betsizes, state.last_action,hero,villain,pot);
-    setBetAmount(Math.min(...availBetsizes))
-    gameHistory = decodeHistory(state,hero,villain);
+    availBetsizes = getAvailBetsizes(
+      state.betsize_mask,
+      state.betsizes,
+      state.last_action,
+      hero,
+      villain,
+      pot
+    );
+    setBetAmount(Math.min(...availBetsizes));
+    setGameHistory({state, hero, villain});
     potClass = "active";
     activeDisplayClass = "active";
     await getStats();
     if (state.done) {
       activeDisplayClass = "inactive";
-      outcomeStrings(outcome)
+      outcomeStrings(outcome);
       if (autoNextHand) {
         newHand();
       }
@@ -149,7 +142,7 @@
       method: "POST",
       body: JSON.stringify({
         action,
-        betsize: betSize+hero.streetTotal
+        betsize: betSize + hero.streetTotal
       })
     });
     let text = await res.text();
@@ -160,31 +153,54 @@
       betSize = gameState.state.last_betsize;
     }
     const { state, outcome } = gameState;
-    setDone(state.done)
+    setDone(state.done);
     community = await getCards(state.board_cards);
     updatePlayers(state);
     updateGame(state);
-    gameHistory = decodeHistory(state,hero,villain);
+    setGameHistory({state, hero, villain});
     availActions = getAvailActions(state.action_mask);
-    availBetsizes = getAvailBetsizes(state.betsize_mask, state.betsizes, state.last_action,hero,villain,pot);
-    setBetAmount(Math.min(...availBetsizes))
+    availBetsizes = getAvailBetsizes(
+      state.betsize_mask,
+      state.betsizes,
+      state.last_action,
+      hero,
+      villain,
+      pot
+    );
+    setBetAmount(Math.min(...availBetsizes));
     activeDisplayClass = "active";
-    console.log(state.done)
     if (state.done) {
       activeDisplayClass = "inactive";
-      if (state.last_action == 2 || state.last_action == 0 || state.last_action == 5) {
+      if (
+        state.last_action == 2 ||
+        state.last_action == 0 ||
+        state.last_action == 5
+      ) {
         villain.hand = await getCards(outcome.player2_hand);
-        gameHistory.push(`Showdown`);
+        setGameHistory(null, 'Showdown');
       }
-      let strings = outcomeStrings(outcome)
+      let strings = outcomeStrings(outcome);
       for (const event in strings) {
-        gameHistory.push(event)
+        setGameHistory(null, event);
       }
       await getStats();
       if (autoNextHand) {
         newHand();
       }
     }
+  }
+
+  async function setGameHistory(payload, event) {
+    if (payload) {
+      let {state, hero, villain} = payload;
+      gameHistory = await decodeHistory(state, hero, villain);
+    } else {
+      gameHistory.push(event);
+    }
+    setTimeout(function() {
+      let elem = document.getElementById("history-content");
+      elem.scrollTop = elem.scrollHeight;
+    }, 50);
   }
 </script>
 
@@ -216,31 +232,43 @@
         {#each gameHistory as step}
           <div>{step}</div>
         {/each}
+      </div>
     </div>
-  </div>
-  <div id="stats">
-    <h2>Stats</h2>
-    <hr>
+    <div id="stats">
+      <h2>Stats</h2>
+      <hr />
       <table id="stats-content">
-        <tr><td>total_hands</td> <td class="text-right">{playerStats.total_hands}</td></tr>
-        <tr><td>winnings</td> <td class="text-right">{playerStats.results}</td></tr>
-        <tr><td>bb per hand</td> <td class="text-right">{playerStats.bb_per_hand.toFixed(2)}</td></tr>
-        <tr><td>SB</td> <td class="text-right">{playerStats.SB}</td></tr>
-        <tr><td>BB</td> <td class="text-right">{playerStats.BB}</td></tr>
+        <tr>
+          <td>Total Hands</td>
+          <td class="text-right">{playerStats.total_hands}</td>
+        </tr>
+        <tr>
+          <td>Winnings</td>
+          <td class="text-right">{playerStats.results}</td>
+        </tr>
+        <tr>
+          <td>BB per hand</td>
+          <td class="text-right">{playerStats.bb_per_hand.toFixed(2)}</td>
+        </tr>
+        <tr>
+          <td>SB</td>
+          <td class="text-right">{playerStats.SB}</td>
+        </tr>
+        <tr>
+          <td>BB</td>
+          <td class="text-right">{playerStats.BB}</td>
+        </tr>
       </table>
     </div>
-    <div>
-    <label id='nextHand-checkbox'>
-      <h2>AutoNextHand</h2>
-      <input type=checkbox checked={autoNextHand} on:click={() => checkbox()}>
-    </label>
-  </div>
-    <div id='nextHandButton' class="{autoNextHandDisplay} d-flex">
-      {#if !autoNextHand}
-        <div on:click={() => newHand()} class="btn hover-effect">
-          Next Hand
-        </div>
-      {/if}
+    <div id="next-hand">
+      <div on:click={() => newHand()} class="btn hover-effect">Next Hand</div>
+      <div class="field-container d-flex align-center">
+        Automatic
+        <input
+            type="checkbox"
+            checked={autoNextHand}
+            on:click={() => checkbox()} />
+      </div>
     </div>
     <div class="container no-margin-bottom">
       <div id="villain" class="hand" style="width: {pokerBotHandWidth}px">
@@ -336,7 +364,11 @@
               on:click={() => endTurn(action, betSize)}>
               <span>
                 {action}
-                {#if action === 'bet' || action === 'raise'}{betSize}{:else if action === 'call'}{villain.streetTotal - hero.streetTotal}{/if}
+                {#if action === 'bet' || action === 'raise'}
+                  {betSize}
+                {:else if action === 'call'}
+                  {villain.streetTotal - hero.streetTotal}
+                {/if}
               </span>
             </div>
           {/each}
@@ -360,7 +392,11 @@
               on:click={() => endTurn(action, betSize)}>
               <span>
                 {action}
-                {#if action === 'bet' || action === 'raise'}{betSize}{:else if action === 'call'}{villain.streetTotal - hero.streetTotal}{/if}
+                {#if action === 'bet' || action === 'raise'}
+                  {betSize}
+                {:else if action === 'call'}
+                  {villain.streetTotal - hero.streetTotal}
+                {/if}
               </span>
             </div>
           {/each}

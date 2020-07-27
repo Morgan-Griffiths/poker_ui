@@ -1,4 +1,4 @@
-import { onlyUnique } from "./utils.js";
+import { onlyUnique, linespace } from "./utils.js";
 import { actionDict } from "./dataTypes";
 
 export function getAvailActions(mask) {
@@ -13,19 +13,14 @@ export function getAvailActions(mask) {
 export function getAvailBetsizes(betsize_mask, betsizes, last_action, hero, villain, pot) {
     // Takes boolean mask array, and betsizes array of nums between 0 and 1.
     // Returns new array of allowable betsizes or raise sizes.
-    console.log(betsize_mask, betsizes, last_action, hero, villain, pot)
     let availBetsizes = new Array(betsize_mask.length);
-    if (last_action == 3 || last_action == 4) {
+    if (last_action == 3 || last_action == 4 || last_action == 2) {
+    let max_raise = Math.min((2 * villain.streetTotal) + pot - hero.streetTotal,hero.stack + hero.streetTotal)
+    let previous_bet = Math.min(Math.max(villain.streetTotal - hero.streetTotal,1),hero.stack + hero.streetTotal)
+    let min_raise = previous_bet * 2
+    let possible_sizes = linespace(min_raise,max_raise,betsize_mask.length)
       for (var i = 0; i < betsize_mask.length; i++) {
-        let max_raise = Math.min((2 * villain.streetTotal) + (pot - hero.streetTotal),(hero.stack + hero.streetTotal))
-        let previous_bet = Math.max(villain.streetTotal - hero.streetTotal,1)
-        let min_raise = Math.min(Math.max((previous_bet * 2),1),hero.stack)
-        let betsize_value = (betsizes[i] * max_raise)
-        let betsize = Math.min(Math.max(min_raise,betsize_value),hero.stack)
-        availBetsizes[i] = betsize * betsize_mask[i]
-        console.log('previous_bet',previous_bet)
-        console.log('betsize',betsize)
-        console.log('min_raise',min_raise)
+        availBetsizes[i] = possible_sizes[i] * betsize_mask[i]
       }
     } else {
       for (var i = 0; i < betsize_mask.length; i++) {
@@ -33,5 +28,5 @@ export function getAvailBetsizes(betsize_mask, betsizes, last_action, hero, vill
       }
     }
     availBetsizes = availBetsizes.filter( onlyUnique )
-    return availBetsizes;
+    return availBetsizes.sort((a, b) => a - b);;
   }

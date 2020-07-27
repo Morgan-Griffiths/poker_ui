@@ -17,36 +17,50 @@ body {
   background-repeat: no-repeat;
 }
 
-#nextHand-checkbox {
-  position: fixed;
-  left:250px;
-  top:80px;
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-#nextHand-checkbox h2 {
-  position: fixed;
-  left:330px;
-  top:10px;
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: #888; 
 }
 
-#nextHandButton {
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+#next-hand {
   position: fixed;
-  left:30px;
-  bottom:250px;
+  left:20px;
+  top: 660px;
+}
+
+#next-hand .btn {
   width:250px;
   height:100px;
 }
 
-#stats {
-  position:fixed;
-  top:20px;
-  right:20px;
-  height:190px;
-  width:250px;
-  background:rgba(0, 0, 0, 0.6);
+#next-hand .field-container {
+  width: 230px;
+  justify-content: space-between;
+  padding: 10px;
 }
 
-#stats h2 {
+#stats {
+  position:fixed;
+  top:440px;
+  left:20px;
+  height:200px;
+  width:250px;
+  background:rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.3);
+}
+
+#stats h2, #history h2, #options h2 {
   text-align: center;
 }
 
@@ -55,30 +69,38 @@ body {
   padding:8px;
 }
 
-#stats-content tr td:first-child {
-  border-right: 1px solid #fff;
-}
-
 #history {
   position:fixed;
   top:20px;
   left:20px;
-  height:600px;
+  height:400px;
+  width:250px;
+  background:rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.3);
+}
+
+#history div {
+  padding-bottom: 10px;
+  text-align: left;
+}
+
+#history-content {
+  height: 312px;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+#options {
+  position:fixed;
+  top:620px;
+  left:20px;
+  height:200px;
   width:250px;
   background:rgba(0, 0, 0, 0.6);
 }
 
-#history h2 {
-  text-align: center;
-}
-
-#history div {
-  padding-top:10px;
-  text-align: center;
-}
-
-#history-content {
-  overflow-y:scroll;
+#options-content {
+  padding: 10px;
 }
 
 p {
@@ -98,13 +120,15 @@ a:visited {
   color: rgb(0, 80, 160);
 }
 
-label {
-  display: block;
+hr {
+  height: .5px;
+  margin: 0;
+  background-color: #fff;
+  border: none;
 }
 
-hr {
-  border-width: 0.5px;
-  margin: 0;
+.field-container {
+  display: flex;
 }
 
 input,
@@ -156,6 +180,12 @@ input[type="range" i]::-webkit-slider-thumb {
   -webkit-appearance: none;
 }
 
+input[type="checkbox"] {
+  height: 20px;
+  width: 20px;
+  margin: 0;
+}
+
 #table {
   height: 100%;
   display: flex;
@@ -192,6 +222,7 @@ input[type="range" i]::-webkit-slider-thumb {
 
 #villain .card-container img {
   max-width: 100px;
+  height: 155px;
 }
 
 #community .card-container img {
@@ -200,6 +231,7 @@ input[type="range" i]::-webkit-slider-thumb {
 
 #hero .card-container img {
   max-width: 160px;
+  height: 245px;
 }
 
 .hand {

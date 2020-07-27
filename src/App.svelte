@@ -87,6 +87,14 @@
     betSize = 0;
   }
 
+  function updateHistory(outcome) {
+    let strings = outcomeStrings(outcome)
+      for (let event of strings) {
+        gameHistory.push(event)
+      }
+      gameHistory = gameHistory
+  }
+
   function setDone(bool) {
     done = bool
   }
@@ -138,7 +146,7 @@
     await getStats();
     if (state.done) {
       activeDisplayClass = "inactive";
-      outcomeStrings(outcome)
+      updateHistory(outcome)
       if (autoNextHand) {
         newHand();
       }
@@ -146,11 +154,12 @@
   }
 
   async function endTurn(action, betSize) {
+    console.log('betSize',betSize)
     const res = await fetch("http://localhost:4000/api/step", {
       method: "POST",
       body: JSON.stringify({
         action,
-        betsize: betSize+hero.streetTotal
+        betsize: betSize
       })
     });
     let text = await res.text();
@@ -161,6 +170,7 @@
       betSize = gameState.state.last_betsize;
     }
     const { state, outcome } = gameState;
+    console.log('state',state)
     setDone(state.done)
     community = await getCards(state.board_cards);
     updatePlayers(state);
@@ -177,10 +187,7 @@
         villain.hand = await getCards(outcome.player2_hand);
         gameHistory.push(`Showdown`);
       }
-      let strings = outcomeStrings(outcome)
-      for (const event in strings) {
-        gameHistory.push(event)
-      }
+      updateHistory(outcome)
       await getStats();
       if (autoNextHand) {
         newHand();

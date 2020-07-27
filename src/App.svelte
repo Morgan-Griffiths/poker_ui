@@ -243,7 +243,7 @@
       {/if}
     </div>
     <div class="container no-margin-bottom">
-      <div id="villian" class="hand" style="width: {pokerBotHandWidth}px">
+      <div id="villain" class="hand" style="width: {pokerBotHandWidth}px">
         {#if villain.hand.length === 0}
           {#each Array(playerNumCards) as _}
             <div class="card-container">
@@ -260,7 +260,7 @@
       </div>
     </div>
     <div class="container no-margin-bottom no-margin-top">
-      <div id="villian-info" class="d-flex column">
+      <div id="villain-info" class="d-flex column">
         <div class="d-flex justify-center" style="margin-bottom: 8px">
           Morgan's Poker Bot
           {#if villain.dealer}

@@ -1,6 +1,27 @@
 import { actionDict,positionDict,streetDict,streetStart } from "./dataTypes";
 import {getCards} from "./cards"
 
+export function returnHandType(handrank) {
+  if (handrank > 6185) {
+    return 'High Card'
+  } else if (handrank > 3325) {
+    return 'One Pair'
+  } else if (handrank > 2467) {
+    return 'Two pair'
+  } else if (handrank > 1609) {
+    return 'Three of a kind'
+  } else if (handrank > 1599) {
+    return 'a Straight'
+  } else if (handrank > 322) {
+    return 'a Flush'
+  } else if (handrank > 166) {
+    return 'a Full House'
+  } else if (handrank > 10) {
+    return 'Quads'
+  }
+  return 'a Straight Flush'
+}
+
 export function decodeHistory(gameData,hero,villain) {
     let gameHistory = [];
     const { history, mapping } = gameData;
@@ -56,7 +77,7 @@ export function outcomeStrings(outcome) {
       } else {
         villain_outcome_str = 'ties'
       }
-    return [`Hero ${hero_outcome_str} ${outcome.player1_reward}`,`Villain ${villain_outcome_str} ${outcome.player2_reward}`];
+    return [`Hero ${hero_outcome_str} ${outcome.player1_reward}`,`Villain ${villain_outcome_str} ${outcome.player2_reward}`,`Hero has ${returnHandType(outcome.player1_handrank)}`,`Villain has ${returnHandType(outcome.player2_handrank)}`];
   }
 
 export function buildString(

@@ -45,7 +45,7 @@
   export let autoNextHand = true;
   let gameType;
   let gameState;
-  let done;
+  let done = true;
   let playerStats = { results: 0, bb_per_hand: 0, total_hands: 0 };
   let street;
   export let availBetsizes = [];
@@ -77,10 +77,10 @@
 
   function updateHistory(outcome) {
     let strings = outcomeStrings(outcome)
-      for (let event of strings) {
-        gameHistory.push(event)
-      }
-      gameHistory = gameHistory
+    for (let event of strings) {
+      gameHistory.push(event)
+    }
+    gameHistory = gameHistory
   }
 
   function setDone(bool) {
@@ -149,7 +149,6 @@
   }
 
   async function endTurn(action, betSize) {
-    console.log('betSize',betSize)
     const res = await fetch("http://localhost:4000/api/step", {
       method: "POST",
       body: JSON.stringify({
@@ -269,7 +268,7 @@
         </tr>
       </table>
     </div>
-    <div id="next-hand">
+    <div id="next-hand" >
       <div on:click={() => newHand()} class="btn hover-effect">Next Hand</div>
       <div class="field-container d-flex align-center">
         Automatic

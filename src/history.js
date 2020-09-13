@@ -63,21 +63,17 @@ export function decodeHistory(gameData,hero,villain) {
 export function outcomeStrings(outcome) {
     let hero_outcome_str;
     let villain_outcome_str;
-    if (outcome.player1_reward > 0) {
+    if (outcome.player1_reward >= 0) {
         hero_outcome_str = 'wins'
-      } else if (outcome.player1_reward < 0) {
+      } else {
         hero_outcome_str = 'loses'
-      } else {
-        hero_outcome_str = 'ties'
       }
-    if (outcome.player2_reward > 0) {
+    if (outcome.player2_reward >= 0) {
         villain_outcome_str = 'wins'
-      } else if (outcome.player2_reward < 0) {
-        villain_outcome_str = 'loses'
       } else {
-        villain_outcome_str = 'ties'
+        villain_outcome_str = 'loses'
       }
-    return [`Hero ${hero_outcome_str} ${outcome.player1_reward}`,`Villain ${villain_outcome_str} ${outcome.player2_reward}`,`Hero has ${returnHandType(outcome.player1_handrank)}`,`Villain has ${returnHandType(outcome.player2_handrank)}`];
+    return [`Hero has ${returnHandType(outcome.player1_handrank)} (${outcome.player1_handrank})`,`Villain has ${returnHandType(outcome.player2_handrank)} (${outcome.player2_handrank})`,`Hero ${hero_outcome_str} ${outcome.player1_reward}`,`Villain ${villain_outcome_str} ${outcome.player2_reward}`];
   }
 
 export function buildString(

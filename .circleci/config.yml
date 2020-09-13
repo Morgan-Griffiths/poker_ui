@@ -1,0 +1,23 @@
+version: 2.1
+jobs:
+  test-javascript:
+    working_directory: ~/project
+    docker:
+      - image: circleci/node:10.16.3
+    steps:
+      - checkout
+      - run:
+          name: update-npm
+          command: 'sudo npm install -g npm@5'
+      - run:
+          name: install-npm-wee
+          command: npm install
+      - run:
+          name: test
+          command: npm run test
+      - store_test_results:
+          path: test-results.xm
+workflows:
+  main:
+    jobs:
+      - test-javascript

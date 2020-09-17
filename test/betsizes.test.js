@@ -1,4 +1,5 @@
 import app from '../src/App.svelte'
+import { actionOffset } from '../src/dataTypes'
 import { getAvailBetsizes } from '../src/actions'
 import '@testing-library/jest-dom/extend-expect'
 import { render, fireEvent, act } from '@testing-library/svelte'
@@ -31,7 +32,7 @@ test('BBraiseVsSbCall', () => {
   let pot = 2
   let betsize_mask = [1,0]
   let betsizes = [0.5,1]
-  let last_action = 2
+  let last_action = actionOffset.call
   let betsize = getAvailBetsizes(betsize_mask,betsizes,last_action,hero,villain,pot)
   expect(betsize).not.toBeNaN();
   expect(betsize).toEqual([2]);
@@ -52,7 +53,7 @@ test('BBraiseVsSbCall', () => {
   pot = 2
   betsize_mask = [1,1]
   betsizes = [0.5,1]
-  last_action = 2
+  last_action = actionOffset.call
   betsize = getAvailBetsizes(betsize_mask,betsizes,last_action,hero,villain,pot)
   expect(betsize).not.toBeNaN();
   expect(betsize).toEqual([2,3]);
@@ -76,7 +77,7 @@ test('SBraiseVsBlind', () => {
   let pot = 1.5
   let betsize_mask = [1,0]
   let betsizes = [0.5,1]
-  let last_action = 4
+  let last_action = actionOffset.raise
   let betsize = getAvailBetsizes(betsize_mask,betsizes,last_action,hero,villain,pot)
   expect(betsize).not.toBeNaN();
   expect(betsize).toEqual([2]);
@@ -97,7 +98,7 @@ test('SBraiseVsBlind', () => {
   pot = 1.5
   betsize_mask = [1,1]
   betsizes = [0.5,1]
-  last_action = 4
+  last_action = actionOffset.raise
   betsize = getAvailBetsizes(betsize_mask,betsizes,last_action,hero,villain,pot)
   expect(betsize).not.toBeNaN();
   expect(betsize).toEqual([2,3]);
@@ -121,7 +122,7 @@ test('raiseVsBet', () => {
   let pot = 2
   let betsize_mask = [1,1]
   let betsizes = [0.5,1]
-  let last_action = 3
+  let last_action = actionOffset.bet
   let betsize = getAvailBetsizes(betsize_mask,betsizes,last_action,hero,villain,pot)
   expect(betsize).not.toBeNaN();
   expect(betsize).toEqual([2,4]);
@@ -142,7 +143,7 @@ test('raiseVsBet', () => {
   pot = 2
   betsize_mask = [1,1]
   betsizes = [0.5,1]
-  last_action = 3
+  last_action = actionOffset.bet
   betsize = getAvailBetsizes(betsize_mask,betsizes,last_action,hero,villain,pot)
   expect(betsize).not.toBeNaN();
   expect(betsize).toEqual([2,3]);
@@ -163,7 +164,7 @@ test('raiseVsBet', () => {
   pot = 2
   betsize_mask = [1,0]
   betsizes = [0.5,1]
-  last_action = 3
+  last_action = actionOffset.bet
   betsize = getAvailBetsizes(betsize_mask,betsizes,last_action,hero,villain,pot)
   expect(betsize).not.toBeNaN();
   expect(betsize).toEqual([2]);
@@ -184,7 +185,7 @@ test('raiseVsBet', () => {
   pot = 3
   betsize_mask = [1,1]
   betsizes = [0.5,1]
-  last_action = 3
+  last_action = actionOffset.bet
   betsize = getAvailBetsizes(betsize_mask,betsizes,last_action,hero,villain,pot)
   expect(betsize).not.toBeNaN();
   expect(betsize).toEqual([3,6]);
@@ -208,7 +209,7 @@ test('Bet', () => {
   let pot = 1
   let betsize_mask = [1,0]
   let betsizes = [0.5,1]
-  let last_action = 0
+  let last_action = actionOffset.check
   let betsize = getAvailBetsizes(betsize_mask,betsizes,last_action,hero,villain,pot)
   expect(betsize).not.toBeNaN();
   expect(betsize).toEqual([1]);
@@ -229,7 +230,7 @@ test('Bet', () => {
   pot = 2
   betsize_mask = [1,1]
   betsizes = [0.5,1]
-  last_action = 0
+  last_action = actionOffset.check
   betsize = getAvailBetsizes(betsize_mask,betsizes,last_action,hero,villain,pot)
   expect(betsize).not.toBeNaN();
   expect(betsize).toEqual([1,2]);
@@ -250,7 +251,7 @@ test('Bet', () => {
   pot = 5
   betsize_mask = [1,1]
   betsizes = [0.5,1]
-  last_action = 0
+  last_action = actionOffset.check
   betsize = getAvailBetsizes(betsize_mask,betsizes,last_action,hero,villain,pot)
   expect(betsize).not.toBeNaN();
   expect(betsize).toEqual([2.5,5]);

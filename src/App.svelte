@@ -2,6 +2,7 @@
   import { getCards } from "./cards.js";
   import { decodeHistory, outcomeStrings } from "./history";
   import { getAvailActions, getAvailBetsizes } from "./actions.js";
+  import { Position, Action } from "./dataTypes"
   export let game = null;
   export let playerName = null;
   let playerNumCards;
@@ -60,12 +61,12 @@
 
   function updatePlayers(state) {
     hero.stack = state.hero_stack;
-    hero.dealer = state.hero_position == 0 ? true : false;
+    hero.dealer = state.hero_position == Position.SB ? true : false;
     hero.position = state.hero_position;
     hero.streetTotal = state.hero_street_total;
     villain.position = state.villain_position;
     villain.stack = state.villain_stack;
-    villain.dealer = state.villain_position == 0 ? true : false;
+    villain.dealer = state.villain_position == Position.SB ? true : false;
     villain.streetTotal = state.villain_street_total;
   }
 
@@ -183,9 +184,9 @@
     if (state.done) {
       activeDisplayClass = "inactive";
       if (
-        state.last_action == 2 ||
-        state.last_action == 0 ||
-        state.last_action == 5
+        state.last_action == Action.call ||
+        state.last_action == Action.check ||
+        state.last_action == Action.unopened
       ) {
         villain.hand = await getCards(outcome.player2_hand);
         setGameHistory(null, 'Showdown');

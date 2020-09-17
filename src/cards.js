@@ -1,3 +1,5 @@
+import { Ranks,Suits } from './dataTypes'
+
 const cards = [
   "2C",
   "2D",
@@ -61,7 +63,7 @@ export function getCards(array) {
       rank = value;
       if (rank != 0) {
         suit = array[index + 1];
-        let cardIndex = (rank - 2) * 4 + suit;
+        let cardIndex = (rank - Ranks.LOW) * 4 + suit - Suits.LOW;
         carry.push(cards[cardIndex]);
       }
     }

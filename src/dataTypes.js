@@ -1,6 +1,14 @@
 
 export const positionDict = { 1: "SB", 2: "BB", 3: "dealer" };
 export const Position = { "SB" : 1, "BB":2, "dealer":3 };
+export const Suits = {
+    'LOW':1,
+    'HIGH':5
+}
+export const Ranks = {
+    'LOW':2,
+    'HIGH':15
+}
 export const actionIndex = {
     0: "check",
     1: "fold",
@@ -8,14 +16,6 @@ export const actionIndex = {
     3: "bet",
     4: "raise",
     5: "unopened"
-};
-export const actionDict = {
-    1: "check",
-    2: "fold",
-    3: "call",
-    4: "bet",
-    5: "raise",
-    6: "unopened"
 };
 // With zero padding, actions are offset by 1
 export const actionOffset = {

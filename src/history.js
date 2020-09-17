@@ -1,4 +1,4 @@
-import { actionDict,positionDict,streetDict,streetStart } from "./dataTypes";
+import { actionOffset,positionDict,streetDict,streetStart,Blind } from "./dataTypes";
 import {getCards} from "./cards"
 
 export function returnHandType(handrank) {
@@ -44,7 +44,7 @@ export function decodeHistory(gameData,hero,villain) {
       }
       let displayString = buildString(
         positionDict[hist[i][mapping.last_position]],
-        actionDict[hist[i][mapping.last_action]],
+        actionOffset[hist[i][mapping.last_action]],
         hist[i][mapping.last_aggressive_betsize],
         amount_to_call,
         last_street_total,
@@ -99,13 +99,13 @@ export function buildString(
     } else if (last_action === "check") {
       displayString = `${last_position} checks`;
     } else if (last_action === "bet") {
-      if (blind) {
+      if (blind == Blind.POSTED) {
         displayString = `${last_position} posts ${last_betsize}`;
       } else {
         displayString = `${last_position} bets ${last_betsize}`;
       }
     } else if (last_action === "raise") {
-      if (blind) {
+      if (blind == Blind.POSTED) {
         displayString = `${last_position} posts ${last_betsize + last_street_total}`;
       } else {
         displayString = `${last_position} raises ${last_betsize} to ${last_betsize + last_street_total}`;

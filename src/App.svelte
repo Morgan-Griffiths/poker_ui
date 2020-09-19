@@ -39,6 +39,7 @@
   export let community = [];
   export let betSize = 0;
   export let maxBet;
+  let APIServer = IsProd ? '/api' : 'http://localhost:4000/api'
   $: maxBet = hero.stack;
   export let allIn;
   $: allIn = hero.stack == 0 || villain.stack == 0;
@@ -91,7 +92,7 @@
   async function setName() {
     let value = document.getElementById("hero-name").value;
     playerName = value;
-    const res = await fetch("http://localhost:4000/api/player/name", {
+    const res = await fetch(`${APIServer}/player/name`, {
       method: "POST",
       body: JSON.stringify({
         name: playerName
@@ -100,7 +101,7 @@
   }
 
   async function getStats() {
-    const res = await fetch("http://localhost:4000/api/player/stats");
+    const res = await fetch(`${APIServer}/player/stats`);
     let text = await res.text();
     playerStats = JSON.parse(text);
   }
@@ -116,7 +117,7 @@
   }
   async function newHand() {
     villain.hand = [];
-    const res = await fetch("http://localhost:4000/api/reset");
+    const res = await fetch(`${APIServer}/reset`);
     let text = await res.text();
     gameState = JSON.parse(text);
     const { state, outcome } = gameState;
@@ -150,7 +151,7 @@
   }
 
   async function endTurn(action, betSize) {
-    const res = await fetch("http://localhost:4000/api/step", {
+    const res = await fetch(`{APIServer}/step`, {
       method: "POST",
       body: JSON.stringify({
         action,

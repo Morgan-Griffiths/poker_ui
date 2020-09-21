@@ -151,7 +151,7 @@
   }
 
   async function endTurn(action, betSize) {
-    const res = await fetch(`{APIServer}/step`, {
+    const res = await fetch(`${APIServer}/step`, {
       method: "POST",
       body: JSON.stringify({
         action,

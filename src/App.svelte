@@ -50,8 +50,30 @@
   let done = true;
   let playerStats = { results: 0, bb_per_hand: 0, total_hands: 0 };
   let street;
+  let settingsDialog = false;
+  let settingsElements = ['AutoNextHand','Four Color Deck'];
+  let settingsAdvanced = ['Show Villain Hand','Display Villain Outputs'];
+  let deckColor = '4_color_cards';
+  let deckColorChecked = true;
   export let availBetsizes = [];
   export let gameHistory = [];
+
+  function setDeckColor() {
+    deckColorChecked = !deckColorChecked
+    deckColor = '4_color_cards' ? deckColorChecked : 'cards'
+  }
+
+  function showAdvancedOptions() {
+    // Only available on local env
+  }
+
+  function showBotCards() {
+    // Displays bot cards at all times
+  }
+
+  function showBotOutputs() {
+    // Shows bot outputs
+  }
 
   function checkbox() {
     autoNextHand = !autoNextHand;
@@ -270,6 +292,24 @@
         </tr>
       </table>
     </div>
+    <div id="settings">
+      <div class="field-container d-flex align-right" on:click={() => settingsDialog=!settingsDialog}>
+          <img
+            src="images/settings_icon.png"
+            alt="Settings Icon"/>
+      </div>
+    </div>
+    {#if settingsDialog == true}
+      <div id="settings-window">
+        <div class="field-container d-flex align-right" on:click={() => settingsDialog=!settingsDialog}>
+          {#each settingsElements as setting}
+          <div class="field-container d-flex align-right" >
+            <label>{setting}</label>
+          </div>
+          {/each}
+        </div>
+      </div>
+    {/if}
     <div id="next-hand" >
       <div on:click={() => newHand()} class="btn hover-effect">Next Hand</div>
       <div class="field-container d-flex align-center">
@@ -285,13 +325,13 @@
         {#if villain.hand.length === 0}
           {#each Array(playerNumCards) as _}
             <div class="card-container">
-              <img src="images/cards/card_back.png" alt="Card Back" />
+              <img src="images/{deckColor}/card_back.png" alt="Card Back" />
             </div>
           {/each}
         {:else}
           {#each villain.hand as card}
             <div class="card-container">
-              <img src="images/cards/{card}.png" alt={card} />
+              <img src="images/{deckColor}/{card}.png" alt={card} />
             </div>
           {/each}
         {/if}
@@ -324,7 +364,7 @@
       <div id="community" class="hand">
         {#each community as card}
           <div class="card-container">
-            <img src="images/cards/{card}.png" alt={card} />
+            <img src="images/{deckColor}/{card}.png" alt={card} />
           </div>
         {/each}
       </div>
@@ -336,7 +376,7 @@
       <div id="hero" class="hand" style="width: {heroHandWidth}px">
         {#each hero.hand as card}
           <div class="card-container">
-            <img src="images/cards/{card}.png" alt={card} />
+            <img src="images/{deckColor}/{card}.png" alt={card} />
           </div>
         {/each}
       </div>

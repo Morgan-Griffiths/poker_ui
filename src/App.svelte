@@ -163,11 +163,13 @@
     const res = await fetch(`${APIServer}/reset`);
     let text = await res.text();
     gameState = JSON.parse(text);
+    console.log(gameState)
     const { state, outcome } = gameState;
     setDone(state.done);
     playerNumCards = state.hero_cards.length / 2;
     availActions = getAvailActions(state.action_mask);
     hero.hand = await getCards(state.hero_cards);
+    villain.hand = await getCards(state.villain_cards);
     community = await getCards(state.board_cards);
     updatePlayers(state);
     updateGame(state);
@@ -203,7 +205,6 @@
     });
     let text = await res.text();
     let gameState = JSON.parse(text);
-    console.log(gameState)
     action = action.slice(0, 1).toLowerCase() + action.slice(1);
     activeDisplayClass = "inactive";
     if (action === "call") {
@@ -359,7 +360,7 @@
     </div>
     <div class="container no-margin-bottom">
       <div id="villain" class="hand" style="width: {pokerBotHandWidth}px">
-        {#if villain.hand.length === 0}
+        {#if !allIn && !dispVillHand}
           {#each Array(playerNumCards) as _}
             <div class="card-container">
               <img src="images/{deckType}/card_back.png" alt="Card Back" />

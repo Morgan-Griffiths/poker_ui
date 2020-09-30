@@ -1,8 +1,10 @@
 <script>
-  import { getCards } from "./cards.js";
+  import { getCards } from "./cards";
   import { decodeHistory, outcomeStrings } from "./history";
-  import { getAvailActions, getAvailBetsizes } from "./actions.js";
+  import { getAvailActions, getAvailBetsizes } from "./actions";
   import { Position, Action } from "./dataTypes";
+  import { testObj } from "./test";
+  import Chart from "chart.js";
   let game = null;
   let playerName = null;
   let playerNumCards;
@@ -79,9 +81,7 @@
       name: "Display Villain Outputs",
       type: "checkbox",
       checked: dispVillOut,
-      func: () => {
-        dispVillOut = !dispVillOut;
-      }
+      func: () => showBotOutputs()
     }
   ];
   let availBetsizes = [];
@@ -94,13 +94,55 @@
     }
   }
 
-  function showBotCards() {
-    // Displays bot cards at all times
-    console.log("do something");
-  }
-
   function showBotOutputs() {
-    console.log("do something");
+    dispVillOut = !dispVillOut;
+    if (dispVillOut) {
+      setTimeout(() => {
+        let ctx = document
+          .getElementById("villain-output-chart")
+          .getContext("2d");
+        new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            datasets: [
+              {
+                label: "# of Votes",
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                  "rgba(255, 99, 132, 0.2)",
+                  "rgba(54, 162, 235, 0.2)",
+                  "rgba(255, 206, 86, 0.2)",
+                  "rgba(75, 192, 192, 0.2)",
+                  "rgba(153, 102, 255, 0.2)",
+                  "rgba(255, 159, 64, 0.2)"
+                ],
+                borderColor: [
+                  "rgba(255, 99, 132, 1)",
+                  "rgba(54, 162, 235, 1)",
+                  "rgba(255, 206, 86, 1)",
+                  "rgba(75, 192, 192, 1)",
+                  "rgba(153, 102, 255, 1)",
+                  "rgba(255, 159, 64, 1)"
+                ],
+                borderWidth: 1
+              }
+            ]
+          },
+          options: {
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }
+              ]
+            }
+          }
+        });
+      }, 20);
+    }
   }
 
   function updatePlayers(state) {
@@ -163,7 +205,6 @@
     const res = await fetch(`${APIServer}/reset`);
     let text = await res.text();
     gameState = JSON.parse(text);
-    console.log(gameState)
     const { state, outcome } = gameState;
     setDone(state.done);
     playerNumCards = state.hero_cards.length / 2;
@@ -353,6 +394,13 @@
             {/each}
           {/if}
         </div>
+      </div>
+    {/if}
+    {#if dispVillOut}
+      <div id="villain-output">
+        <h2>Villian Output</h2>
+        <hr />
+        <canvas id="villain-output-chart" width="400" height="400" />
       </div>
     {/if}
     <div id="next-hand">

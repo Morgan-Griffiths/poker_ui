@@ -3,7 +3,6 @@
   import { decodeHistory, outcomeStrings } from "./history";
   import { getAvailActions, getAvailBetsizes } from "./actions";
   import { Position, Action } from "./dataTypes";
-  import { testObj } from "./test";
   import Chart from "chart.js";
   let game = null;
   let playerName = null;
@@ -97,52 +96,54 @@
   function showBotOutputs() {
     dispVillOut = !dispVillOut;
     if (dispVillOut) {
-      setTimeout(() => {
-        let ctx = document
-          .getElementById("villain-output-chart")
-          .getContext("2d");
-        new Chart(ctx, {
-          type: "bar",
-          data: {
-            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-            datasets: [
+      getBotOutputs();
+    }
+  }
+
+  async function getBotOutputs() {
+    const res = await fetch(`${APIServer}/model/outputs`);
+    let text = await res.text();
+    let parsedText = JSON.parse(text);
+    let actionProbsData = parsedText.action_probs[0].map(val => (val * 100).toFixed(2));
+    let qValuesData = parsedText.q_values[0].map(val => (val * 100).toFixed(2));
+    let actionProbsEl = document.getElementById("villain-action-probs").getContext("2d");
+    let qValuesEl = document.getElementById("villain-q-values").getContext("2d");
+    let labels = ["Check", "Fold", "Call", "B/R #1", "B/R #2"];
+    buildChart(actionProbsEl, labels, "Action %", actionProbsData, [255, 99, 132]);
+    buildChart(qValuesEl, labels, "Q Values", qValuesData, [255, 206, 86]);
+  }
+
+  function buildChart(elem, labels, title, data, colorArr) {
+    let bGColor = `rgba( ${colorArr.join(", ")} , .2)`;
+    let borderColor = `rgba( ${colorArr.join(", ")} , 1)`
+    new Chart(elem, {
+        type: "bar",
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: title,
+              data: data,
+              backgroundColor: bGColor,
+              borderColor: borderColor,
+              borderWidth: 1
+            }
+          ]
+        },
+        options: {
+          scales: {
+            yAxes: [
               {
-                label: "# of Votes",
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                  "rgba(255, 99, 132, 0.2)",
-                  "rgba(54, 162, 235, 0.2)",
-                  "rgba(255, 206, 86, 0.2)",
-                  "rgba(75, 192, 192, 0.2)",
-                  "rgba(153, 102, 255, 0.2)",
-                  "rgba(255, 159, 64, 0.2)"
-                ],
-                borderColor: [
-                  "rgba(255, 99, 132, 1)",
-                  "rgba(54, 162, 235, 1)",
-                  "rgba(255, 206, 86, 1)",
-                  "rgba(75, 192, 192, 1)",
-                  "rgba(153, 102, 255, 1)",
-                  "rgba(255, 159, 64, 1)"
-                ],
-                borderWidth: 1
+                ticks: {
+                  beginAtZero: true,
+                  max: 100,
+                  min: 0
+                }
               }
             ]
-          },
-          options: {
-            scales: {
-              yAxes: [
-                {
-                  ticks: {
-                    beginAtZero: true
-                  }
-                }
-              ]
-            }
           }
-        });
-      }, 20);
-    }
+        }
+      });
   }
 
   function updatePlayers(state) {
@@ -248,6 +249,9 @@
     let gameState = JSON.parse(text);
     action = action.slice(0, 1).toLowerCase() + action.slice(1);
     activeDisplayClass = "inactive";
+    if (dispVillOut) {
+      getBotOutputs();
+    }
     if (action === "call") {
       betSize = gameState.state.last_betsize;
     }
@@ -400,7 +404,8 @@
       <div id="villain-output">
         <h2>Villian Output</h2>
         <hr />
-        <canvas id="villain-output-chart" width="400" height="400" />
+        <canvas id="villain-action-probs" width="400" height="300" />
+        <canvas id="villain-q-values" width="400" height="300" />
       </div>
     {/if}
     <div id="next-hand">

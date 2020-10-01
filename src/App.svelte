@@ -1,85 +1,149 @@
 <script>
-  import { getCards } from "./cards.js";
+  import { getCards } from "./cards";
   import { decodeHistory, outcomeStrings } from "./history";
-  import { getAvailActions, getAvailBetsizes } from "./actions.js";
-  import { Position, Action } from "./dataTypes"
-  export let game = null;
-  export let playerName = null;
+  import { getAvailActions, getAvailBetsizes } from "./actions";
+  import { Position, Action } from "./dataTypes";
+  import Chart from "chart.js";
+  let game = null;
+  let playerName = null;
   let playerNumCards;
-  export let availActions = [];
-  export let leftAvailActions, rightAvailActions;
+  $: pokerBotHandWidth = playerNumCards * 60 + 40;
+  $: heroHandWidth = playerNumCards * 100 + 60;
+  let availActions = [];
   $: leftAvailActions =
     availActions.length > 2
       ? availActions.slice(0, 2)
       : availActions.slice(0, 1);
   $: rightAvailActions =
     availActions.length > 2 ? availActions.slice(2) : availActions.slice(1);
-  export let pokerBotHandWidth;
-  $: pokerBotHandWidth = playerNumCards * 60 + 40;
-  export let heroHandWidth;
-  $: heroHandWidth = playerNumCards * 100 + 60;
-  export let pot = 0;
+  let pot = 0;
   let potClass;
   let heroTurn;
-  export let activeDisplayClass = "inactive";
-  export let villain = {
+  let activeDisplayClass = "inactive";
+  let villain = {
     hand: [],
     stack: 100,
     dealer: true,
     position: null,
     streetTotal: 0
   };
-  export let hero = {
+  let hero = {
     hand: [],
     stack: 100,
     dealer: false,
     position: null,
     streetTotal: 0
   };
-  export let community = [];
-  export let betSize = 0;
-  export let maxBet;
-  let APIServer = IsProd ? '/api' : 'http://localhost:4000/api'
   $: maxBet = hero.stack;
-  export let allIn;
   $: allIn = hero.stack == 0 || villain.stack == 0;
+  let community = [];
+  let betSize = 0;
+  let APIServer = IsProd ? "/api" : "http://localhost:4000/api";
   let showdown;
-  export let autoNextHand = true;
   let gameType;
   let gameState;
   let done = true;
   let playerStats = { results: 0, bb_per_hand: 0, total_hands: 0 };
   let street;
   let settingsDialog = false;
-  let settingsElements = ['AutoNextHand','Four Color Deck'];
-  let settingsAdvanced = ['Show Villain Hand','Display Villain Outputs'];
-  let deckColor = '4_color_cards';
-  let deckColorChecked = true;
-  export let availBetsizes = [];
-  export let gameHistory = [];
+  let autoNextHand = true;
+  let fourColorCards = true;
+  $: deckType = fourColorCards ? "4_color_cards" : "cards";
+  $: settingsElements = [
+    {
+      name: "Auto Next Hand",
+      type: "checkbox",
+      checked: autoNextHand,
+      func: () => toggleAutoNext()
+    },
+    {
+      name: "Four Color Deck",
+      type: "checkbox",
+      checked: fourColorCards,
+      func: () => {
+        fourColorCards = !fourColorCards;
+      }
+    }
+  ];
+  let dispVillHand = false;
+  let dispVillOut = false;
+  $: settingsAdvanced = [
+    {
+      name: "Show Villain Hand",
+      type: "checkbox",
+      checked: dispVillHand,
+      func: () => {
+        dispVillHand = !dispVillHand;
+      }
+    },
+    {
+      name: "Display Villain Outputs",
+      type: "checkbox",
+      checked: dispVillOut,
+      func: () => showBotOutputs()
+    }
+  ];
+  let availBetsizes = [];
+  let gameHistory = [];
 
-  function setDeckColor() {
-    deckColorChecked = !deckColorChecked
-    deckColor = '4_color_cards' ? deckColorChecked : 'cards'
-  }
-
-  function showAdvancedOptions() {
-    // Only available on local env
-  }
-
-  function showBotCards() {
-    // Displays bot cards at all times
-  }
-
-  function showBotOutputs() {
-    // Shows bot outputs
-  }
-
-  function checkbox() {
+  function toggleAutoNext() {
     autoNextHand = !autoNextHand;
     if (done) {
       newHand();
     }
+  }
+
+  function showBotOutputs() {
+    dispVillOut = !dispVillOut;
+    if (dispVillOut) {
+      getBotOutputs();
+    }
+  }
+
+  async function getBotOutputs() {
+    const res = await fetch(`${APIServer}/model/outputs`);
+    let text = await res.text();
+    let parsedText = JSON.parse(text);
+    let actionProbsData = parsedText.action_probs[0].map(val => (val * 100).toFixed(2));
+    let qValuesData = parsedText.q_values[0].map(val => (val * 100).toFixed(2));
+    let actionProbsEl = document.getElementById("villain-action-probs").getContext("2d");
+    let qValuesEl = document.getElementById("villain-q-values").getContext("2d");
+    let labels = ["Check", "Fold", "Call", "B/R #1", "B/R #2"];
+    buildChart(actionProbsEl, labels, "Action %", actionProbsData, [255, 99, 132]);
+    buildChart(qValuesEl, labels, "Q Values", qValuesData, [255, 206, 86]);
+  }
+
+  function buildChart(elem, labels, title, data, colorArr) {
+    let bGColor = `rgba( ${colorArr.join(", ")} , .2)`;
+    let borderColor = `rgba( ${colorArr.join(", ")} , 1)`
+    new Chart(elem, {
+        type: "bar",
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: title,
+              data: data,
+              backgroundColor: bGColor,
+              borderColor: borderColor,
+              borderWidth: 1
+            }
+          ]
+        },
+        options: {
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                  max: 100,
+                  min: 0
+                }
+              }
+            ]
+          }
+        }
+      });
   }
 
   function updatePlayers(state) {
@@ -100,11 +164,11 @@
   }
 
   function updateHistory(outcome) {
-    let strings = outcomeStrings(outcome)
+    let strings = outcomeStrings(outcome);
     for (let event of strings) {
-      gameHistory.push(event)
+      gameHistory.push(event);
     }
-    gameHistory = gameHistory
+    gameHistory = gameHistory;
   }
 
   function setDone(bool) {
@@ -147,6 +211,7 @@
     playerNumCards = state.hero_cards.length / 2;
     availActions = getAvailActions(state.action_mask);
     hero.hand = await getCards(state.hero_cards);
+    villain.hand = await getCards(state.villain_cards);
     community = await getCards(state.board_cards);
     updatePlayers(state);
     updateGame(state);
@@ -159,13 +224,13 @@
       pot
     );
     setBetAmount(Math.min(...availBetsizes));
-    setGameHistory({state, hero, villain});
+    setGameHistory({ state, hero, villain });
     potClass = "active";
     activeDisplayClass = "active";
     await getStats();
     if (state.done) {
       activeDisplayClass = "inactive";
-      updateHistory(outcome)
+      updateHistory(outcome);
       if (autoNextHand) {
         newHand();
       }
@@ -184,6 +249,9 @@
     let gameState = JSON.parse(text);
     action = action.slice(0, 1).toLowerCase() + action.slice(1);
     activeDisplayClass = "inactive";
+    if (dispVillOut) {
+      getBotOutputs();
+    }
     if (action === "call") {
       betSize = gameState.state.last_betsize;
     }
@@ -192,7 +260,7 @@
     community = await getCards(state.board_cards);
     updatePlayers(state);
     updateGame(state);
-    setGameHistory({state, hero, villain});
+    setGameHistory({ state, hero, villain });
     availActions = getAvailActions(state.action_mask);
     availBetsizes = getAvailBetsizes(
       state.betsize_mask,
@@ -212,9 +280,9 @@
         state.last_action == Action.unopened
       ) {
         villain.hand = await getCards(outcome.player2_hand);
-        setGameHistory(null, 'Showdown');
+        setGameHistory(null, "Showdown");
       }
-      updateHistory(outcome)
+      updateHistory(outcome);
       await getStats();
       if (autoNextHand) {
         newHand();
@@ -224,15 +292,16 @@
 
   async function setGameHistory(payload, event) {
     if (payload) {
-      let {state, hero, villain} = payload;
+      let { state, hero, villain } = payload;
       gameHistory = await decodeHistory(state, hero, villain);
     } else {
       gameHistory.push(event);
     }
-    setTimeout(function() {
-      let elem = document.getElementById("history-content");
-      elem.scrollTop = elem.scrollHeight;
-    }, 50);
+    if (document.getElementById("history-content")) {
+      document.getElementById(
+        "history-content"
+      ).scrollTop = document.getElementById("history-content").scrollHeight;
+    }
   }
 </script>
 
@@ -293,45 +362,67 @@
       </table>
     </div>
     <div id="settings">
-      <div class="field-container d-flex align-right" on:click={() => settingsDialog=!settingsDialog}>
-          <img
-            src="images/settings_icon.png"
-            alt="Settings Icon"/>
-      </div>
+      <i
+        class="material-icons icon-hover"
+        on:click={() => {
+          settingsDialog = !settingsDialog;
+        }}>
+        settings
+      </i>
     </div>
     {#if settingsDialog == true}
-      <div id="settings-window">
-        <div class="field-container d-flex align-right" on:click={() => settingsDialog=!settingsDialog}>
+      <div id="settings-dialog">
+        <h2>Settings</h2>
+        <hr />
+        <div
+          id="settings-dialog-content"
+          class="field-container d-flex flex-wrap">
           {#each settingsElements as setting}
-          <div class="field-container d-flex align-right" >
-            <label>{setting}</label>
-          </div>
+            <div class="setting d-flex align-center">
+              {setting.name}
+              <input
+                type={setting.type}
+                checked={setting.checked}
+                on:click={setting.func} />
+            </div>
           {/each}
+          {#if !IsProd}
+            {#each settingsAdvanced as setting}
+              <div class="setting d-flex align-center">
+                {setting.name}
+                <input
+                  type={setting.type}
+                  checked={setting.checked}
+                  on:click={setting.func} />
+              </div>
+            {/each}
+          {/if}
         </div>
       </div>
     {/if}
-    <div id="next-hand" >
-      <div on:click={() => newHand()} class="btn hover-effect">Next Hand</div>
-      <div class="field-container d-flex align-center">
-        Automatic
-        <input
-            type="checkbox"
-            checked={autoNextHand}
-            on:click={() => checkbox()} />
+    {#if dispVillOut}
+      <div id="villain-output">
+        <h2>Villian Output</h2>
+        <hr />
+        <canvas id="villain-action-probs" width="400" height="300" />
+        <canvas id="villain-q-values" width="400" height="300" />
       </div>
+    {/if}
+    <div id="next-hand">
+      <div on:click={() => newHand()} class="btn hover-effect">Next Hand</div>
     </div>
     <div class="container no-margin-bottom">
       <div id="villain" class="hand" style="width: {pokerBotHandWidth}px">
-        {#if villain.hand.length === 0}
+        {#if !allIn && !dispVillHand}
           {#each Array(playerNumCards) as _}
             <div class="card-container">
-              <img src="images/{deckColor}/card_back.png" alt="Card Back" />
+              <img src="images/{deckType}/card_back.png" alt="Card Back" />
             </div>
           {/each}
         {:else}
           {#each villain.hand as card}
             <div class="card-container">
-              <img src="images/{deckColor}/{card}.png" alt={card} />
+              <img src="images/{deckType}/{card}.png" alt={card} />
             </div>
           {/each}
         {/if}
@@ -364,7 +455,7 @@
       <div id="community" class="hand">
         {#each community as card}
           <div class="card-container">
-            <img src="images/{deckColor}/{card}.png" alt={card} />
+            <img src="images/{deckType}/{card}.png" alt={card} />
           </div>
         {/each}
       </div>
@@ -376,7 +467,7 @@
       <div id="hero" class="hand" style="width: {heroHandWidth}px">
         {#each hero.hand as card}
           <div class="card-container">
-            <img src="images/{deckColor}/{card}.png" alt={card} />
+            <img src="images/{deckType}/{card}.png" alt={card} />
           </div>
         {/each}
       </div>

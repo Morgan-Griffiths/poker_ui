@@ -1,6 +1,11 @@
 {
-  "name": "svelte-app",
+  "name": "morganspokerapp",
   "version": "1.0.0",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexandroslewis/poker_ui.git"
+  },
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
@@ -28,6 +33,7 @@
     "svelte-jester": "^1.0.6"
   },
   "dependencies": {
+    "chart.js": "^2.9.3",
     "sirv-cli": "^0.4.4"
   }
 }

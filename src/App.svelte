@@ -39,7 +39,6 @@
   let community = [];
   let betSize = 0;
   let APIServer = IsProd ? "/api" : "http://localhost:4000/api";
-  let showdown;
   let gameType;
   let gameState;
   let done = true;
@@ -72,9 +71,7 @@
       name: "Show Villain Hand",
       type: "checkbox",
       checked: dispVillHand,
-      func: () => {
-        dispVillHand = !dispVillHand;
-      }
+      func: () => toggleDispVillHand()
     },
     {
       name: "Display Villain Outputs",
@@ -93,9 +90,18 @@
     }
   }
 
+  async function toggleDispVillHand() {
+    dispVillHand = !dispVillHand;
+    if (dispVillHand && !IsProd) {
+      villain.hand = await getCards(gameState.state.villain_cards); 
+    } else {
+      villain.hand = [];
+    }
+  }
+
   function showBotOutputs() {
     dispVillOut = !dispVillOut;
-    if (dispVillOut) {
+    if (dispVillOut && !IsProd) {
       getBotOutputs();
     }
   }
@@ -211,7 +217,6 @@
     playerNumCards = state.hero_cards.length / 2;
     availActions = getAvailActions(state.action_mask);
     hero.hand = await getCards(state.hero_cards);
-    villain.hand = await getCards(state.villain_cards);
     community = await getCards(state.board_cards);
     updatePlayers(state);
     updateGame(state);
@@ -413,7 +418,7 @@
     </div>
     <div class="container no-margin-bottom">
       <div id="villain" class="hand" style="width: {pokerBotHandWidth}px">
-        {#if !allIn && !dispVillHand}
+        {#if villain.hand.length === 0}
           {#each Array(playerNumCards) as _}
             <div class="card-container">
               <img src="images/{deckType}/card_back.png" alt="Card Back" />

@@ -60,8 +60,8 @@ body {
 
 #settings i {
   font-size: 70px;
-  color: black;
-  opacity: .8;
+  color: white;
+  opacity: 1;
   cursor: pointer;
 }
 
@@ -546,12 +546,12 @@ input[type="checkbox"] {
 
 @-webkit-keyframes icon-hover {
   50% {
-    opacity: .3;
+    opacity: .4;
   }
 }
 @keyframes icon-hover {
   50% {
-    opacity: .3;
+    opacity: .4;
   }
 }
 
@@ -566,5 +566,5 @@ input[type="checkbox"] {
   animation-timing-function: linear;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
-  opacity: .3;
+  opacity: .4;
 }

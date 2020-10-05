@@ -50,6 +50,58 @@ body {
   padding: 10px;
 }
 
+#settings {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  height: 70px;
+  width: 70px;
+}
+
+#settings i {
+  font-size: 70px;
+  color: white;
+  opacity: 1;
+  cursor: pointer;
+}
+
+#settings-dialog {
+  width: 250px;
+  height: auto;
+  position: fixed;
+  right: 20px;
+  top: 110px;
+  background: rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+#settings-dialog-content {
+  padding: 10px;
+}
+
+.setting {
+  width: 100%;
+  padding: 10px;
+  justify-content: space-between;
+}
+
+.setting i {
+  cursor: pointer;
+}
+
+#villain-output {
+  width: 400px;
+  height: auto;
+  position: fixed;
+  right: 20px;
+  top: 378px;
+  background: rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  text-align: center;
+}
+
 #stats {
   position:fixed;
   top:440px;
@@ -60,13 +112,13 @@ body {
   box-shadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.3);
 }
 
-#stats h2, #history h2, #options h2 {
+#stats h2, #history h2, #options h2, #settings-dialog h2 {
   text-align: center;
 }
 
 #stats-content {
   width:100%;
-  padding:8px;
+  padding:10px;
 }
 
 #history {
@@ -490,4 +542,29 @@ input[type="checkbox"] {
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
   background-color: rgba(255, 255, 255, 0.2);
+}
+
+@-webkit-keyframes icon-hover {
+  50% {
+    opacity: .4;
+  }
+}
+@keyframes icon-hover {
+  50% {
+    opacity: .4;
+  }
+}
+
+.icon-hover:hover,
+.icon-hover:focus,
+.icon-hover:active {
+  -webkit-animation-name: icon-hover;
+  animation-name: icon-hover;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  opacity: .4;
 }

@@ -41,6 +41,7 @@
   let APIServer = IsProd ? "/api" : "http://localhost:4000/api";
   let gameType;
   let gameState;
+  let showdown = false;
   let done = true;
   let playerStats = { results: 0, bb_per_hand: 0, total_hands: 0 };
   let street;
@@ -169,8 +170,8 @@
     betSize = 0;
   }
 
-  function updateHistory(outcome) {
-    let strings = outcomeStrings(outcome);
+  function updateHistory(outcome,showdown) {
+    let strings = outcomeStrings(outcome,showdown);
     for (let event of strings) {
       gameHistory.push(event);
     }
@@ -208,6 +209,7 @@
     betSize = amount;
   }
   async function newHand() {
+    showdown = false
     villain.hand = [];
     const res = await fetch(`${APIServer}/reset`);
     let text = await res.text();
@@ -235,7 +237,7 @@
     await getStats();
     if (state.done) {
       activeDisplayClass = "inactive";
-      updateHistory(outcome);
+      updateHistory(outcome,showdown);
       if (autoNextHand) {
         newHand();
       }
@@ -284,10 +286,11 @@
         state.last_action == Action.check ||
         state.last_action == Action.unopened
       ) {
+        showdown = true
         villain.hand = await getCards(outcome.player2_hand);
         setGameHistory(null, "Showdown");
       }
-      updateHistory(outcome);
+      updateHistory(outcome,showdown);
       await getStats();
       if (autoNextHand) {
         newHand();

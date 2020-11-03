@@ -108,6 +108,10 @@
 
   function toggleBotOutputs() {
     dispVillOut = !dispVillOut;
+    checkBotOutputsDisp();
+  }
+
+  function checkBotOutputsDisp() {
     if (dispVillOut && !IsProd) {
       getBotOutputs();
     }
@@ -223,6 +227,7 @@
   async function newHand() {
     showdown = false
     checkVillainHand();
+    checkBotOutputsDisp();
     const res = await fetch(`${APIServer}/reset`);
     let text = await res.text();
     gameState = JSON.parse(text);

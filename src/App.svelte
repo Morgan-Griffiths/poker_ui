@@ -83,6 +83,8 @@
   ];
   let availBetsizes = [];
   let gameHistory = [];
+  let actionProbsChart;
+  let qValuesChart;
 
   function toggleAutoNext() {
     autoNextHand = !autoNextHand;
@@ -120,14 +122,20 @@
     let actionProbsEl = document.getElementById("villain-action-probs").getContext("2d");
     let qValuesEl = document.getElementById("villain-q-values").getContext("2d");
     let labels = ["Check", "Fold", "Call", "B/R #1", "B/R #2"];
-    buildChart(actionProbsEl, labels, "Action %", actionProbsData, [255, 99, 132], [0, 100]);
-    buildChart(qValuesEl, labels, "Q Values", qValuesData, [255, 206, 86], [-100, 100]);
+    if (actionProbsChart) {
+      actionProbsChart.destroy();
+    }
+    if (qValuesChart) {
+      qValuesChart.destroy();
+    }
+    actionProbsChart = buildChart(actionProbsEl, labels, "Action %", actionProbsData, [255, 99, 132], [0, 100]);
+    qValuesChart = buildChart(qValuesEl, labels, "Q Values", qValuesData, [255, 206, 86], [-100, 100]);
   }
 
   function buildChart(elem, labels, title, data, colorArr, range) {
     let bGColor = `rgba( ${colorArr.join(", ")} , .2)`;
     let borderColor = `rgba( ${colorArr.join(", ")} , 1)`
-    new Chart(elem, {
+    return new Chart(elem, {
         type: "bar",
         data: {
           labels: labels,

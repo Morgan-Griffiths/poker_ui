@@ -227,7 +227,6 @@
   async function newHand() {
     showdown = false
     checkVillainHand();
-    checkBotOutputsDisp();
     const res = await fetch(`${APIServer}/reset`);
     let text = await res.text();
     gameState = JSON.parse(text);
@@ -252,6 +251,7 @@
     potClass = "active";
     activeDisplayClass = "active";
     await getStats();
+    checkBotOutputsDisp();
     if (state.done) {
       activeDisplayClass = "inactive";
       updateHistory(outcome,showdown);

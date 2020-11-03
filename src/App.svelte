@@ -78,7 +78,7 @@
       name: "Display Villain Outputs",
       type: "checkbox",
       checked: dispVillOut,
-      func: () => showBotOutputs()
+      func: () => toggleBotOutputs()
     }
   ];
   let availBetsizes = [];
@@ -91,8 +91,12 @@
     }
   }
 
-  async function toggleDispVillHand() {
+  function toggleDispVillHand() {
     dispVillHand = !dispVillHand;
+    checkVillainHand();
+  }
+
+  async function checkVillainHand() {
     if (dispVillHand && !IsProd) {
       villain.hand = await getCards(gameState.state.villain_cards); 
     } else {
@@ -100,7 +104,7 @@
     }
   }
 
-  function showBotOutputs() {
+  function toggleBotOutputs() {
     dispVillOut = !dispVillOut;
     if (dispVillOut && !IsProd) {
       getBotOutputs();
@@ -116,11 +120,11 @@
     let actionProbsEl = document.getElementById("villain-action-probs").getContext("2d");
     let qValuesEl = document.getElementById("villain-q-values").getContext("2d");
     let labels = ["Check", "Fold", "Call", "B/R #1", "B/R #2"];
-    buildChart(actionProbsEl, labels, "Action %", actionProbsData, [255, 99, 132]);
-    buildChart(qValuesEl, labels, "Q Values", qValuesData, [255, 206, 86]);
+    buildChart(actionProbsEl, labels, "Action %", actionProbsData, [255, 99, 132], [0, 100]);
+    buildChart(qValuesEl, labels, "Q Values", qValuesData, [255, 206, 86], [-100, 100]);
   }
 
-  function buildChart(elem, labels, title, data, colorArr) {
+  function buildChart(elem, labels, title, data, colorArr, range) {
     let bGColor = `rgba( ${colorArr.join(", ")} , .2)`;
     let borderColor = `rgba( ${colorArr.join(", ")} , 1)`
     new Chart(elem, {
@@ -143,8 +147,8 @@
               {
                 ticks: {
                   beginAtZero: true,
-                  max: 100,
-                  min: 0
+                  max: range[1],
+                  min: range[0]
                 }
               }
             ]
@@ -210,7 +214,7 @@
   }
   async function newHand() {
     showdown = false
-    villain.hand = [];
+    checkVillainHand();
     const res = await fetch(`${APIServer}/reset`);
     let text = await res.text();
     gameState = JSON.parse(text);
